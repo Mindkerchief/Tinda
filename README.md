@@ -1,4 +1,4 @@
-#Tinda
+# Tinda
 
 Online shopping has become a second nature in today's fast-paced world, offering convenience and a wide range of products. While online shopping offers numerous advantages and opportunities, it's also important to recognize its effects on local businesses. As a local store owner, building an online shopping store for thier physical store can be challenging because of the existing competition and chosing the perfect platform.
 
