@@ -1,6 +1,10 @@
 <resources>
     <string name="app_name">Tinda</string>
     <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="title_basket">Basket</string>
+    <string name="title_account">Account</string>
+    <string name="button_search">Search</string>
+    <string name="button_nearby">Nearby</string>
+    <string name="button_deal">Deal</string>
+    <string name="button_map">Map</string>
 </resources>
