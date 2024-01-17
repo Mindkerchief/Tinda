@@ -7,5 +7,6 @@
     <string name="button_nearby">Nearby</string>
     <string name="button_deal">Deal</string>
     <string name="button_map">Map</string>
+    <string name="button_favorite">Favorite</string>
     <string name="label_ongoing">Under Development</string>
 </resources>
