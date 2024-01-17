@@ -7,4 +7,8 @@
     <string name="button_nearby">Nearby</string>
     <string name="button_deal">Deal</string>
     <string name="button_map">Map</string>
+    <string name="label_search">Search</string>
+    <string name="label_nearby">Nearby</string>
+    <string name="label_deal">Deal</string>
+    <string name="label_map">Map</string>
 </resources>
