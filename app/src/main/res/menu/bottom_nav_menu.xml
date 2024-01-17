@@ -5,12 +5,10 @@
         android:id="@+id/navigation_home"
         android:icon="@drawable/baseline_home"
         android:title="@string/title_home" />
-
     <item
         android:id="@+id/navigation_basket"
         android:icon="@drawable/baseline_shopping_basket"
         android:title="@string/title_basket" />
-
     <item
         android:id="@+id/navigation_account"
         android:icon="@drawable/baseline_account_circle"
