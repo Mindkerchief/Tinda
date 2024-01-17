@@ -8,7 +8,7 @@
     tools:context=".ui.home.HomeFragment">
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cardView3"
+        android:id="@+id/cViewMapContainer"
         android:layout_width="110dp"
         android:layout_height="100dp"
         android:layout_marginTop="15dp"
@@ -17,138 +17,54 @@
         app:cardElevation="5dp"
         app:contentPadding="10dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView">
+        app:layout_constraintTop_toBottomOf="@+id/cViewSearchContainer">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <Button
-                android:id="@+id/button4"
+                android:id="@+id/btnMap"
                 android:layout_width="50dp"
                 android:layout_height="60dp"
                 android:padding="5dp"
                 app:cornerRadius="8dp"
-                app:icon="@drawable/baseline_store"
+                app:icon="@drawable/baseline_map"
                 app:iconSize="40dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/textView2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/label_map"
+                android:layout_marginTop="3dp"
+                android:text="@string/button_map"
                 android:textAlignment="center"
                 android:textSize="14sp"
                 android:textStyle="bold"
-                tools:layout_editor_absoluteY="63dp" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.cardview.widget.CardView>
-
-    <FrameLayout
-        android:id="@+id/frameLayout"
-        android:layout_width="0dp"
-        android:layout_height="150dp"
-        android:background="@color/blue_800"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="20dp"
-            android:text="Ongoing Development"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-    </FrameLayout>
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardView"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="-30dp"
-        android:layout_marginEnd="15dp"
-        app:cardCornerRadius="8dp"
-        app:cardElevation="5dp"
-        app:contentPadding="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/frameLayout">
-
-        <EditText
-            android:id="@+id/editTextText2"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/trasparent"
-            android:drawableLeft="@drawable/outline_search"
-            android:ems="10"
-            android:hint="@string/label_search"
-            android:inputType="text"
-            android:textSize="16sp" />
-    </androidx.cardview.widget.CardView>
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardView2"
-        android:layout_width="110dp"
-        android:layout_height="100dp"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="15dp"
-        app:cardCornerRadius="8dp"
-        app:cardElevation="5dp"
-        app:contentPadding="10dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <Button
-                android:id="@+id/button4"
-                android:layout_width="50dp"
-                android:layout_height="60dp"
-                android:padding="5dp"
-                app:cornerRadius="8dp"
-                app:icon="@drawable/baseline_store"
-                app:iconSize="40dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/textView2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/label_nearby"
-                android:textAlignment="center"
-                android:textSize="14sp"
-                android:textStyle="bold"
-                tools:layout_editor_absoluteY="63dp" />
+                app:layout_constraintTop_toBottomOf="@+id/btnMap" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/cViewDealContainer"
         android:layout_width="110dp"
         android:layout_height="100dp"
         android:layout_marginTop="15dp"
         app:cardCornerRadius="8dp"
         app:cardElevation="5dp"
         app:contentPadding="10dp"
-        app:layout_constraintEnd_toStartOf="@+id/cardView3"
-        app:layout_constraintStart_toEndOf="@+id/cardView2"
-        app:layout_constraintTop_toBottomOf="@+id/cardView">
+        app:layout_constraintEnd_toStartOf="@+id/cViewMapContainer"
+        app:layout_constraintStart_toEndOf="@+id/cViewNearbyContainer"
+        app:layout_constraintTop_toBottomOf="@+id/cViewSearchContainer">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <Button
-                android:id="@+id/button4"
+                android:id="@+id/btnDeal"
                 android:layout_width="50dp"
                 android:layout_height="60dp"
                 android:padding="5dp"
@@ -160,15 +76,102 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/textView2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/label_deal"
+                android:layout_marginTop="3dp"
+                android:text="@string/button_deal"
                 android:textAlignment="center"
                 android:textSize="14sp"
                 android:textStyle="bold"
-                tools:layout_editor_absoluteY="63dp" />
+                app:layout_constraintTop_toBottomOf="@+id/btnDeal" />
         </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cViewNearbyContainer"
+        android:layout_width="110dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="15dp"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="5dp"
+        app:contentPadding="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cViewSearchContainer">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Button
+                android:id="@+id/btnNearby"
+                android:layout_width="50dp"
+                android:layout_height="60dp"
+                android:padding="5dp"
+                app:cornerRadius="8dp"
+                app:icon="@drawable/baseline_store"
+                app:iconSize="40dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:text="@string/button_nearby"
+                android:textAlignment="center"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@+id/btnNearby" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+    <FrameLayout
+        android:id="@+id/fLayoutFeature"
+        android:layout_width="0dp"
+        android:layout_height="170dp"
+        android:background="@color/blue_800"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/tViewOngoing"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:text="@string/label_ongoing"
+            android:textColor="@color/grey_900"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+    </FrameLayout>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cViewSearchContainer"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="-30dp"
+        android:layout_marginRight="15dp"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="5dp"
+        app:contentPaddingLeft="15dp"
+        app:contentPaddingRight="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fLayoutFeature">
+
+        <EditText
+            android:id="@+id/eTextSearch"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/trasparent"
+            android:drawableLeft="@drawable/outline_search"
+            android:ems="10"
+            android:hint="@string/label_search"
+            android:inputType="text"
+            android:textSize="16sp" />
     </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
