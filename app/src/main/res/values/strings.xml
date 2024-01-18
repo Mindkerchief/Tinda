@@ -10,6 +10,7 @@
     <string name="button_map">Map</string>
     <string name="button_favorite">Favorite</string>
     <string name="label_under_development">Under Development</string>
-    <string name="label_interesting_products">Interesting Products</string>
+    <string name="label_nearby_store">Local Store Near You</string>
+    <string name="label_available_products">Available Products</string>
     <string name="title_activity_maps">MapsActivity</string>
 </resources>
