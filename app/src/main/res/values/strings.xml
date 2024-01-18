@@ -11,4 +11,5 @@
     <string name="button_favorite">Favorite</string>
     <string name="label_under_development">Under Development</string>
     <string name="label_interesting_products">Interesting Products</string>
+    <string name="title_activity_maps">MapsActivity</string>
 </resources>
