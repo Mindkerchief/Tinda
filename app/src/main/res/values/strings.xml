@@ -13,4 +13,7 @@
     <string name="label_nearby_store">Local Store Near You</string>
     <string name="label_available_products">Available Products</string>
     <string name="title_activity_maps">MapsActivity</string>
+    <string name="label_product_name">KARSON Scientific Calculator Multiple Modes Intuitive Interface</string>
+    <string name="label_product_store">NSS Market Mall</string>
+    <string name="label_product_price">P158.00</string>
 </resources>
