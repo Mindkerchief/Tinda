@@ -238,7 +238,7 @@
                 android:id="@+id/eTextSearch"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:background="@color/trasparent"
+                android:background="@color/transparent"
                 android:drawableStart="@drawable/outline_search"
                 android:ems="10"
                 android:hint="@string/label_search"
