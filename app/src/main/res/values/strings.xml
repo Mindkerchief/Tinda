@@ -3,10 +3,12 @@
     <string name="title_home">Home</string>
     <string name="title_basket">Basket</string>
     <string name="title_account">Account</string>
-    <string name="label_search">Search</string>
+    <string name="label_search">Search local products</string>
+    <string name="button_category">Category</string>
     <string name="button_nearby">Nearby</string>
     <string name="button_deal">Deal</string>
     <string name="button_map">Map</string>
     <string name="button_favorite">Favorite</string>
-    <string name="label_ongoing">Under Development</string>
+    <string name="label_under_development">Under Development</string>
+    <string name="label_interesting_products">Interesting Products</string>
 </resources>
