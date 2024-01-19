@@ -257,15 +257,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/tViewOngoing"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="24dp"
-            android:text="@string/label_under_development"
-            android:textColor="@color/grey_900"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+        <ImageView
+            android:id="@+id/imageVPromotionBanner"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/blue_800"
+            android:scaleType="centerCrop"
+            app:srcCompat="@drawable/promotion_sample_banner" />
     </FrameLayout>
 
     <androidx.cardview.widget.CardView
