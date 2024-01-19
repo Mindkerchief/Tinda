@@ -26,7 +26,7 @@ public class StoreRecyclerViewAdapter extends RecyclerView.Adapter<StoreRecycler
     public StoreRecyclerViewAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         // Inflate the layout
         LayoutInflater inflater = LayoutInflater.from(context);
-        View view = inflater.inflate(R.layout.card_store, parent, false);
+        View view = inflater.inflate(R.layout.card_store_vertical, parent, false);
         return new StoreRecyclerViewAdapter.MyViewHolder(view);
     }
 
