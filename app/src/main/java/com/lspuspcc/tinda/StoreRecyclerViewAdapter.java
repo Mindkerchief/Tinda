@@ -13,19 +13,19 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 public class StoreRecyclerViewAdapter extends RecyclerView.Adapter<StoreRecyclerViewAdapter.MyViewHolder> {
-    Context context;
-    ArrayList<StoreModel> storeModels;
+    Context mContext;
+    ArrayList<StoreModel> mStoreModels;
 
     public StoreRecyclerViewAdapter(Context context, ArrayList<StoreModel> storeModels) {
-        this.context = context;
-        this.storeModels = storeModels;
+        this.mContext = context;
+        this.mStoreModels = storeModels;
     }
 
     @NonNull
     @Override
     public StoreRecyclerViewAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         // Inflate the layout
-        LayoutInflater inflater = LayoutInflater.from(context);
+        LayoutInflater inflater = LayoutInflater.from(mContext);
         View view = inflater.inflate(R.layout.card_store_vertical, parent, false);
         return new StoreRecyclerViewAdapter.MyViewHolder(view);
     }
@@ -33,20 +33,20 @@ public class StoreRecyclerViewAdapter extends RecyclerView.Adapter<StoreRecycler
     @Override
     public void onBindViewHolder(@NonNull StoreRecyclerViewAdapter.MyViewHolder holder, int position) {
         // Assign values in the views
-        holder.imageVStoreImage.setImageResource(storeModels.get(position).getStoreImage());
-        holder.textVStoreName.setText(storeModels.get(position).getStoreName());
-        holder.textVStoreAddress.setText(storeModels.get(position).getStoreAddress());
-        holder.textVStoreCategory.setText(storeModels.get(position).getStoreCategory());
+        holder.imageVStoreImage.setImageResource(mStoreModels.get(position).getmStoreImage());
+        holder.textVStoreName.setText(mStoreModels.get(position).getmStoreName());
+        holder.textVStoreAddress.setText(mStoreModels.get(position).getmStoreAddress());
+        holder.textVStoreCategory.setText(mStoreModels.get(position).getmStoreCategory());
     }
 
     @Override
     public int getItemCount() {
-        // counts number of items to be displayed
-        return storeModels.size();
+        // Counts the number of items to be displayed
+        return mStoreModels.size();
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
-        // gets the views from recycler view rows
+        // Gets the views from recycler view rows
         ImageView imageVStoreImage;
         TextView textVStoreName, textVStoreAddress, textVStoreCategory;
         public MyViewHolder(@NonNull View itemView) {

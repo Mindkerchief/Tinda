@@ -13,19 +13,19 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 public class ProductRecyclerViewAdapter extends RecyclerView.Adapter<ProductRecyclerViewAdapter.MyViewHolder> {
-    Context context;
-    ArrayList<ProductModel> productModels;
+    Context mContext;
+    ArrayList<ProductModel> mProductModels;
 
     public ProductRecyclerViewAdapter(Context context, ArrayList<ProductModel> productModels) {
-        this.context = context;
-        this.productModels = productModels;
+        this.mContext = context;
+        this.mProductModels = productModels;
     }
 
     @NonNull
     @Override
     public ProductRecyclerViewAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         // Inflate the layout
-        LayoutInflater inflater = LayoutInflater.from(context);
+        LayoutInflater inflater = LayoutInflater.from(mContext);
         View view = inflater.inflate(R.layout.card_product, parent, false);
         return new ProductRecyclerViewAdapter.MyViewHolder(view);
     }
@@ -33,20 +33,20 @@ public class ProductRecyclerViewAdapter extends RecyclerView.Adapter<ProductRecy
     @Override
     public void onBindViewHolder(@NonNull ProductRecyclerViewAdapter.MyViewHolder holder, int position) {
         // Assign values in the views
-        holder.imageVProductImage.setImageResource(productModels.get(position).getProductImage());
-        holder.textVProductName.setText(productModels.get(position).getProductName());
-        holder.textVProductStore.setText(productModels.get(position).getProductStore());
-        holder.textVProductPrice.setText(productModels.get(position).getProductPrice());
+        holder.imageVProductImage.setImageResource(mProductModels.get(position).getmProductImage());
+        holder.textVProductName.setText(mProductModels.get(position).getmProductName());
+        holder.textVProductStore.setText(mProductModels.get(position).getmProductStore());
+        holder.textVProductPrice.setText(mProductModels.get(position).getmProductPrice());
     }
 
     @Override
     public int getItemCount() {
-        // counts number of items to be displayed
-        return productModels.size();
+        // Count the number of items to be displayed
+        return mProductModels.size();
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
-        // gets the views from recycler view rows
+        // Gets the views from recycler view rows
         ImageView imageVProductImage;
         TextView textVProductName, textVProductStore, textVProductPrice;
         public MyViewHolder(@NonNull View itemView) {

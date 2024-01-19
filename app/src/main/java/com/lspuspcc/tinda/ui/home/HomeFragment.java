@@ -32,36 +32,36 @@ import java.util.ArrayList;
 
 public class HomeFragment extends Fragment {
 
-    private FragmentHomeBinding binding;
-    private ArrayList<ProductModel> productModels;
-    private ArrayList<StoreModel> storeModels;
+    private FragmentHomeBinding mBinding;
+    private ArrayList<ProductModel> mProductModels;
+    private ArrayList<StoreModel> mStoreModels;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         HomeViewModel homeViewModel =
                 new ViewModelProvider(this).get(HomeViewModel.class);
 
-        binding = FragmentHomeBinding.inflate(inflater, container, false);
-        View root = binding.getRoot();
+        mBinding = FragmentHomeBinding.inflate(inflater, container, false);
+        View root = mBinding.getRoot();
 
         // Setup Home Stores and Products Recycler View
-        productModels = new ArrayList<>();
-        storeModels = new ArrayList<>();
+        mProductModels = new ArrayList<>();
+        mStoreModels = new ArrayList<>();
         setupProductModel();
         setupStoreModel();
 
-        RecyclerView recyclerVRecommendedProducts = root.findViewById(R.id.recyclerVRecommendedProducts);
-        ProductRecyclerViewAdapter productRVAdapter = new ProductRecyclerViewAdapter(requireContext(), productModels);
+        RecyclerView recyclerVRecommendedProducts = mBinding.recyclerVRecommendedProducts;
+        ProductRecyclerViewAdapter productRVAdapter = new ProductRecyclerViewAdapter(requireContext(), mProductModels);
         recyclerVRecommendedProducts.setLayoutManager(new GridLayoutManager(getActivity(), 2));
         recyclerVRecommendedProducts.setAdapter(productRVAdapter);
 
-        RecyclerView recyclerVNearbyStore = root.findViewById(R.id.recyclerVNearbyStore);
-        StoreRecyclerViewAdapter storeRVAdapter = new StoreRecyclerViewAdapter(requireContext(), storeModels);
+        RecyclerView recyclerVNearbyStore = mBinding.recyclerVNearbyStore;
+        StoreRecyclerViewAdapter storeRVAdapter = new StoreRecyclerViewAdapter(requireContext(), mStoreModels);
         recyclerVNearbyStore.setLayoutManager(new LinearLayoutManager(requireContext(),
                 LinearLayoutManager.HORIZONTAL, false));
         recyclerVNearbyStore.setAdapter(storeRVAdapter);
 
-        // Setup buttons OnClickEvents
+        // Setup Buttons OnClickEvents
         Intent intentSearch = new Intent(getActivity(), SearchActivity.class);
         Intent intentNearby = new Intent(getActivity(), NearbyActivity.class);
         Intent intentDeal = new Intent(getActivity(), DealActivity.class);
@@ -81,6 +81,7 @@ public class HomeFragment extends Fragment {
         btnMap.setOnClickListener(view -> startActivity(intentMap));
         btnFavorite.setOnClickListener(view -> startActivity(intentFavorite));
 
+        // TODO: Improve this warning
         eTextSearch.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent motionEvent) {
@@ -98,28 +99,30 @@ public class HomeFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        binding = null;
+        mBinding = null;
     }
 
     private void setupProductModel() {
+        // Temporary implementation for testing purposes
         int productImage = R.drawable.product_sample_image;
         String productName = getResources().getString(R.string.label_product_name);
         String productStore = getResources().getString(R.string.label_product_store);
         String productPrice = getResources().getString(R.string.label_product_price);
 
         for (int i = 0; i < 10; i++) {
-            productModels.add(new ProductModel(productImage, productName, productStore, productPrice));
+            mProductModels.add(new ProductModel(productImage, productName, productStore, productPrice));
         }
     }
 
     private void setupStoreModel() {
+        // Temporary implementation for testing purposes
         int storeImage = R.drawable.store_sample_image;
         String storeName = getResources().getString(R.string.label_product_store);
         String storeAddress = getResources().getString(R.string.label_store_address);
         String storeCategory = getResources().getString(R.string.label_store_category);
 
         for (int i = 0; i < 10; i++) {
-            storeModels.add(new StoreModel(storeImage, storeName, storeAddress, storeCategory));
+            mStoreModels.add(new StoreModel(storeImage, storeName, storeAddress, storeCategory));
         }
     }
 }

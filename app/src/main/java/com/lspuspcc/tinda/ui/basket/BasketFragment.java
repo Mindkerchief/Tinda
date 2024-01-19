@@ -18,14 +18,14 @@ public class BasketFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        BasketViewModel dashboardViewModel =
+        BasketViewModel basketViewModel =
                 new ViewModelProvider(this).get(BasketViewModel.class);
 
         binding = FragmentBasketBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textDashboard;
-        dashboardViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+        final TextView textView = binding.textBasket;
+        basketViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;
     }
 
