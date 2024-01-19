@@ -12,15 +12,20 @@ import android.widget.EditText;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.lspuspcc.tinda.DealActivity;
 import com.lspuspcc.tinda.FavoriteActivity;
 import com.lspuspcc.tinda.MapsActivity;
 import com.lspuspcc.tinda.NearbyActivity;
 import com.lspuspcc.tinda.ProductModel;
+import com.lspuspcc.tinda.ProductRecyclerViewAdapter;
 import com.lspuspcc.tinda.R;
 import com.lspuspcc.tinda.SearchActivity;
 import com.lspuspcc.tinda.StoreModel;
+import com.lspuspcc.tinda.StoreRecyclerViewAdapter;
 import com.lspuspcc.tinda.databinding.FragmentHomeBinding;
 
 import java.util.ArrayList;
@@ -39,11 +44,24 @@ public class HomeFragment extends Fragment {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
+        // Setup Home Stores and Products Recycler View
         productModels = new ArrayList<>();
         storeModels = new ArrayList<>();
         setupProductModel();
         setupStoreModel();
 
+        RecyclerView recyclerVRecommendedProducts = root.findViewById(R.id.recyclerVRecommendedProducts);
+        ProductRecyclerViewAdapter productRVAdapter = new ProductRecyclerViewAdapter(requireContext(), productModels);
+        recyclerVRecommendedProducts.setLayoutManager(new GridLayoutManager(getActivity(), 2));
+        recyclerVRecommendedProducts.setAdapter(productRVAdapter);
+
+        RecyclerView recyclerVNearbyStore = root.findViewById(R.id.recyclerVNearbyStore);
+        StoreRecyclerViewAdapter storeRVAdapter = new StoreRecyclerViewAdapter(requireContext(), storeModels);
+        recyclerVNearbyStore.setLayoutManager(new LinearLayoutManager(requireContext(),
+                LinearLayoutManager.HORIZONTAL, false));
+        recyclerVNearbyStore.setAdapter(storeRVAdapter);
+
+        // Setup buttons OnClickEvents
         Intent intentSearch = new Intent(getActivity(), SearchActivity.class);
         Intent intentNearby = new Intent(getActivity(), NearbyActivity.class);
         Intent intentDeal = new Intent(getActivity(), DealActivity.class);
@@ -84,24 +102,24 @@ public class HomeFragment extends Fragment {
     }
 
     private void setupProductModel() {
-        int productImage = R.drawable.ic_launcher_background;
+        int productImage = R.drawable.product_sample_image;
         String productName = getResources().getString(R.string.label_product_name);
         String productStore = getResources().getString(R.string.label_product_store);
         String productPrice = getResources().getString(R.string.label_product_price);
 
-        for (int i = 0; i <= 10; i++) {
+        for (int i = 0; i < 10; i++) {
             productModels.add(new ProductModel(productImage, productName, productStore, productPrice));
         }
     }
 
     private void setupStoreModel() {
-        int productImage = R.drawable.ic_launcher_background;
+        int storeImage = R.drawable.store_sample_image;
         String storeName = getResources().getString(R.string.label_product_store);
         String storeAddress = getResources().getString(R.string.label_store_address);
         String storeCategory = getResources().getString(R.string.label_store_category);
 
-        for (int i = 0; i <= 10; i++) {
-            productModels.add(new ProductModel(productImage, storeName, storeAddress, storeCategory));
+        for (int i = 0; i < 10; i++) {
+            storeModels.add(new StoreModel(storeImage, storeName, storeAddress, storeCategory));
         }
     }
 }

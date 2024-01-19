@@ -28,11 +28,10 @@
                 android:layout_height="150dp"
                 android:contentDescription="@string/label_product_name"
                 android:scaleType="centerCrop"
-                android:src="@tools:sample/avatars"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_launcher_background" />
+                app:srcCompat="@drawable/product_sample_image" />
 
             <TextView
                 android:id="@+id/textVProductName"
@@ -46,6 +45,7 @@
                 android:maxLines="2"
                 android:text="@string/label_product_name"
                 android:textColor="@color/lighter_black"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
