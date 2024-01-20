@@ -10,7 +10,7 @@
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="-212dp"
+        android:layout_marginTop="-208dp"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -309,52 +309,45 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/cViewSearchContainer"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="45dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="70dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="16dp"
                 app:cardCornerRadius="8dp"
-                app:cardElevation="5dp"
-                app:contentPaddingLeft="15dp">
+                app:cardElevation="5dp">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
-                    <EditText
-                        android:id="@+id/eTextSearch"
+                    <SearchView
+                        android:id="@+id/searchVSearchField"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:background="@color/transparent"
-                        android:drawableStart="@drawable/outline_search"
-                        android:ems="10"
-                        android:hint="@string/label_search"
-                        android:inputType="text"
-                        android:textSize="16sp"
+                        android:clickable="false"
+                        android:queryHint="@string/label_search"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@+id/btnCategory"
-                        app:layout_constraintStart_toStartOf="parent" />
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <Button
                         android:id="@+id/btnCategory"
-                        android:layout_width="50dp"
+                        android:layout_width="40dp"
                         android:layout_height="match_parent"
                         android:background="@color/transparent"
                         android:contentDescription="@string/button_category"
-                        android:drawableLeft="@drawable/outline_category_24"
-                        android:paddingStart="7dp"
-                        app:layout_constraintEnd_toEndOf="parent" />
+                        android:drawableTop="@drawable/outline_category_24"
+                        android:drawableTint="#666666"
+                        android:paddingLeft="8dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
             </androidx.cardview.widget.CardView>
-
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbarSearchBar"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:minHeight="?attr/actionBarSize"
-                android:theme="?attr/actionBarTheme" />
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
 
