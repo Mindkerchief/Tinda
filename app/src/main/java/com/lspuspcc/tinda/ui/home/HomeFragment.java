@@ -1,5 +1,6 @@
 package com.lspuspcc.tinda.ui.home;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -8,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.SearchView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -36,6 +38,7 @@ public class HomeFragment extends Fragment {
     private ArrayList<ProductModel> mProductModels;
     private ArrayList<StoreModel> mStoreModels;
 
+    @SuppressLint("ClickableViewAccessibility")
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         HomeViewModel homeViewModel =
@@ -68,7 +71,7 @@ public class HomeFragment extends Fragment {
         Intent intentMap = new Intent(getActivity(), MapsActivity.class);
         Intent intentFavorite = new Intent(getActivity(), FavoriteActivity.class);
 
-        EditText eTextSearch = root.findViewById(R.id.eTextSearch);
+        SearchView searchVSearchField = root.findViewById(R.id.searchVSearchField);
         Button btnCategory = root.findViewById(R.id.btnCategory);
         Button btnNearby = root.findViewById(R.id.btnNearby);
         Button btnDeal = root.findViewById(R.id.btnDeal);
@@ -81,16 +84,20 @@ public class HomeFragment extends Fragment {
         btnMap.setOnClickListener(view -> startActivity(intentMap));
         btnFavorite.setOnClickListener(view -> startActivity(intentFavorite));
 
-        // TODO: Improve this warning
-        eTextSearch.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent motionEvent) {
-                if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
-                    startActivity(intentSearch);
-                    return true;
-                }
-                return false;
+        searchVSearchField.setOnClickListener(view -> startActivity(intentSearch));
+
+        searchVSearchField.setOnSearchClickListener(view -> {
+            startActivity(intentSearch);
+            searchVSearchField.setIconified(true);
+        });
+
+        searchVSearchField.setOnTouchListener((view, motionEvent) -> {
+            if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
+                startActivity(intentSearch);
+                // Consumes the extra touch event
+                return true;
             }
+            return false;
         });
 
         return root;
