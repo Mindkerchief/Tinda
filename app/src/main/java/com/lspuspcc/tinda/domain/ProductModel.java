@@ -1,4 +1,4 @@
-package com.lspuspcc.tinda;
+package com.lspuspcc.tinda.domain;
 
 public class ProductModel {
     private int mProductImage;

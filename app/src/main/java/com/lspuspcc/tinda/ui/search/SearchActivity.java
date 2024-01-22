@@ -1,10 +1,12 @@
-package com.lspuspcc.tinda;
+package com.lspuspcc.tinda.ui.search;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.widget.SearchView;
+
+import com.lspuspcc.tinda.R;
 
 public class SearchActivity extends AppCompatActivity {
 

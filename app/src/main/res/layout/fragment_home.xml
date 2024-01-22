@@ -129,7 +129,7 @@
                             android:contentDescription="@string/button_nearby"
                             android:padding="5dp"
                             app:cornerRadius="@dimen/view_corner_radius"
-                            app:icon="@drawable/baseline_store"
+                            app:icon="@drawable/ic_store"
                             app:iconSize="40dp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
@@ -150,9 +150,9 @@
                     android:id="@+id/cardV_dealButton"
                     android:layout_width="80dp"
                     android:layout_height="90dp"
-                    android:layout_marginLeft="8dp"
+                    android:layout_marginStart="8dp"
                     android:layout_marginTop="@dimen/view_margin"
-                    android:layout_marginRight="@dimen/view_margin_half"
+                    android:layout_marginEnd="@dimen/view_margin_half"
                     android:layout_marginBottom="@dimen/view_margin"
                     android:layout_weight="1"
                     app:cardCornerRadius="@dimen/view_corner_radius"
@@ -169,7 +169,7 @@
                             android:contentDescription="@string/button_deal"
                             android:padding="5dp"
                             app:cornerRadius="@dimen/view_corner_radius"
-                            app:icon="@drawable/baseline_handshake"
+                            app:icon="@drawable/ic_deal"
                             app:iconSize="40dp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
@@ -209,7 +209,7 @@
                             android:contentDescription="@string/button_map"
                             android:padding="5dp"
                             app:cornerRadius="@dimen/view_corner_radius"
-                            app:icon="@drawable/baseline_map"
+                            app:icon="@drawable/ic_map"
                             app:iconSize="40dp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
@@ -248,7 +248,7 @@
                             android:contentDescription="@string/button_favorite"
                             android:padding="5dp"
                             app:cornerRadius="@dimen/view_corner_radius"
-                            app:icon="@drawable/baseline_favorite"
+                            app:icon="@drawable/ic_favorite"
                             app:iconSize="40dp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
@@ -281,7 +281,7 @@
                     android:layout_height="match_parent"
                     android:background="@color/blue_800"
                     android:scaleType="centerCrop"
-                    app:srcCompat="@drawable/promotion_sample_banner" />
+                    app:srcCompat="@drawable/sample_promotion_banner" />
             </FrameLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -303,7 +303,7 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardV_homeSearchBarContainer"
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
+                android:layout_height="48dp"
                 android:layout_marginStart="@dimen/view_margin"
                 android:layout_marginTop="70dp"
                 android:layout_marginEnd="@dimen/view_margin"
@@ -333,7 +333,7 @@
                         android:layout_height="match_parent"
                         android:background="@color/transparent"
                         android:contentDescription="@string/button_category"
-                        android:drawableTop="@drawable/outline_category_24"
+                        android:drawableTop="@drawable/ic_category"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />

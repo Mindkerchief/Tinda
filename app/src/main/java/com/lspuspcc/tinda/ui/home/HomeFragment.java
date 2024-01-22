@@ -15,16 +15,16 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.lspuspcc.tinda.DealActivity;
-import com.lspuspcc.tinda.FavoriteActivity;
-import com.lspuspcc.tinda.MapsActivity;
-import com.lspuspcc.tinda.NearbyActivity;
-import com.lspuspcc.tinda.ProductModel;
-import com.lspuspcc.tinda.ProductRecyclerViewAdapter;
+import com.lspuspcc.tinda.ui.deal.DealActivity;
+import com.lspuspcc.tinda.ui.favorite.FavoriteActivity;
+import com.lspuspcc.tinda.ui.maps.MapsActivity;
+import com.lspuspcc.tinda.ui.nearby.NearbyActivity;
+import com.lspuspcc.tinda.domain.ProductModel;
+import com.lspuspcc.tinda.domain.ProductRecyclerViewAdapter;
 import com.lspuspcc.tinda.R;
-import com.lspuspcc.tinda.SearchActivity;
-import com.lspuspcc.tinda.StoreModel;
-import com.lspuspcc.tinda.StoreRecyclerViewAdapter;
+import com.lspuspcc.tinda.ui.search.SearchActivity;
+import com.lspuspcc.tinda.domain.StoreModel;
+import com.lspuspcc.tinda.domain.StoreRecyclerViewAdapter;
 import com.lspuspcc.tinda.databinding.FragmentHomeBinding;
 
 import java.util.ArrayList;
@@ -93,7 +93,7 @@ public class HomeFragment extends Fragment {
 
     private void setupProductModel() {
         // Temporary implementation for testing purposes
-        int productImage = R.drawable.product_sample_image;
+        int productImage = R.drawable.sample_product_image;
         String productName = getResources().getString(R.string.label_product_name);
         String productStore = getResources().getString(R.string.label_product_store);
         String productPrice = getResources().getString(R.string.label_product_price);
@@ -105,7 +105,7 @@ public class HomeFragment extends Fragment {
 
     private void setupStoreModel() {
         // Temporary implementation for testing purposes
-        int storeImage = R.drawable.store_sample_image;
+        int storeImage = R.drawable.sample_store_image;
         String storeName = getResources().getString(R.string.label_product_store);
         String storeAddress = getResources().getString(R.string.label_store_address);
         String storeCategory = getResources().getString(R.string.label_store_category);
