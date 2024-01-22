@@ -1,14 +1,11 @@
 package com.lspuspcc.tinda.ui.home;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.SearchView;
 
 import androidx.annotation.NonNull;
@@ -38,7 +35,6 @@ public class HomeFragment extends Fragment {
     private ArrayList<ProductModel> mProductModels;
     private ArrayList<StoreModel> mStoreModels;
 
-    @SuppressLint("ClickableViewAccessibility")
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         HomeViewModel homeViewModel =
@@ -64,41 +60,27 @@ public class HomeFragment extends Fragment {
                 LinearLayoutManager.HORIZONTAL, false));
         recyclerVNearbyStore.setAdapter(storeRVAdapter);
 
-        // Setup Buttons OnClickEvents
+        // Setup Search Bar & Buttons Event
         Intent intentSearch = new Intent(getActivity(), SearchActivity.class);
         Intent intentNearby = new Intent(getActivity(), NearbyActivity.class);
         Intent intentDeal = new Intent(getActivity(), DealActivity.class);
         Intent intentMap = new Intent(getActivity(), MapsActivity.class);
         Intent intentFavorite = new Intent(getActivity(), FavoriteActivity.class);
 
-        SearchView searchVSearchField = root.findViewById(R.id.searchVSearchField);
-        Button btnCategory = root.findViewById(R.id.btnCategory);
+        SearchView searchVSearchField = root.findViewById(R.id.searchVHomeSearchField);
+        Button btnSearchCategory = root.findViewById(R.id.btnSearchCategory);
         Button btnNearby = root.findViewById(R.id.btnNearby);
         Button btnDeal = root.findViewById(R.id.btnDeal);
         Button btnMap = root.findViewById(R.id.btnMap);
         Button btnFavorite = root.findViewById(R.id.btnFavorite);
 
-        btnCategory.setOnClickListener(view -> startActivity(intentSearch));
+        btnSearchCategory.setOnClickListener(view -> homeSearchBarOnClick(intentSearch, searchVSearchField, false));
+        searchVSearchField.setOnClickListener(view -> homeSearchBarOnClick(intentSearch, searchVSearchField, true));
+        searchVSearchField.setOnSearchClickListener(view -> homeSearchBarOnClick(intentSearch, searchVSearchField, true));
         btnNearby.setOnClickListener(view -> startActivity(intentNearby));
         btnDeal.setOnClickListener(view -> startActivity(intentDeal));
         btnMap.setOnClickListener(view -> startActivity(intentMap));
         btnFavorite.setOnClickListener(view -> startActivity(intentFavorite));
-
-        searchVSearchField.setOnClickListener(view -> startActivity(intentSearch));
-
-        searchVSearchField.setOnSearchClickListener(view -> {
-            startActivity(intentSearch);
-            searchVSearchField.setIconified(true);
-        });
-
-        searchVSearchField.setOnTouchListener((view, motionEvent) -> {
-            if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
-                startActivity(intentSearch);
-                // Consumes the extra touch event
-                return true;
-            }
-            return false;
-        });
 
         return root;
     }
@@ -131,5 +113,12 @@ public class HomeFragment extends Fragment {
         for (int i = 0; i < 10; i++) {
             mStoreModels.add(new StoreModel(storeImage, storeName, storeAddress, storeCategory));
         }
+    }
+
+    private void homeSearchBarOnClick(Intent intentSearch, SearchView searchVSearchField, boolean isTyping) {
+        // Could be improve using ViewModel I guess
+        intentSearch.putExtra("isTyping", isTyping);
+        startActivity(intentSearch);
+        searchVSearchField.setIconified(true);
     }
 }
