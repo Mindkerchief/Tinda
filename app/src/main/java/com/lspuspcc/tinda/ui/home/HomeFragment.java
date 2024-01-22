@@ -54,7 +54,7 @@ public class HomeFragment extends Fragment {
         recyclerVRecommendedProducts.setLayoutManager(new GridLayoutManager(getActivity(), 2));
         recyclerVRecommendedProducts.setAdapter(productRVAdapter);
 
-        RecyclerView recyclerVNearbyStore = mBinding.recyclerVNearbyStore;
+        RecyclerView recyclerVNearbyStore = mBinding.recyclerVNearbyStores;
         StoreRecyclerViewAdapter storeRVAdapter = new StoreRecyclerViewAdapter(requireContext(), mStoreModels);
         recyclerVNearbyStore.setLayoutManager(new LinearLayoutManager(requireContext(),
                 LinearLayoutManager.HORIZONTAL, false));
@@ -67,12 +67,12 @@ public class HomeFragment extends Fragment {
         Intent intentMap = new Intent(getActivity(), MapsActivity.class);
         Intent intentFavorite = new Intent(getActivity(), FavoriteActivity.class);
 
-        SearchView searchVSearchField = root.findViewById(R.id.searchVHomeSearchField);
-        Button btnSearchCategory = root.findViewById(R.id.btnSearchCategory);
-        Button btnNearby = root.findViewById(R.id.btnNearby);
-        Button btnDeal = root.findViewById(R.id.btnDeal);
-        Button btnMap = root.findViewById(R.id.btnMap);
-        Button btnFavorite = root.findViewById(R.id.btnFavorite);
+        SearchView searchVSearchField = mBinding.searchVHomeSearchField;
+        Button btnSearchCategory = mBinding.btnSearchCategory;
+        Button btnNearby = mBinding.btnNearby;
+        Button btnDeal = mBinding.btnDeal;
+        Button btnMap = mBinding.btnMap;
+        Button btnFavorite = mBinding.btnFavorite;
 
         btnSearchCategory.setOnClickListener(view -> homeSearchBarOnClick(intentSearch, searchVSearchField, false));
         searchVSearchField.setOnClickListener(view -> homeSearchBarOnClick(intentSearch, searchVSearchField, true));
