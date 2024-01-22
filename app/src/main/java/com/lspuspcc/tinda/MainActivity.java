@@ -24,12 +24,15 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
         NavigationUI.setupWithNavController(binding.navView, navController);
 
+        // Prevents night mode
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+
         // Hide the action bar
         if (getSupportActionBar() != null)
             getSupportActionBar().hide();
 
-        // Prevents night mode
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        /*TODO
+        * Scrolling in home using store recycler view does not detect by collapsing toolbar
+        **/
     }
-
 }
