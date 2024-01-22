@@ -15,13 +15,13 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.lspuspcc.tinda.domain.SetupModel;
 import com.lspuspcc.tinda.ui.deal.DealActivity;
 import com.lspuspcc.tinda.ui.favorite.FavoriteActivity;
 import com.lspuspcc.tinda.ui.maps.MapsActivity;
 import com.lspuspcc.tinda.ui.nearby.NearbyActivity;
 import com.lspuspcc.tinda.domain.ProductModel;
 import com.lspuspcc.tinda.domain.ProductRecyclerViewAdapter;
-import com.lspuspcc.tinda.R;
 import com.lspuspcc.tinda.ui.search.SearchActivity;
 import com.lspuspcc.tinda.domain.StoreModel;
 import com.lspuspcc.tinda.domain.StoreRecyclerViewAdapter;
@@ -44,14 +44,13 @@ public class HomeFragment extends Fragment {
         View root = mBinding.getRoot();
 
         // Setup Home Stores and Products Recycler View
-        mProductModels = new ArrayList<>();
-        mStoreModels = new ArrayList<>();
-        setupProductModel();
-        setupStoreModel();
+        SetupModel setupModel = new SetupModel(requireContext());
+        mProductModels = setupModel.setupProductModel();
+        mStoreModels = setupModel.setupStoreModel();
 
         RecyclerView recyclerVRecommendedProducts = mBinding.recyclerVRecommendedProducts;
         ProductRecyclerViewAdapter productRVAdapter = new ProductRecyclerViewAdapter(requireContext(), mProductModels);
-        recyclerVRecommendedProducts.setLayoutManager(new GridLayoutManager(getActivity(), 2));
+        recyclerVRecommendedProducts.setLayoutManager(new GridLayoutManager(requireContext(), 2));
         recyclerVRecommendedProducts.setAdapter(productRVAdapter);
 
         RecyclerView recyclerVNearbyStore = mBinding.recyclerVNearbyStores;
@@ -89,30 +88,6 @@ public class HomeFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         mBinding = null;
-    }
-
-    private void setupProductModel() {
-        // Temporary implementation for testing purposes
-        int productImage = R.drawable.sample_product_image;
-        String productName = getResources().getString(R.string.label_product_name);
-        String productStore = getResources().getString(R.string.label_product_store);
-        String productPrice = getResources().getString(R.string.label_product_price);
-
-        for (int i = 0; i < 10; i++) {
-            mProductModels.add(new ProductModel(productImage, productName, productStore, productPrice));
-        }
-    }
-
-    private void setupStoreModel() {
-        // Temporary implementation for testing purposes
-        int storeImage = R.drawable.sample_store_image;
-        String storeName = getResources().getString(R.string.label_product_store);
-        String storeAddress = getResources().getString(R.string.label_store_address);
-        String storeCategory = getResources().getString(R.string.label_store_category);
-
-        for (int i = 0; i < 10; i++) {
-            mStoreModels.add(new StoreModel(storeImage, storeName, storeAddress, storeCategory));
-        }
     }
 
     private void homeSearchBarOnClick(Intent intentSearch, SearchView searchVSearchField, boolean isTyping) {
