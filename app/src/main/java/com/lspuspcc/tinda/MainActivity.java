@@ -12,17 +12,17 @@ import com.lspuspcc.tinda.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ActivityMainBinding binding;
+    private ActivityMainBinding mBinding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        binding = ActivityMainBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
+        mBinding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(mBinding.getRoot());
 
         NavController navController = Navigation.findNavController(this, R.id.navHostF_main);
-        NavigationUI.setupWithNavController(binding.navVMain, navController);
+        NavigationUI.setupWithNavController(mBinding.navVMain, navController);
 
         // Prevents Night Mode
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
