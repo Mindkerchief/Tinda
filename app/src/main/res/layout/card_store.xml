@@ -30,7 +30,7 @@
                 android:scaleType="centerCrop"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/store_sample_image" />
+                app:srcCompat="@drawable/sample_store_image" />
 
             <TextView
                 android:id="@+id/textVStoreName"

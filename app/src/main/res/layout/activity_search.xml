@@ -4,12 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SearchActivity">
+    tools:context=".ui.search.SearchActivity">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardV_searchBarContainer"
         android:layout_width="match_parent"
-        android:layout_height="45dp"
+        android:layout_height="48dp"
         android:layout_marginStart="@dimen/view_margin"
         android:layout_marginTop="@dimen/view_margin"
         android:layout_marginEnd="@dimen/view_margin"
@@ -41,7 +41,7 @@
                 android:layout_height="match_parent"
                 android:background="@color/transparent"
                 android:contentDescription="@string/button_category"
-                android:drawableTop="@drawable/outline_category_24"
+                android:drawableTop="@drawable/ic_category"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />

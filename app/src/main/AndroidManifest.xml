@@ -21,20 +21,20 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyBRzITmwoNlsoFjMRuEz-6PUNxzDi7Q408" />
         <activity
-            android:name=".MapsActivity"
+            android:name=".ui.maps.MapsActivity"
             android:exported="false"
             android:label="@string/title_activity_maps" />
         <activity
-            android:name=".SearchActivity"
+            android:name=".ui.search.SearchActivity"
             android:exported="false" />
         <activity
-            android:name=".FavoriteActivity"
+            android:name=".ui.favorite.FavoriteActivity"
             android:exported="false" />
         <activity
-            android:name=".DealActivity"
+            android:name=".ui.deal.DealActivity"
             android:exported="false" />
         <activity
-            android:name=".NearbyActivity"
+            android:name=".ui.nearby.NearbyActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
