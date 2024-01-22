@@ -14,7 +14,7 @@ public class SearchActivity extends AppCompatActivity {
         setContentView(R.layout.activity_search);
 
         boolean startTyping = getIntent().getBooleanExtra("isTyping", false);
-        SearchView searchVSearchField = findViewById(R.id.searchVSearchField);
+        SearchView searchVSearchField = findViewById(R.id.searchV_searchField);
 
         if (startTyping)
             searchVSearchField.setIconified(false);

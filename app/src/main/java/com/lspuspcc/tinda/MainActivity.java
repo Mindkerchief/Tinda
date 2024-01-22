@@ -21,18 +21,18 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
-        NavigationUI.setupWithNavController(binding.navView, navController);
+        NavController navController = Navigation.findNavController(this, R.id.navHostF_main);
+        NavigationUI.setupWithNavController(binding.navVMain, navController);
 
-        // Prevents night mode
+        // Prevents Night Mode
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
-        // Hide the action bar
+        // Hides Action Bar
         if (getSupportActionBar() != null)
             getSupportActionBar().hide();
 
         /*TODO
-        * Scrolling in home using store recycler view does not detect by collapsing toolbar
+        * Scrolling in Home using Store Recycler View does not detect by Collapsing Toolbar
         **/
     }
 }

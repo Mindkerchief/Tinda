@@ -7,13 +7,13 @@
     tools:context=".SearchActivity">
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cardVSearchBarContainer"
+        android:id="@+id/cardV_searchBarContainer"
         android:layout_width="match_parent"
         android:layout_height="45dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        app:cardCornerRadius="8dp"
+        android:layout_marginStart="@dimen/view_margin"
+        android:layout_marginTop="@dimen/view_margin"
+        android:layout_marginEnd="@dimen/view_margin"
+        app:cardCornerRadius="@dimen/view_corner_radius"
         app:cardElevation="4dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -24,19 +24,19 @@
             android:layout_height="match_parent">
 
             <SearchView
-                android:id="@+id/searchVSearchField"
+                android:id="@+id/searchV_searchField"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginEnd="-12dp"
                 android:clickable="false"
                 android:queryHint="@string/label_search"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/btnSearchCategory"
+                app:layout_constraintEnd_toStartOf="@+id/btn_searchCategory"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <Button
-                android:id="@+id/btnSearchCategory"
+                android:id="@+id/btn_searchCategory"
                 android:layout_width="50dp"
                 android:layout_height="match_parent"
                 android:background="@color/transparent"
