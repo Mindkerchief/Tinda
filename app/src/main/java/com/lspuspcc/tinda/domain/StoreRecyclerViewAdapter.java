@@ -54,10 +54,10 @@ public class StoreRecyclerViewAdapter extends RecyclerView.Adapter<StoreRecycler
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            imageVStoreImage = itemView.findViewById(R.id.imageVStoreImage);
-            textVStoreName = itemView.findViewById(R.id.textVStoreName);
-            textVStoreAddress = itemView.findViewById(R.id.textVStoreAddress);
-            textVStoreCategory = itemView.findViewById(R.id.textVStoreCategory);
+            imageVStoreImage = itemView.findViewById(R.id.imageV_storeImage);
+            textVStoreName = itemView.findViewById(R.id.textV_storeName);
+            textVStoreAddress = itemView.findViewById(R.id.textV_storeAddress);
+            textVStoreCategory = itemView.findViewById(R.id.textV_storeCategory);
         }
     }
 }

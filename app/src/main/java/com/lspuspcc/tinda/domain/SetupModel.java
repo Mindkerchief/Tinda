@@ -5,22 +5,18 @@ import android.content.Context;
 import com.lspuspcc.tinda.R;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class SetupModel {
-    private Context mContext;
-
-    public SetupModel(Context context) {
-        this.mContext = context;
-    }
 
     public ArrayList<ProductModel> setupProductModel() {
         // Temporary implementation for testing purposes
         ArrayList<ProductModel> productModels = new ArrayList<>();
 
         int productImage = R.drawable.sample_product_image;
-        String productName = mContext.getString(R.string.label_product_name);
-        String productStore = mContext.getString(R.string.label_product_store);
-        String productPrice = mContext.getString(R.string.label_product_price);
+        String productName = "KARSON Scientific Calculator Multiple Modes Intuitive Interface";
+        String productStore = "Expressions - Ultimart San Pablo";
+        String productPrice = "P169.00";
 
         for (int i = 0; i < 10; i++) {
             productModels.add(new ProductModel(productImage, productName, productStore, productPrice));
@@ -34,14 +30,38 @@ public class SetupModel {
         ArrayList<StoreModel> storeModels = new ArrayList<>();
 
         int storeImage = R.drawable.sample_store_image;
-        String storeName = mContext.getString(R.string.label_product_store);
-        String storeAddress = mContext.getString(R.string.label_store_address);
-        String storeCategory = mContext.getString(R.string.label_store_category);
+        String storeName = "Expressions - Ultimart San Pablo";
+        String storeAddress = "San Pablo";
+        String storeCategory = "School/Office Supplies";
 
         for (int i = 0; i < 10; i++) {
             storeModels.add(new StoreModel(storeImage, storeName, storeAddress, storeCategory));
         }
 
         return storeModels;
+    }
+
+    public ArrayList<CategoryModel> setupSubCategoryModel(int index) {
+        ArrayList<CategoryModel> categoryModels = new ArrayList<>();
+
+        int categoryImage = R.drawable.sample_product_image;
+        String[][] subCategory = {
+            {"Smartphone", "Keyboard", "Earphone", "Headphone", "Cable"},
+            {"Television", "Speaker", "Refrigerator", "Fans", "Toaster"},
+            {"Lotion", "Deodorant", "Shampoo", "Perfume", "Wax"},
+            {"Car", "Gun", "Barbie", "Ball", "Card"},
+            {"Rice", "Vegetable", "Fruits", "Canned Goods"},
+            {"Chair", "Stand", "Closet", "Bed", "Table"},
+            {"T-shirt", "Short", "Jeans", "Pants", "Polo"},
+            {"Slippers", "Sandals", "Sneakers", "Black-shoes", "High-hills"},
+            {"Treadmill", "Weights", "Ball"},
+            {"Tool", "Parts", "Paint"}
+        };
+
+        for (int i = 0; i < subCategory[index].length; i++) {
+            categoryModels.add(new CategoryModel(categoryImage, subCategory[index][i]));
+        }
+
+        return categoryModels;
     }
 }

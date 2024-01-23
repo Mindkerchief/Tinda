@@ -23,7 +23,7 @@
             android:layout_height="match_parent">
 
             <ImageView
-                android:id="@+id/imageVStoreImage"
+                android:id="@+id/imageV_storeImage"
                 android:layout_width="120dp"
                 android:layout_height="120dp"
                 android:contentDescription="@string/label_product_name"
@@ -33,54 +33,54 @@
                 app:srcCompat="@drawable/sample_store_image" />
 
             <TextView
-                android:id="@+id/textVStoreName"
+                android:id="@+id/textV_storeName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="4dp"
                 android:layout_marginEnd="8dp"
                 android:ellipsize="end"
-                android:labelFor="@id/imageVStoreImage"
+                android:labelFor="@id/imageV_storeImage"
                 android:maxLines="2"
                 android:text="@string/label_product_store"
                 android:textColor="@color/lighter_black"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toEndOf="@+id/imageVStoreImage"
+                app:layout_constraintStart_toEndOf="@+id/imageV_storeImage"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/textVStoreAddress"
+                android:id="@+id/textV_storeAddress"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
-                android:labelFor="@id/imageVStoreImage"
+                android:labelFor="@id/imageV_storeImage"
                 android:text="@string/label_store_address"
                 android:textColor="@color/lighter_black"
                 android:textSize="12sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toEndOf="@+id/imageVStoreImage"
-                app:layout_constraintTop_toBottomOf="@+id/textVStoreName" />
+                app:layout_constraintStart_toEndOf="@+id/imageV_storeImage"
+                app:layout_constraintTop_toBottomOf="@+id/textV_storeName" />
 
             <TextView
-                android:id="@+id/textVStoreCategory"
+                android:id="@+id/textV_storeCategory"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
-                android:labelFor="@id/imageVStoreImage"
+                android:labelFor="@id/imageV_storeImage"
                 android:text="@string/label_store_category"
                 android:textColor="@color/blue_800"
                 android:textSize="12sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toEndOf="@+id/imageVStoreImage"
-                app:layout_constraintTop_toBottomOf="@+id/textVStoreAddress" />
+                app:layout_constraintStart_toEndOf="@+id/imageV_storeImage"
+                app:layout_constraintTop_toBottomOf="@+id/textV_storeAddress" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

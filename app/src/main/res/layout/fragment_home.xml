@@ -10,7 +10,7 @@
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="-208dp"
+        android:layout_marginTop="-210dp"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -90,8 +90,6 @@
                 android:layout_marginTop="-8dp"
                 android:layout_marginEnd="@dimen/view_margin"
                 android:background="@color/white"
-                android:nestedScrollingEnabled="true"
-                android:overScrollMode="ifContentScrolls"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/cardV_nearbyStoreTitle" />
@@ -275,13 +273,39 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
-                <ImageView
-                    android:id="@+id/imageV_promotionBanner"
+                <ViewFlipper
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@color/blue_800"
-                    android:scaleType="centerCrop"
-                    app:srcCompat="@drawable/sample_promotion_banner" />
+                    android:autoStart="true"
+                    android:flipInterval="10000"
+                    android:inAnimation="@android:anim/slide_in_left"
+                    android:outAnimation="@android:anim/slide_out_right">
+
+                    <ImageView
+                        android:id="@+id/imageV_promotionBanner1"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/blue_800"
+                        android:scaleType="centerCrop"
+                        app:srcCompat="@drawable/sample_promotion_banner" />
+
+                    <ImageView
+                        android:id="@+id/imageV_promotionBanner2"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/blue_800"
+                        android:scaleType="centerCrop"
+                        app:srcCompat="@drawable/ic_launcher_background" />
+
+                    <ImageView
+                        android:id="@+id/imageV_promotionBanner3"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/blue_800"
+                        android:scaleType="centerCrop"
+                        app:srcCompat="@drawable/sample_promotion_banner" />
+                </ViewFlipper>
+
             </FrameLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>

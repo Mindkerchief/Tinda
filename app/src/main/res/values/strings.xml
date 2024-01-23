@@ -18,4 +18,14 @@
     <string name="label_product_price">P169.00</string>
     <string name="label_store_category">School/Office Supplies</string>
     <string name="label_store_address">San Pablo</string>
+    <string name="category_electronics">Electronics</string>
+    <string name="category_appliances">Appliances</string>
+    <string name="category_beauty">Beauty</string>
+    <string name="category_toys">Toys</string>
+    <string name="category_grocery">Grocery</string>
+    <string name="category_furniture">Furniture</string>
+    <string name="category_clothing">Clothing</string>
+    <string name="category_footwear">Footwear</string>
+    <string name="category_sports">Sports</string>
+    <string name="category_hardware">Hardware</string>
 </resources>
