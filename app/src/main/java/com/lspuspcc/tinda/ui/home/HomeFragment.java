@@ -44,7 +44,7 @@ public class HomeFragment extends Fragment {
         View root = mBinding.getRoot();
 
         // Setup Home Stores and Products Recycler View
-        SetupModel setupModel = new SetupModel(requireContext());
+        SetupModel setupModel = new SetupModel();
         mProductModels = setupModel.setupProductModel();
         mStoreModels = setupModel.setupStoreModel();
 

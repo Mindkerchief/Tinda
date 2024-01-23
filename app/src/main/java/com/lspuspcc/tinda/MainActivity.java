@@ -27,12 +27,9 @@ public class MainActivity extends AppCompatActivity {
         // Prevents Night Mode
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
-        // Hides Action Bar
-        if (getSupportActionBar() != null)
-            getSupportActionBar().hide();
-
         /*TODO
         * Scrolling in Home using Store Recycler View does not detect by Collapsing Toolbar
+        * Use onViewCreated methods instead of onCreateView
         **/
     }
 }

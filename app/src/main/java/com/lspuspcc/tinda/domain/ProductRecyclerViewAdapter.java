@@ -54,10 +54,10 @@ public class ProductRecyclerViewAdapter extends RecyclerView.Adapter<ProductRecy
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            imageVProductImage = itemView.findViewById(R.id.imageVProductImage);
-            textVProductName = itemView.findViewById(R.id.textVProductName);
-            textVProductStore = itemView.findViewById(R.id.textVProductStore);
-            textVProductPrice = itemView.findViewById(R.id.textVProductPrice);
+            imageVProductImage = itemView.findViewById(R.id.imageV_productImage);
+            textVProductName = itemView.findViewById(R.id.textV_productName);
+            textVProductStore = itemView.findViewById(R.id.textV_productStore);
+            textVProductPrice = itemView.findViewById(R.id.textV_productPrice);
         }
     }
 }
