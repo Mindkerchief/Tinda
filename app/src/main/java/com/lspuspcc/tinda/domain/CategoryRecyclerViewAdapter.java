@@ -56,4 +56,8 @@ public class CategoryRecyclerViewAdapter extends RecyclerView.Adapter<CategoryRe
             textVCategoryName = itemView.findViewById(R.id.textV_categoryName);
         }
     }
+
+    public void updateCategoryModel(ArrayList<CategoryModel> categoryModels) {
+        this.mCategoryModels = categoryModels;
+    }
 }
