@@ -1,11 +1,8 @@
 package com.lspuspcc.tinda.domain;
 
-import android.content.Context;
-
 import com.lspuspcc.tinda.R;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class SetupModel {
 
@@ -41,12 +38,13 @@ public class SetupModel {
         return storeModels;
     }
 
-    public ArrayList<CategoryModel> setupSubCategoryModel(int index) {
-        ArrayList<CategoryModel> categoryModels = new ArrayList<>();
+    public ArrayList<SubCategoryModel> setupSubCategoryModel(int index) {
+        // Temporary implementation for testing purposes
+        ArrayList<SubCategoryModel> subCategoryModels = new ArrayList<>();
 
         int categoryImage = R.drawable.sample_product_image;
         String[][] subCategory = {
-            {"Smartphone", "Keyboard", "Earphone", "Headphone", "Cable"},
+            {"Smartphone", "Keyboard", "Earphone", "Headphone"},
             {"Television", "Speaker", "Refrigerator", "Fans", "Toaster"},
             {"Lotion", "Deodorant", "Shampoo", "Perfume", "Wax"},
             {"Car", "Gun", "Barbie", "Ball", "Card"},
@@ -59,9 +57,28 @@ public class SetupModel {
         };
 
         for (int i = 0; i < subCategory[index].length; i++) {
-            categoryModels.add(new CategoryModel(categoryImage, subCategory[index][i]));
+            subCategoryModels.add(new SubCategoryModel(categoryImage, subCategory[index][i]));
         }
 
-        return categoryModels;
+        return subCategoryModels;
+    }
+
+    public ArrayList<SearchCategoryModel> setupSearchCategoryModel() {
+        // Temporary implementation for testing purposes
+        ArrayList<SearchCategoryModel> searchCategoryModels = new ArrayList<>();
+        int categoryIcon = R.drawable.ic_basket;
+        String[] categoryNames = {
+            "Electronics",  "Appliances",
+            "Beauty",       "Toys",
+            "Grocery",      "Furniture",
+            "Clothing",     "Footwear",
+            "Sports",       "Hardware"
+        };
+
+        for (byte i = 0; i < categoryNames.length; i++) {
+            searchCategoryModels.add(new SearchCategoryModel(categoryIcon, categoryNames[i], i));
+        }
+
+        return searchCategoryModels;
     }
 }

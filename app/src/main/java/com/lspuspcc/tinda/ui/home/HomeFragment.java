@@ -67,13 +67,13 @@ public class HomeFragment extends Fragment {
         Intent intentFavorite = new Intent(getActivity(), FavoriteActivity.class);
 
         SearchView searchVSearchField = mBinding.searchVHomeSearchField;
-        Button btnSearchCategory = mBinding.btnSearchCategory;
+        Button btnSearchCategoryFilter = mBinding.btnSearchCategoryFilter;
         Button btnNearby = mBinding.btnNearby;
         Button btnDeal = mBinding.btnDeal;
         Button btnMap = mBinding.btnMap;
         Button btnFavorite = mBinding.btnFavorite;
 
-        btnSearchCategory.setOnClickListener(view -> homeSearchBarOnClick(intentSearch, searchVSearchField, false));
+        btnSearchCategoryFilter.setOnClickListener(view -> homeSearchBarOnClick(intentSearch, searchVSearchField, false));
         searchVSearchField.setOnClickListener(view -> homeSearchBarOnClick(intentSearch, searchVSearchField, true));
         searchVSearchField.setOnSearchClickListener(view -> homeSearchBarOnClick(intentSearch, searchVSearchField, true));
         btnNearby.setOnClickListener(view -> startActivity(intentNearby));

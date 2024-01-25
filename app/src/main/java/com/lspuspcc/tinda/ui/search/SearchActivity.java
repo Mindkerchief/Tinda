@@ -3,6 +3,7 @@ package com.lspuspcc.tinda.ui.search;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.animation.LayoutTransition;
@@ -15,8 +16,10 @@ import android.widget.Button;
 import android.widget.SearchView;
 
 import com.lspuspcc.tinda.databinding.ActivitySearchBinding;
-import com.lspuspcc.tinda.domain.CategoryModel;
-import com.lspuspcc.tinda.domain.CategoryRecyclerViewAdapter;
+import com.lspuspcc.tinda.domain.SearchCategoryModel;
+import com.lspuspcc.tinda.domain.SearchCategoryRecyclerViewAdapter;
+import com.lspuspcc.tinda.domain.SubCategoryModel;
+import com.lspuspcc.tinda.domain.SubCategoryRecyclerViewAdapter;
 import com.lspuspcc.tinda.domain.ProductModel;
 import com.lspuspcc.tinda.domain.ProductRecyclerViewAdapter;
 import com.lspuspcc.tinda.domain.SetupModel;
@@ -26,12 +29,14 @@ import java.util.ArrayList;
 
 public class SearchActivity extends AppCompatActivity {
     private ActivitySearchBinding mBinding;
-    private ArrayList<CategoryModel> mCategoryModels;
+    private ArrayList<SearchCategoryModel> mSearchCategoryModels;
+    private ArrayList<SubCategoryModel> mSubCategoryModels;
     private ArrayList<ProductModel> mProductModels;
     private ArrayList<StoreModel> mStoreModels;
     private SetupModel mSetupModel;
     private ConstraintLayout mConstraintLCategory;
-    private CategoryRecyclerViewAdapter mCategoryRVAdapter;
+    private SearchCategoryRecyclerViewAdapter mSearchCategoryRVAdapter;
+    private SubCategoryRecyclerViewAdapter mSubCategoryRVAdapter;
     private byte mCurrentCategoryIndex;
 
     @Override
@@ -41,58 +46,42 @@ public class SearchActivity extends AppCompatActivity {
         setContentView(mBinding.getRoot());
 
         // Initialize most of the Views
-        mConstraintLCategory = mBinding.constraintLCategory;
+        mConstraintLCategory = mBinding.constraintLSearchCategory;
         mSetupModel = new SetupModel();
 
         SearchView searchVSearchField = mBinding.searchVSearchField;
+        RecyclerView recyclerVSearchCategory = mBinding.recyclerVSearchCategory;
         RecyclerView recyclerVSearchResults = mBinding.recyclerVSearchResults;
-        RecyclerView mRecyclerVSubCategory = mBinding.recyclerVSubCategory;
-        Button btnSearchCategory = mBinding.btnSearchCategory;
-        Button btnElectronicsCategory = mBinding.btnElectronicsCategory;
-        Button btnAppliancesCategory = mBinding.btnAppliancesCategory;
-        Button btnBeautyCategory = mBinding.btnBeautyCategory;
-        Button btnToysCategory = mBinding.btnToysCategory;
-        Button btnGroceryCategory = mBinding.btnGroceryCategory;
-        Button btnFurnitureCategory = mBinding.btnFurnitureCategory;
-        Button btnClothingCategory = mBinding.btnClothingCategory;
-        Button btnFootwearCategory = mBinding.btnFootwearCategory;
-        Button btnSportsCategory = mBinding.btnSportsCategory;
-        Button btnHardwareCategory = mBinding.btnHardwareCategory;
+        RecyclerView recyclerVSubCategory = mBinding.recyclerVSubCategory;
+        Button btnSearchCategoryFilter = mBinding.btnSearchCategoryFilter;
 
         // Takes Home Fragment Search Bar Action using Extra
         if (getIntent().getBooleanExtra("isTyping", false))
             searchVSearchField.setIconified(false);
         else
-            btnSearchCategory.performClick();
-
-        // Prevents Category Model from having NullException
-        mCategoryModels = mSetupModel.setupSubCategoryModel(0);
+            btnSearchCategoryFilter.performClick();
 
         // Enables layout transition
         mConstraintLCategory.getLayoutTransition().enableTransitionType(LayoutTransition.CHANGING);
 
+        // Initialize Search Bar Category Recycler View
+        mSearchCategoryModels = mSetupModel.setupSearchCategoryModel();
+        mSearchCategoryRVAdapter = new SearchCategoryRecyclerViewAdapter(this, mSearchCategoryModels);
+        recyclerVSearchCategory.setLayoutManager(new LinearLayoutManager(this,
+                LinearLayoutManager.HORIZONTAL, false));
+        recyclerVSearchCategory.setAdapter(mSearchCategoryRVAdapter);
+
         // Initialize Search Bar Subcategory Recycler View
-        mCategoryRVAdapter = new CategoryRecyclerViewAdapter(this, mCategoryModels);
-        mRecyclerVSubCategory.setLayoutManager(new GridLayoutManager(this, 4));
-        mRecyclerVSubCategory.setAdapter(mCategoryRVAdapter);
+        mSubCategoryModels = mSetupModel.setupSubCategoryModel(0);
+        mSubCategoryRVAdapter = new SubCategoryRecyclerViewAdapter(this, mSubCategoryModels);
+        recyclerVSubCategory.setLayoutManager(new GridLayoutManager(this, 4));
+        recyclerVSubCategory.setAdapter(mSubCategoryRVAdapter);
 
         // Initialize Search Results Recycler View
         mProductModels = mSetupModel.setupProductModel();
         ProductRecyclerViewAdapter productRVAdapter = new ProductRecyclerViewAdapter(this, mProductModels);
         recyclerVSearchResults.setLayoutManager(new GridLayoutManager(this, 2));
         recyclerVSearchResults.setAdapter(productRVAdapter);
-
-        // Handles Buttons OnCLick Event
-        btnElectronicsCategory.setOnClickListener(view -> updateRecyclerVSubCategory((byte) 0));
-        btnAppliancesCategory.setOnClickListener(view -> updateRecyclerVSubCategory((byte) 1));
-        btnBeautyCategory.setOnClickListener(view -> updateRecyclerVSubCategory((byte) 2));
-        btnToysCategory.setOnClickListener(view -> updateRecyclerVSubCategory((byte) 3));
-        btnGroceryCategory.setOnClickListener(view -> updateRecyclerVSubCategory((byte) 4));
-        btnFurnitureCategory.setOnClickListener(view -> updateRecyclerVSubCategory((byte) 5));
-        btnClothingCategory.setOnClickListener(view -> updateRecyclerVSubCategory((byte) 6));
-        btnFootwearCategory.setOnClickListener(view -> updateRecyclerVSubCategory((byte) 7));
-        btnSportsCategory.setOnClickListener(view -> updateRecyclerVSubCategory((byte) 8));
-        btnHardwareCategory.setOnClickListener(view -> updateRecyclerVSubCategory((byte) 9));
 
         // TODO: Improve this Search Field OnTouch Event
         searchVSearchField.setOnTouchListener((view, motionEvent) -> {
@@ -107,15 +96,17 @@ public class SearchActivity extends AppCompatActivity {
 
         TransitionManager.beginDelayedTransition(mConstraintLCategory, new AutoTransition());
         mConstraintLCategory.setVisibility(viewVisibility);
+        mCurrentCategoryIndex = 0;
     }
 
-    private void updateRecyclerVSubCategory(byte index) {
+    public void updateRecyclerVSubCategory(View view) {
         // Use condition to prevent spam
+        byte index = (byte) view.getTag();
         if (mCurrentCategoryIndex != index) {
-            mCategoryRVAdapter.notifyItemRangeRemoved(0, mCategoryModels.size());
-            mCategoryModels = mSetupModel.setupSubCategoryModel(index);
-            mCategoryRVAdapter.updateCategoryModel(mCategoryModels);
-            mCategoryRVAdapter.notifyItemRangeInserted(0, mCategoryModels.size());
+            mSubCategoryRVAdapter.notifyItemRangeRemoved(0, mSubCategoryModels.size());
+            mSubCategoryModels = mSetupModel.setupSubCategoryModel(index);
+            mSubCategoryRVAdapter.updateCategoryModel(mSubCategoryModels);
+            mSubCategoryRVAdapter.notifyItemRangeInserted(0, mSubCategoryModels.size());
             mCurrentCategoryIndex = index;
         }
     }

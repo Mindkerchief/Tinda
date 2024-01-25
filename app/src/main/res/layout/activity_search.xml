@@ -28,7 +28,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginStart="@dimen/view_margin"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="@dimen/view_margin"
                     android:layout_marginEnd="@dimen/view_margin"
                     android:background="@color/white"
                     android:visibility="gone"
@@ -42,9 +42,9 @@
             android:id="@+id/cardV_searchCategory"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
+            android:layout_marginStart="@dimen/view_margin_wider"
             android:layout_marginTop="-10dp"
-            android:layout_marginEnd="24dp"
+            android:layout_marginEnd="@dimen/view_margin_wider"
             app:cardCornerRadius="@dimen/view_corner_radius"
             app:cardElevation="4dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -52,207 +52,19 @@
             app:layout_constraintTop_toBottomOf="@+id/cardV_searchBar">
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/constraintL_category"
+                android:id="@+id/constraintL_searchCategory"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:animateLayoutChanges="true"
                 android:visibility="gone">
 
-                <HorizontalScrollView
-                    android:id="@+id/horizontalSV_category"
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerV_searchCategory"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:scrollbars="none"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-
-                    <TableRow
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:background="@color/transparent">
-
-                        <Button
-                            android:id="@+id/btn_electronicsCategory"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:backgroundTint="@color/dirty_white"
-                            android:insetTop="10dp"
-                            android:insetBottom="0dp"
-                            android:paddingLeft="0dp"
-                            android:paddingRight="0dp"
-                            android:text="@string/category_electronics"
-                            android:textColor="@color/lighter_black"
-                            android:textSize="8sp"
-                            app:icon="@drawable/ic_basket"
-                            app:iconGravity="textTop"
-                            app:iconPadding="4dp"
-                            app:iconSize="30dp"
-                            app:iconTint="@color/lighter_black" />
-
-                        <Button
-                            android:id="@+id/btn_appliancesCategory"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:backgroundTint="@color/dirty_white"
-                            android:insetTop="10dp"
-                            android:insetBottom="0dp"
-                            android:paddingLeft="0dp"
-                            android:paddingRight="0dp"
-                            android:text="@string/category_appliances"
-                            android:textColor="@color/lighter_black"
-                            android:textSize="8sp"
-                            app:icon="@drawable/ic_basket"
-                            app:iconGravity="textTop"
-                            app:iconPadding="4dp"
-                            app:iconSize="30dp"
-                            app:iconTint="@color/lighter_black" />
-
-                        <Button
-                            android:id="@+id/btn_beautyCategory"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:backgroundTint="@color/dirty_white"
-                            android:insetTop="10dp"
-                            android:insetBottom="0dp"
-                            android:paddingLeft="0dp"
-                            android:paddingRight="0dp"
-                            android:text="@string/category_beauty"
-                            android:textColor="@color/lighter_black"
-                            android:textSize="8sp"
-                            app:icon="@drawable/ic_basket"
-                            app:iconGravity="textTop"
-                            app:iconPadding="4dp"
-                            app:iconSize="30dp"
-                            app:iconTint="@color/lighter_black" />
-
-                        <Button
-                            android:id="@+id/btn_toysCategory"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:backgroundTint="@color/dirty_white"
-                            android:insetTop="10dp"
-                            android:insetBottom="0dp"
-                            android:paddingLeft="0dp"
-                            android:paddingRight="0dp"
-                            android:text="@string/category_toys"
-                            android:textColor="@color/lighter_black"
-                            android:textSize="8sp"
-                            app:icon="@drawable/ic_basket"
-                            app:iconGravity="textTop"
-                            app:iconPadding="4dp"
-                            app:iconSize="30dp"
-                            app:iconTint="@color/lighter_black" />
-
-                        <Button
-                            android:id="@+id/btn_groceryCategory"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:backgroundTint="@color/dirty_white"
-                            android:insetTop="10dp"
-                            android:insetBottom="0dp"
-                            android:paddingLeft="0dp"
-                            android:paddingRight="0dp"
-                            android:text="@string/category_grocery"
-                            android:textColor="@color/lighter_black"
-                            android:textSize="8sp"
-                            app:icon="@drawable/ic_basket"
-                            app:iconGravity="textTop"
-                            app:iconPadding="4dp"
-                            app:iconSize="30dp"
-                            app:iconTint="@color/lighter_black" />
-
-                        <Button
-                            android:id="@+id/btn_furnitureCategory"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:backgroundTint="@color/dirty_white"
-                            android:insetTop="10dp"
-                            android:insetBottom="0dp"
-                            android:paddingLeft="0dp"
-                            android:paddingRight="0dp"
-                            android:text="@string/category_furniture"
-                            android:textColor="@color/lighter_black"
-                            android:textSize="8sp"
-                            app:icon="@drawable/ic_basket"
-                            app:iconGravity="textTop"
-                            app:iconPadding="4dp"
-                            app:iconSize="30dp"
-                            app:iconTint="@color/lighter_black" />
-
-                        <Button
-                            android:id="@+id/btn_clothingCategory"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:backgroundTint="@color/dirty_white"
-                            android:insetTop="10dp"
-                            android:insetBottom="0dp"
-                            android:paddingLeft="0dp"
-                            android:paddingRight="0dp"
-                            android:text="@string/category_clothing"
-                            android:textColor="@color/lighter_black"
-                            android:textSize="8sp"
-                            app:icon="@drawable/ic_basket"
-                            app:iconGravity="textTop"
-                            app:iconPadding="4dp"
-                            app:iconSize="30dp"
-                            app:iconTint="@color/lighter_black" />
-
-                        <Button
-                            android:id="@+id/btn_footwearCategory"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:backgroundTint="@color/dirty_white"
-                            android:insetTop="10dp"
-                            android:insetBottom="0dp"
-                            android:paddingLeft="0dp"
-                            android:paddingRight="0dp"
-                            android:text="@string/category_footwear"
-                            android:textColor="@color/lighter_black"
-                            android:textSize="8sp"
-                            app:icon="@drawable/ic_basket"
-                            app:iconGravity="textTop"
-                            app:iconPadding="4dp"
-                            app:iconSize="30dp"
-                            app:iconTint="@color/lighter_black" />
-
-                        <Button
-                            android:id="@+id/btn_sportsCategory"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:backgroundTint="@color/dirty_white"
-                            android:insetTop="10dp"
-                            android:insetBottom="0dp"
-                            android:paddingLeft="0dp"
-                            android:paddingRight="0dp"
-                            android:text="@string/category_sports"
-                            android:textColor="@color/lighter_black"
-                            android:textSize="8sp"
-                            app:icon="@drawable/ic_basket"
-                            app:iconGravity="textTop"
-                            app:iconPadding="4dp"
-                            app:iconSize="30dp"
-                            app:iconTint="@color/lighter_black" />
-
-                        <Button
-                            android:id="@+id/btn_hardwareCategory"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:backgroundTint="@color/dirty_white"
-                            android:insetTop="10dp"
-                            android:insetBottom="0dp"
-                            android:paddingLeft="0dp"
-                            android:paddingRight="0dp"
-                            android:text="@string/category_hardware"
-                            android:textColor="@color/lighter_black"
-                            android:textSize="8sp"
-                            app:icon="@drawable/ic_basket"
-                            app:iconGravity="textTop"
-                            app:iconPadding="4dp"
-                            app:iconSize="30dp"
-                            app:iconTint="@color/lighter_black" />
-                    </TableRow>
-                </HorizontalScrollView>
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyclerV_subCategory"
@@ -261,7 +73,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/horizontalSV_category" />
+                    app:layout_constraintTop_toBottomOf="@+id/recyclerV_searchCategory" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
@@ -269,10 +81,10 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/cardV_searchBar"
             android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
+            android:layout_height="@dimen/search_bar_height"
+            android:layout_marginStart="@dimen/view_margin"
+            android:layout_marginTop="@dimen/view_margin"
+            android:layout_marginEnd="@dimen/view_margin"
             app:cardCornerRadius="@dimen/view_corner_radius"
             app:cardElevation="4dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -287,17 +99,18 @@
                     android:id="@+id/searchV_searchField"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_marginEnd="-12dp"
+                    android:layout_marginEnd="@dimen/search_field_margin_end"
                     android:clickable="true"
+                    android:focusable="true"
                     android:queryHint="@string/label_search"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/btn_searchCategory"
+                    app:layout_constraintEnd_toStartOf="@+id/btn_searchCategoryFilter"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <Button
-                    android:id="@+id/btn_searchCategory"
-                    android:layout_width="50dp"
+                    android:id="@+id/btn_searchCategoryFilter"
+                    android:layout_width="@dimen/search_filter_width"
                     android:layout_height="match_parent"
                     android:background="@color/transparent"
                     android:contentDescription="@string/button_category"
