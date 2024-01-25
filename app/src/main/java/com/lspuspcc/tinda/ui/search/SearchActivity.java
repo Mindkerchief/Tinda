@@ -83,12 +83,8 @@ public class SearchActivity extends AppCompatActivity {
         recyclerVSearchResults.setLayoutManager(new GridLayoutManager(this, 2));
         recyclerVSearchResults.setAdapter(productRVAdapter);
 
-        // TODO: Improve this Search Field OnTouch Event
-        searchVSearchField.setOnTouchListener((view, motionEvent) -> {
-            if (motionEvent.getAction() == MotionEvent.ACTION_UP)
-                searchVSearchField.setIconified(false);
-            return false;
-        });
+        // Handle Button Event
+        searchVSearchField.setOnClickListener(v -> searchVSearchField.setIconified(false));
     }
 
     public void expandCollapseConstraintLCategory(View view) {
@@ -100,8 +96,9 @@ public class SearchActivity extends AppCompatActivity {
     }
 
     public void updateRecyclerVSubCategory(View view) {
-        // Use condition to prevent spam
         byte index = (byte) view.getTag();
+
+        // Use condition to prevent spam
         if (mCurrentCategoryIndex != index) {
             mSubCategoryRVAdapter.notifyItemRangeRemoved(0, mSubCategoryModels.size());
             mSubCategoryModels = mSetupModel.setupSubCategoryModel(index);

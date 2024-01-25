@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.SearchView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -30,18 +31,22 @@ import com.lspuspcc.tinda.databinding.FragmentHomeBinding;
 import java.util.ArrayList;
 
 public class HomeFragment extends Fragment {
-
     private FragmentHomeBinding mBinding;
+    private Intent mIntentSearch, mIntentNearby, mIntentDeal, mIntentMap, mIntentFavorite;
+    private SearchView mSearchVSearchField;
     private ArrayList<ProductModel> mProductModels;
     private ArrayList<StoreModel> mStoreModels;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        HomeViewModel homeViewModel =
-                new ViewModelProvider(this).get(HomeViewModel.class);
-
+        HomeViewModel homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
         mBinding = FragmentHomeBinding.inflate(inflater, container, false);
-        View root = mBinding.getRoot();
+        return mBinding.getRoot();
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
         // Setup Home Stores and Products Recycler View
         SetupModel setupModel = new SetupModel();
@@ -59,29 +64,24 @@ public class HomeFragment extends Fragment {
                 LinearLayoutManager.HORIZONTAL, false));
         recyclerVNearbyStore.setAdapter(storeRVAdapter);
 
-        // Setup Search Bar & Buttons Event
-        Intent intentSearch = new Intent(getActivity(), SearchActivity.class);
-        Intent intentNearby = new Intent(getActivity(), NearbyActivity.class);
-        Intent intentDeal = new Intent(getActivity(), DealActivity.class);
-        Intent intentMap = new Intent(getActivity(), MapsActivity.class);
-        Intent intentFavorite = new Intent(getActivity(), FavoriteActivity.class);
+        // Initialize Search Bar & Buttons Views
+        mIntentSearch = new Intent(getActivity(), SearchActivity.class);
+        mIntentNearby = new Intent(getActivity(), NearbyActivity.class);
+        mIntentDeal = new Intent(getActivity(), DealActivity.class);
+        mIntentMap = new Intent(getActivity(), MapsActivity.class);
+        mIntentFavorite = new Intent(getActivity(), FavoriteActivity.class);
+        mSearchVSearchField = mBinding.searchVHomeSearchField;
 
-        SearchView searchVSearchField = mBinding.searchVHomeSearchField;
-        Button btnSearchCategoryFilter = mBinding.btnSearchCategoryFilter;
-        Button btnNearby = mBinding.btnNearby;
-        Button btnDeal = mBinding.btnDeal;
-        Button btnMap = mBinding.btnMap;
-        Button btnFavorite = mBinding.btnFavorite;
+        // Handle Search Bar & Buttons Event
+        mBinding.btnSearchCategoryFilter.setOnClickListener(v -> homeSearchBarOnClick(false));
 
-        btnSearchCategoryFilter.setOnClickListener(view -> homeSearchBarOnClick(intentSearch, searchVSearchField, false));
-        searchVSearchField.setOnClickListener(view -> homeSearchBarOnClick(intentSearch, searchVSearchField, true));
-        searchVSearchField.setOnSearchClickListener(view -> homeSearchBarOnClick(intentSearch, searchVSearchField, true));
-        btnNearby.setOnClickListener(view -> startActivity(intentNearby));
-        btnDeal.setOnClickListener(view -> startActivity(intentDeal));
-        btnMap.setOnClickListener(view -> startActivity(intentMap));
-        btnFavorite.setOnClickListener(view -> startActivity(intentFavorite));
+        mSearchVSearchField.setOnClickListener(v -> homeSearchBarOnClick(true));
+        mSearchVSearchField.setOnSearchClickListener(v -> homeSearchBarOnClick(true));
 
-        return root;
+        mBinding.btnNearby.setOnClickListener(v -> startActivity(mIntentNearby));
+        mBinding.btnDeal.setOnClickListener(v -> startActivity(mIntentDeal));
+        mBinding.btnMap.setOnClickListener(v -> startActivity(mIntentMap));
+        mBinding.btnFavorite.setOnClickListener(v -> startActivity(mIntentFavorite));
     }
 
     @Override
@@ -90,10 +90,10 @@ public class HomeFragment extends Fragment {
         mBinding = null;
     }
 
-    private void homeSearchBarOnClick(Intent intentSearch, SearchView searchVSearchField, boolean isTyping) {
+    private void homeSearchBarOnClick(boolean isTyping) {
         // Could be improve using ViewModel I guess
-        intentSearch.putExtra("isTyping", isTyping);
-        startActivity(intentSearch);
-        searchVSearchField.setIconified(true);
+        mIntentSearch.putExtra("isTyping", isTyping);
+        startActivity(mIntentSearch);
+        mSearchVSearchField.setIconified(true);
     }
 }
