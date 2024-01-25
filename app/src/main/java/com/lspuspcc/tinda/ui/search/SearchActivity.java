@@ -10,7 +10,6 @@ import android.animation.LayoutTransition;
 import android.os.Bundle;
 import android.transition.AutoTransition;
 import android.transition.TransitionManager;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.SearchView;
@@ -29,14 +28,16 @@ import java.util.ArrayList;
 
 public class SearchActivity extends AppCompatActivity {
     private ActivitySearchBinding mBinding;
-    private ArrayList<SearchCategoryModel> mSearchCategoryModels;
-    private ArrayList<SubCategoryModel> mSubCategoryModels;
-    private ArrayList<ProductModel> mProductModels;
-    private ArrayList<StoreModel> mStoreModels;
-    private SetupModel mSetupModel;
     private ConstraintLayout mConstraintLCategory;
+    private ConstraintLayout mConstraintLSearchResults;
     private SearchCategoryRecyclerViewAdapter mSearchCategoryRVAdapter;
     private SubCategoryRecyclerViewAdapter mSubCategoryRVAdapter;
+    private ProductRecyclerViewAdapter mProductRVAdapter;
+    private ArrayList<SearchCategoryModel> mSearchCategoryModels;
+    private ArrayList<SubCategoryModel> mSubCategoryModels;
+    private ArrayList<ProductModel> mProductResults;
+    private ArrayList<StoreModel> mStoreResults;
+    private SetupModel mSetupModel;
     private byte mCurrentCategoryIndex;
 
     @Override
@@ -46,6 +47,7 @@ public class SearchActivity extends AppCompatActivity {
         setContentView(mBinding.getRoot());
 
         // Initialize most of the Views
+        mConstraintLSearchResults = mBinding.constraintLSearchResults;
         mConstraintLCategory = mBinding.constraintLSearchCategory;
         mSetupModel = new SetupModel();
 
@@ -62,7 +64,7 @@ public class SearchActivity extends AppCompatActivity {
             btnSearchCategoryFilter.performClick();
 
         // Enables layout transition
-        mConstraintLCategory.getLayoutTransition().enableTransitionType(LayoutTransition.CHANGING);
+        // mConstraintLCategory.getLayoutTransition().enableTransitionType(LayoutTransition.CHANGING);
 
         // Initialize Search Bar Category Recycler View
         mSearchCategoryModels = mSetupModel.setupSearchCategoryModel();
@@ -78,13 +80,26 @@ public class SearchActivity extends AppCompatActivity {
         recyclerVSubCategory.setAdapter(mSubCategoryRVAdapter);
 
         // Initialize Search Results Recycler View
-        mProductModels = mSetupModel.setupProductModel();
-        ProductRecyclerViewAdapter productRVAdapter = new ProductRecyclerViewAdapter(this, mProductModels);
+        mProductResults = mSetupModel.setupProductModel();
+        mProductRVAdapter = new ProductRecyclerViewAdapter(this, mProductResults);
         recyclerVSearchResults.setLayoutManager(new GridLayoutManager(this, 2));
-        recyclerVSearchResults.setAdapter(productRVAdapter);
+        recyclerVSearchResults.setAdapter(mProductRVAdapter);
 
         // Handle Button Event
         searchVSearchField.setOnClickListener(v -> searchVSearchField.setIconified(false));
+        searchVSearchField.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                updateRecyclerVProductResults();
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                // TODO: Give search suggestions
+                return false;
+            }
+        });
     }
 
     public void expandCollapseConstraintLCategory(View view) {
@@ -106,5 +121,15 @@ public class SearchActivity extends AppCompatActivity {
             mSubCategoryRVAdapter.notifyItemRangeInserted(0, mSubCategoryModels.size());
             mCurrentCategoryIndex = index;
         }
+    }
+
+    private void updateRecyclerVProductResults() {
+        if (mConstraintLSearchResults.getVisibility() == View.GONE)
+            mConstraintLSearchResults.setVisibility(View.VISIBLE);
+
+        TransitionManager.beginDelayedTransition(mConstraintLSearchResults, new AutoTransition());
+        mProductResults = mSetupModel.setupProductModel();
+        mProductRVAdapter.updateRecyclerVProducts(mProductResults);
+        mProductRVAdapter.notifyDataSetChanged();
     }
 }

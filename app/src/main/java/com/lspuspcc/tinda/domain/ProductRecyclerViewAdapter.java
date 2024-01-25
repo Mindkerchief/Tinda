@@ -60,4 +60,8 @@ public class ProductRecyclerViewAdapter extends RecyclerView.Adapter<ProductRecy
             textVProductPrice = itemView.findViewById(R.id.textV_productPrice);
         }
     }
+
+    public void updateRecyclerVProducts(ArrayList<ProductModel> productModels) {
+        this.mProductModels = productModels;
+    }
 }

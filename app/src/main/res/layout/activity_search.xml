@@ -22,7 +22,8 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraintL_searchResults"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:visibility="gone">
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyclerV_searchResults"
@@ -32,7 +33,6 @@
                     android:layout_marginTop="@dimen/view_margin"
                     android:layout_marginEnd="@dimen/view_margin"
                     android:background="@color/white"
-                    android:visibility="gone"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
