@@ -1,31 +1,26 @@
 <resources>
     <string name="app_name">Tinda</string>
+
     <string name="title_home">Home</string>
     <string name="title_basket">Basket</string>
     <string name="title_account">Account</string>
-    <string name="label_search">Search local products</string>
+    <string name="title_activity_maps">MapsActivity</string>
+
     <string name="button_category">Category</string>
     <string name="button_nearby">Nearby</string>
     <string name="button_deal">Deal</string>
     <string name="button_map">Map</string>
     <string name="button_favorite">Favorite</string>
-    <string name="label_under_development">Under Development</string>
+
+    <string name="label_search">Search local products</string>
     <string name="label_nearby_store">Local Store Near You</string>
     <string name="label_available_products">Available Products</string>
-    <string name="title_activity_maps">MapsActivity</string>
+    <string name="label_under_development">Under Development</string>
+
     <string name="label_product_name">KARSON Scientific Calculator Multiple Modes Intuitive Interface</string>
     <string name="label_product_store">Expressions - Ultimart San Pablo</string>
     <string name="label_product_price">P169.00</string>
     <string name="label_store_category">School/Office Supplies</string>
     <string name="label_store_address">San Pablo</string>
-    <string name="category_electronics">Electronics</string>
-    <string name="category_appliances">Appliances</string>
-    <string name="category_beauty">Beauty</string>
-    <string name="category_toys">Toys</string>
-    <string name="category_grocery">Grocery</string>
-    <string name="category_furniture">Furniture</string>
-    <string name="category_clothing">Clothing</string>
-    <string name="category_footwear">Footwear</string>
-    <string name="category_sports">Sports</string>
-    <string name="category_hardware">Hardware</string>
+    <string name="label_search_category">Electronics</string>
 </resources>

@@ -99,10 +99,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="@dimen/view_margin_wider"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/frameL_feature">
+                app:layout_constraintTop_toBottomOf="@+id/viewFlipper">
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/cardV_nearbyButton"
@@ -264,49 +264,42 @@
                 </androidx.cardview.widget.CardView>
             </TableRow>
 
-            <FrameLayout
-                android:id="@+id/frameL_feature"
+            <ViewFlipper
+                android:id="@+id/viewFlipper"
                 android:layout_width="match_parent"
                 android:layout_height="170dp"
-                android:background="@color/blue_800"
+                android:autoStart="true"
+                android:flipInterval="10000"
+                android:inAnimation="@android:anim/slide_in_left"
+                android:outAnimation="@android:anim/slide_out_right"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
-                <ViewFlipper
+                <ImageView
+                    android:id="@+id/imageV_promotionBanner1"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:autoStart="true"
-                    android:flipInterval="10000"
-                    android:inAnimation="@android:anim/slide_in_left"
-                    android:outAnimation="@android:anim/slide_out_right">
+                    android:background="@color/blue_800"
+                    android:scaleType="centerCrop"
+                    app:srcCompat="@drawable/sample_promotion_banner" />
 
-                    <ImageView
-                        android:id="@+id/imageV_promotionBanner1"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@color/blue_800"
-                        android:scaleType="centerCrop"
-                        app:srcCompat="@drawable/sample_promotion_banner" />
+                <ImageView
+                    android:id="@+id/imageV_promotionBanner2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/blue_800"
+                    android:scaleType="centerCrop"
+                    app:srcCompat="@drawable/ic_launcher_background" />
 
-                    <ImageView
-                        android:id="@+id/imageV_promotionBanner2"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@color/blue_800"
-                        android:scaleType="centerCrop"
-                        app:srcCompat="@drawable/ic_launcher_background" />
-
-                    <ImageView
-                        android:id="@+id/imageV_promotionBanner3"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@color/blue_800"
-                        android:scaleType="centerCrop"
-                        app:srcCompat="@drawable/sample_promotion_banner" />
-                </ViewFlipper>
-
-            </FrameLayout>
+                <ImageView
+                    android:id="@+id/imageV_promotionBanner3"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/blue_800"
+                    android:scaleType="centerCrop"
+                    app:srcCompat="@drawable/sample_promotion_banner" />
+            </ViewFlipper>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
@@ -327,7 +320,7 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardV_homeSearchBarContainer"
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
+                android:layout_height="@dimen/search_bar_height"
                 android:layout_marginStart="@dimen/view_margin"
                 android:layout_marginTop="70dp"
                 android:layout_marginEnd="@dimen/view_margin"
@@ -343,17 +336,17 @@
                         android:id="@+id/searchV_homeSearchField"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_marginEnd="-12dp"
+                        android:layout_marginEnd="@dimen/search_field_margin_end"
                         android:clickable="false"
                         android:queryHint="@string/label_search"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/btn_searchCategory"
+                        app:layout_constraintEnd_toStartOf="@+id/btn_searchCategoryFilter"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <Button
-                        android:id="@+id/btn_searchCategory"
-                        android:layout_width="50dp"
+                        android:id="@+id/btn_searchCategoryFilter"
+                        android:layout_width="@dimen/search_filter_width"
                         android:layout_height="match_parent"
                         android:background="@color/transparent"
                         android:contentDescription="@string/button_category"
