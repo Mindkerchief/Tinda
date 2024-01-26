@@ -17,6 +17,7 @@ import android.widget.SearchView;
 import com.lspuspcc.tinda.databinding.ActivitySearchBinding;
 import com.lspuspcc.tinda.domain.SearchCategoryModel;
 import com.lspuspcc.tinda.domain.SearchCategoryRecyclerViewAdapter;
+import com.lspuspcc.tinda.domain.StoreRecyclerViewAdapter;
 import com.lspuspcc.tinda.domain.SubCategoryModel;
 import com.lspuspcc.tinda.domain.SubCategoryRecyclerViewAdapter;
 import com.lspuspcc.tinda.domain.ProductModel;
@@ -53,7 +54,8 @@ public class SearchActivity extends AppCompatActivity {
 
         SearchView searchVSearchField = mBinding.searchVSearchField;
         RecyclerView recyclerVSearchCategory = mBinding.recyclerVSearchCategory;
-        RecyclerView recyclerVSearchResults = mBinding.recyclerVSearchResults;
+        RecyclerView recyclerVStoreResults = mBinding.recyclerVStoreResults;
+        RecyclerView recyclerVProductResults = mBinding.recyclerVProductResults;
         RecyclerView recyclerVSubCategory = mBinding.recyclerVSubCategory;
         Button btnSearchCategoryFilter = mBinding.btnSearchCategoryFilter;
 
@@ -79,11 +81,18 @@ public class SearchActivity extends AppCompatActivity {
         recyclerVSubCategory.setLayoutManager(new GridLayoutManager(this, 4));
         recyclerVSubCategory.setAdapter(mSubCategoryRVAdapter);
 
-        // Initialize Search Results Recycler View
+        // Initialize Store Search Results Recycler View
+        mStoreResults = mSetupModel.setupStoreModel();
+        StoreRecyclerViewAdapter storeRVAdapter = new StoreRecyclerViewAdapter(this, mStoreResults);
+        recyclerVStoreResults.setLayoutManager(new LinearLayoutManager(this,
+                LinearLayoutManager.HORIZONTAL, false));
+        recyclerVStoreResults.setAdapter(storeRVAdapter);
+
+        // Initialize Products Search Results Recycler View
         mProductResults = mSetupModel.setupProductModel();
         mProductRVAdapter = new ProductRecyclerViewAdapter(this, mProductResults);
-        recyclerVSearchResults.setLayoutManager(new GridLayoutManager(this, 2));
-        recyclerVSearchResults.setAdapter(mProductRVAdapter);
+        recyclerVProductResults.setLayoutManager(new GridLayoutManager(this, 2));
+        recyclerVProductResults.setAdapter(mProductRVAdapter);
 
         // Handle Button Event
         searchVSearchField.setOnClickListener(v -> searchVSearchField.setIconified(false));
