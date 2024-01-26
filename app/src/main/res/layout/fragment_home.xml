@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/dirty_white"
     tools:context=".ui.home.HomeFragment">
 
     <androidx.core.widget.NestedScrollView
@@ -47,11 +46,10 @@
                 android:id="@+id/recyclerV_recommendedProducts"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/view_margin"
+                android:layout_marginStart="8dp"
                 android:layout_marginTop="-8dp"
-                android:layout_marginEnd="@dimen/view_margin"
+                android:layout_marginEnd="8dp"
                 android:background="@color/white"
-                android:scrollbars="vertical"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/cardV_productListTitle" />
@@ -86,9 +84,7 @@
                 android:id="@+id/recyclerV_nearbyStores"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/view_margin"
                 android:layout_marginTop="-8dp"
-                android:layout_marginEnd="@dimen/view_margin"
                 android:background="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -325,8 +321,7 @@
                 android:layout_marginTop="70dp"
                 android:layout_marginEnd="@dimen/view_margin"
                 android:layout_marginBottom="@dimen/view_margin"
-                app:cardCornerRadius="@dimen/view_corner_radius"
-                app:cardElevation="4dp">
+                app:cardCornerRadius="@dimen/view_corner_radius">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
