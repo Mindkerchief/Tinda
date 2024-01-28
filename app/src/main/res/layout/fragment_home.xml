@@ -31,7 +31,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@color/blue_800"
+                    android:background="@color/teal"
                     android:paddingLeft="8dp"
                     android:paddingTop="5dp"
                     android:paddingRight="8dp"
@@ -68,7 +68,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@color/blue_800"
+                    android:background="@color/teal"
                     android:paddingLeft="8dp"
                     android:paddingTop="5dp"
                     android:paddingRight="8dp"
@@ -276,25 +276,25 @@
                     android:id="@+id/imageV_promotionBanner1"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@color/blue_800"
+                    android:background="@color/blue"
                     android:scaleType="centerCrop"
-                    app:srcCompat="@drawable/sample_promotion_banner" />
+                    app:srcCompat="@drawable/sample_promotion_banner_4" />
 
                 <ImageView
                     android:id="@+id/imageV_promotionBanner2"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@color/blue_800"
+                    android:background="@color/blue"
                     android:scaleType="centerCrop"
-                    app:srcCompat="@drawable/ic_launcher_background" />
+                    app:srcCompat="@drawable/sample_promotion_banner_6" />
 
                 <ImageView
                     android:id="@+id/imageV_promotionBanner3"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@color/blue_800"
+                    android:background="@color/blue"
                     android:scaleType="centerCrop"
-                    app:srcCompat="@drawable/sample_promotion_banner" />
+                    app:srcCompat="@drawable/sample_promotion_banner_5" />
             </ViewFlipper>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
