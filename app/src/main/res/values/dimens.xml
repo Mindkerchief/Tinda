@@ -8,5 +8,5 @@
     <dimen name="view_corner_radius">8dp</dimen>
     <dimen name="search_bar_height">48dp</dimen>
     <dimen name="search_field_margin_end">-12dp</dimen>
-    <dimen name="search_filter_width">50dp</dimen>
+    <dimen name="search_filter_width">60dp</dimen>
 </resources>

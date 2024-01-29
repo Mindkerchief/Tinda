@@ -22,32 +22,85 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraintL_searchResults"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:visibility="gone">
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardV_productResultsTitle"
+                    Of="@+id/recyclerV_storeResults"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/view_margin"
+                    android:layout_marginTop="@dimen/view_margin"
+                    app:cardBackgroundColor="@color/white"
+                    app:cardCornerRadius="@dimen/view_corner_radius"
+                    app:cardElevation="0dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/recyclerV_storeResults">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@color/teal"
+                        android:fontFamily="@font/inter_bold_family"
+                        android:paddingLeft="8dp"
+                        android:paddingTop="5dp"
+                        android:paddingRight="8dp"
+                        android:paddingBottom="10dp"
+                        android:text="@string/label_product_results"
+                        android:textColor="@color/white"
+                        android:textSize="18sp" />
+
+                </androidx.cardview.widget.CardView>
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyclerV_productResults"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="@dimen/view_margin"
-                    android:layout_marginTop="@dimen/view_margin"
-                    android:layout_marginEnd="@dimen/view_margin"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/view_margin_half"
+                    android:layout_marginTop="-8dp"
+                    android:layout_marginEnd="@dimen/view_margin_half"
                     android:background="@color/white"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/recyclerV_storeResults" />
+                    app:layout_constraintTop_toBottomOf="@+id/cardV_productResultsTitle" />
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardV_storeResultsTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/view_margin"
+                    android:layout_marginTop="@dimen/view_margin_wider"
+                    app:cardBackgroundColor="@color/white"
+                    app:cardCornerRadius="@dimen/view_corner_radius"
+                    app:cardElevation="0dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@color/teal"
+                        android:fontFamily="@font/inter_bold_family"
+                        android:paddingLeft="8dp"
+                        android:paddingTop="5dp"
+                        android:paddingRight="8dp"
+                        android:paddingBottom="10dp"
+                        android:text="@string/label_store_results"
+                        android:textColor="@color/white"
+                        android:textSize="18sp" />
+
+                </androidx.cardview.widget.CardView>
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyclerV_storeResults"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="@dimen/view_margin"
-                    android:layout_marginTop="@dimen/view_margin_wider"
-                    android:layout_marginEnd="@dimen/view_margin"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="-8dp"
                     android:background="@color/white"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toBottomOf="@+id/cardV_storeResultsTitle" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>
 
@@ -112,7 +165,7 @@
                     android:id="@+id/searchV_searchField"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_marginEnd="@dimen/search_field_margin_end"
+                    android:layout_marginEnd="-15dp"
                     android:layout_marginBottom="-2dp"
                     android:iconifiedByDefault="false"
                     android:queryHint="@string/label_search"
@@ -127,8 +180,12 @@
                     android:layout_height="match_parent"
                     android:background="@color/transparent"
                     android:contentDescription="@string/button_category"
-                    android:drawableTop="@drawable/ic_category"
+                    android:foreground="?android:attr/selectableItemBackgroundBorderless"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
                     android:onClick="expandCollapseConstraintLCategory"
+                    app:icon="@drawable/ic_category"
+                    app:iconTint="@color/grey"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
