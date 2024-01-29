@@ -78,7 +78,7 @@
                 android:layout_marginBottom="4dp"
                 android:labelFor="@id/imageV_storeImage"
                 android:text="@string/label_store_category"
-                android:textColor="@color/teal"
+                android:textColor="@color/grey"
                 android:textSize="10sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

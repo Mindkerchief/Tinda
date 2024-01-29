@@ -32,14 +32,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@color/teal"
+                    android:fontFamily="@font/inter_bold_family"
                     android:paddingLeft="8dp"
                     android:paddingTop="5dp"
                     android:paddingRight="8dp"
                     android:paddingBottom="10dp"
                     android:text="@string/label_available_products"
                     android:textColor="@color/white"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
+                    android:textSize="18sp" />
             </androidx.cardview.widget.CardView>
 
             <androidx.recyclerview.widget.RecyclerView
@@ -69,14 +69,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@color/teal"
+                    android:fontFamily="@font/inter_bold_family"
                     android:paddingLeft="8dp"
                     android:paddingTop="5dp"
                     android:paddingRight="8dp"
                     android:paddingBottom="10dp"
                     android:text="@string/label_nearby_store"
                     android:textColor="@color/white"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
+                    android:textSize="18sp" />
 
             </androidx.cardview.widget.CardView>
 
@@ -103,7 +103,7 @@
                 <androidx.cardview.widget.CardView
                     android:id="@+id/cardV_nearbyButton"
                     android:layout_width="80dp"
-                    android:layout_height="90dp"
+                    android:layout_height="100dp"
                     android:layout_marginStart="@dimen/view_margin"
                     android:layout_marginTop="@dimen/view_margin"
                     android:layout_marginEnd="@dimen/view_margin_half"
@@ -134,7 +134,7 @@
                             android:layout_height="wrap_content"
                             android:text="@string/button_nearby"
                             android:textAlignment="center"
-                            android:textSize="12sp"
+                            android:textSize="14sp"
                             android:textStyle="bold"
                             app:layout_constraintTop_toBottomOf="@+id/btn_nearby" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -143,7 +143,7 @@
                 <androidx.cardview.widget.CardView
                     android:id="@+id/cardV_dealButton"
                     android:layout_width="80dp"
-                    android:layout_height="90dp"
+                    android:layout_height="100dp"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="@dimen/view_margin"
                     android:layout_marginEnd="@dimen/view_margin_half"
@@ -174,7 +174,7 @@
                             android:layout_height="wrap_content"
                             android:text="@string/button_deal"
                             android:textAlignment="center"
-                            android:textSize="12sp"
+                            android:textSize="14sp"
                             android:textStyle="bold"
                             app:layout_constraintTop_toBottomOf="@+id/btn_deal" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -183,7 +183,7 @@
                 <androidx.cardview.widget.CardView
                     android:id="@+id/cardV_mapButton"
                     android:layout_width="80dp"
-                    android:layout_height="90dp"
+                    android:layout_height="100dp"
                     android:layout_marginLeft="@dimen/view_margin_half"
                     android:layout_marginTop="@dimen/view_margin"
                     android:layout_marginRight="@dimen/view_margin_half"
@@ -214,7 +214,7 @@
                             android:layout_height="wrap_content"
                             android:text="@string/button_map"
                             android:textAlignment="center"
-                            android:textSize="12sp"
+                            android:textSize="14sp"
                             android:textStyle="bold"
                             app:layout_constraintTop_toBottomOf="@+id/btn_map" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -223,7 +223,7 @@
                 <androidx.cardview.widget.CardView
                     android:id="@+id/cardV_favoriteButton"
                     android:layout_width="80dp"
-                    android:layout_height="90dp"
+                    android:layout_height="100dp"
                     android:layout_marginStart="@dimen/view_margin_half"
                     android:layout_marginTop="@dimen/view_margin"
                     android:layout_marginEnd="@dimen/view_margin"
@@ -253,7 +253,7 @@
                             android:layout_height="wrap_content"
                             android:text="@string/button_favorite"
                             android:textAlignment="center"
-                            android:textSize="12sp"
+                            android:textSize="14sp"
                             android:textStyle="bold"
                             app:layout_constraintTop_toBottomOf="@+id/btn_favorite" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
