@@ -78,7 +78,7 @@ public class SearchActivity extends AppCompatActivity {
         recyclerVSubCategory.setAdapter(mSubCategoryRVAdapter);
 
         // Initialize Store Search Results Recycler View
-        mStoreResults = mSetupModel.setupStoreModel();
+        mStoreResults = mSetupModel.setupStoreModel(false);
         mStoreRVAdapter = new StoreRecyclerViewAdapter(this, mStoreResults, R.layout.card_store_vertical);
         recyclerVStoreResults.setLayoutManager(new LinearLayoutManager(this,
                 LinearLayoutManager.HORIZONTAL, false));
@@ -166,7 +166,7 @@ public class SearchActivity extends AppCompatActivity {
 
         // Update Store Results
         mStoreRVAdapter.notifyItemRangeRemoved(0, mStoreResults.size());
-        mStoreResults = mSetupModel.setupStoreModel();
+        mStoreResults = mSetupModel.setupStoreModel(false);
         mStoreRVAdapter.updateRecyclerVStore(mStoreResults);
         mStoreRVAdapter.notifyItemRangeInserted(0, mStoreResults.size());
 

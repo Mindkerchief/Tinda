@@ -22,7 +22,7 @@ public class SetupModel {
         return productModels;
     }
 
-    public ArrayList<StoreModel> setupStoreModel() {
+    public ArrayList<StoreModel> setupStoreModel(boolean isFeatureIncluded) {
         // Temporary implementation for testing purposes
         ArrayList<StoreModel> storeModels = new ArrayList<>();
 
@@ -30,15 +30,27 @@ public class SetupModel {
         String storeName = "Expressions - Ultimart San Pablo";
         String storeAddress = "San Pablo";
         String storeCategory = "School/Office Supplies";
+        int[] storeFeatureImages = new int[5];
+        float[] storeFeaturePrices = new float[5];
 
         for (int i = 0; i < 10; i++) {
-            storeModels.add(new StoreModel(storeImage, storeName, storeAddress, storeCategory));
-        }
+            if (isFeatureIncluded) {
+                for (int j = 0; j < 5; j++) {
+                    storeFeatureImages[j] = R.drawable.sample_product_image;
+                    storeFeaturePrices[j] = 169.0f;
+                }
 
+                storeModels.add(new StoreModel(storeImage, storeName, storeAddress, storeCategory,
+                        storeFeatureImages, storeFeaturePrices));
+            }
+            else {
+                storeModels.add(new StoreModel(storeImage, storeName, storeAddress, storeCategory));
+            }
+        }
         return storeModels;
     }
 
-    public ArrayList<SubCategoryModel> setupSubCategoryModel(int index) {
+    public ArrayList<SubCategoryModel> setupSubCategoryModel(int subCategoryIndex) {
         // Temporary implementation for testing purposes
         ArrayList<SubCategoryModel> subCategoryModels = new ArrayList<>();
 
@@ -56,8 +68,8 @@ public class SetupModel {
             {"Tool", "Parts", "Paint"}
         };
 
-        for (int i = 0; i < subCategory[index].length; i++) {
-            subCategoryModels.add(new SubCategoryModel(categoryImage, subCategory[index][i]));
+        for (int i = 0; i < subCategory[subCategoryIndex].length; i++) {
+            subCategoryModels.add(new SubCategoryModel(categoryImage, subCategory[subCategoryIndex][i]));
         }
 
         return subCategoryModels;

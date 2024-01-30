@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.lspuspcc.tinda.R;
@@ -37,10 +38,19 @@ public class StoreRecyclerViewAdapter extends RecyclerView.Adapter<StoreRecycler
     @Override
     public void onBindViewHolder(@NonNull StoreRecyclerViewAdapter.MyViewHolder holder, int position) {
         // Assign values in the views
-        holder.imageVStoreImage.setImageResource(mStoreModels.get(position).getmStoreImage());
-        holder.textVStoreName.setText(mStoreModels.get(position).getmStoreName());
-        holder.textVStoreAddress.setText(mStoreModels.get(position).getmStoreAddress());
-        holder.textVStoreCategory.setText(mStoreModels.get(position).getmStoreCategory());
+        holder.imageVStoreImage.setImageResource(mStoreModels.get(position).getStoreImage());
+        holder.textVStoreName.setText(mStoreModels.get(position).getStoreName());
+        holder.textVStoreAddress.setText(mStoreModels.get(position).getStoreAddress());
+        holder.textVStoreCategory.setText(mStoreModels.get(position).getStoreCategory());
+
+        // Setup Store Features if exists
+        if (mStoreLayout == R.layout.card_store) {
+            StoreFeaturesRecyclerViewAdapter storeFeaturesRVAdapter = new StoreFeaturesRecyclerViewAdapter(mContext,
+                    mStoreModels.get(position).getStoreFeatureImages(), mStoreModels.get(position).getStoreFeaturePrices());
+            holder.recyclerVStoreFeatures.setLayoutManager(new LinearLayoutManager(mContext,
+                    LinearLayoutManager.HORIZONTAL, false));
+            holder.recyclerVStoreFeatures.setAdapter(storeFeaturesRVAdapter);
+        }
     }
 
     @Override
@@ -53,6 +63,7 @@ public class StoreRecyclerViewAdapter extends RecyclerView.Adapter<StoreRecycler
         // Gets the views from recycler view rows
         ImageView imageVStoreImage;
         TextView textVStoreName, textVStoreAddress, textVStoreCategory;
+        RecyclerView recyclerVStoreFeatures;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
 
@@ -60,6 +71,7 @@ public class StoreRecyclerViewAdapter extends RecyclerView.Adapter<StoreRecycler
             textVStoreName = itemView.findViewById(R.id.textV_storeName);
             textVStoreAddress = itemView.findViewById(R.id.textV_storeAddress);
             textVStoreCategory = itemView.findViewById(R.id.textV_storeCategory);
+            recyclerVStoreFeatures = itemView.findViewById(R.id.recyclerV_storeFeatures);
         }
     }
 

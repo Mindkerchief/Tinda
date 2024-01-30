@@ -51,7 +51,7 @@ public class HomeFragment extends Fragment {
         // Setup Home Stores and Products Recycler View
         SetupModel setupModel = new SetupModel();
         mProductModels = setupModel.setupProductModel();
-        mStoreModels = setupModel.setupStoreModel();
+        mStoreModels = setupModel.setupStoreModel(false);
 
         RecyclerView recyclerVRecommendedProducts = mBinding.recyclerVRecommendedProducts;
         ProductRecyclerViewAdapter productRVAdapter = new ProductRecyclerViewAdapter(requireContext(), mProductModels);
