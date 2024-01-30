@@ -62,23 +62,4 @@ public class SetupModel {
 
         return subCategoryModels;
     }
-
-    public ArrayList<SearchCategoryModel> setupSearchCategoryModel() {
-        // Temporary implementation for testing purposes
-        ArrayList<SearchCategoryModel> searchCategoryModels = new ArrayList<>();
-        int categoryIcon = R.drawable.ic_basket;
-        String[] categoryNames = {
-            "Electronics",  "Appliances",
-            "Beauty",       "Toys",
-            "Grocery",      "Furniture",
-            "Clothing",     "Footwear",
-            "Sports",       "Hardware"
-        };
-
-        for (byte i = 0; i < categoryNames.length; i++) {
-            searchCategoryModels.add(new SearchCategoryModel(categoryIcon, categoryNames[i], i));
-        }
-
-        return searchCategoryModels;
-    }
 }

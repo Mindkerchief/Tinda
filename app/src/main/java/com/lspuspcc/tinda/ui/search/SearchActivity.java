@@ -6,7 +6,6 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.animation.LayoutTransition;
 import android.os.Bundle;
 import android.transition.AutoTransition;
 import android.transition.TransitionManager;
@@ -14,9 +13,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.SearchView;
 
+import com.google.android.material.tabs.TabLayout;
+import com.lspuspcc.tinda.R;
 import com.lspuspcc.tinda.databinding.ActivitySearchBinding;
-import com.lspuspcc.tinda.domain.SearchCategoryModel;
-import com.lspuspcc.tinda.domain.SearchCategoryRecyclerViewAdapter;
 import com.lspuspcc.tinda.domain.StoreRecyclerViewAdapter;
 import com.lspuspcc.tinda.domain.SubCategoryModel;
 import com.lspuspcc.tinda.domain.SubCategoryRecyclerViewAdapter;
@@ -26,15 +25,14 @@ import com.lspuspcc.tinda.domain.SetupModel;
 import com.lspuspcc.tinda.domain.StoreModel;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class SearchActivity extends AppCompatActivity {
     private ActivitySearchBinding mBinding;
     private ConstraintLayout mConstraintLCategory;
     private ConstraintLayout mConstraintLSearchResults;
-    private SearchCategoryRecyclerViewAdapter mSearchCategoryRVAdapter;
     private SubCategoryRecyclerViewAdapter mSubCategoryRVAdapter;
     private ProductRecyclerViewAdapter mProductRVAdapter;
-    private ArrayList<SearchCategoryModel> mSearchCategoryModels;
     private ArrayList<SubCategoryModel> mSubCategoryModels;
     private ArrayList<ProductModel> mProductResults;
     private ArrayList<StoreModel> mStoreResults;
@@ -53,11 +51,27 @@ public class SearchActivity extends AppCompatActivity {
         mSetupModel = new SetupModel();
 
         SearchView searchVSearchField = mBinding.searchVSearchField;
-        RecyclerView recyclerVSearchCategory = mBinding.recyclerVSearchCategory;
         RecyclerView recyclerVStoreResults = mBinding.recyclerVStoreResults;
         RecyclerView recyclerVProductResults = mBinding.recyclerVProductResults;
         RecyclerView recyclerVSubCategory = mBinding.recyclerVSubCategory;
+        TabLayout tabLSearchCategory = mBinding.tabLSearchCategory;
         Button btnSearchCategoryFilter = mBinding.btnSearchCategoryFilter;
+
+        String[] categoryNames = {
+                "Electronics",  "Appliances",
+                "Beauty",       "Toys",
+                "Grocery",      "Furniture",
+                "Clothing",     "Footwear",
+                "Sports",       "Hardware"
+        };
+
+        for (int i = 0; i < 10; i++) {
+            TabLayout.Tab newTab = tabLSearchCategory.newTab();
+            newTab.setIcon(R.drawable.ic_basket);
+            newTab.setText(categoryNames[i]);
+            newTab.setTag(i);
+            tabLSearchCategory.addTab(newTab);
+        }
 
         // Takes Home Fragment Search Bar Action using Extra
         if (getIntent().getBooleanExtra("isTyping", false))
@@ -67,13 +81,6 @@ public class SearchActivity extends AppCompatActivity {
 
         // Enables layout transition
         // mConstraintLCategory.getLayoutTransition().enableTransitionType(LayoutTransition.CHANGING);
-
-        // Initialize Search Bar Category Recycler View
-        mSearchCategoryModels = mSetupModel.setupSearchCategoryModel();
-        mSearchCategoryRVAdapter = new SearchCategoryRecyclerViewAdapter(this, mSearchCategoryModels);
-        recyclerVSearchCategory.setLayoutManager(new LinearLayoutManager(this,
-                LinearLayoutManager.HORIZONTAL, false));
-        recyclerVSearchCategory.setAdapter(mSearchCategoryRVAdapter);
 
         // Initialize Search Bar Subcategory Recycler View
         mSubCategoryModels = mSetupModel.setupSubCategoryModel(0);
@@ -95,6 +102,22 @@ public class SearchActivity extends AppCompatActivity {
         recyclerVProductResults.setAdapter(mProductRVAdapter);
 
         // Handle Button Event
+        tabLSearchCategory.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                updateRecyclerVSubCategory(Byte.parseByte(Objects.requireNonNull(tab.getTag()).toString()));
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
         searchVSearchField.setOnClickListener(v -> searchVSearchField.setIconified(false));
         searchVSearchField.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -119,9 +142,7 @@ public class SearchActivity extends AppCompatActivity {
         mCurrentCategoryIndex = 0;
     }
 
-    public void updateRecyclerVSubCategory(View view) {
-        byte index = (byte) view.getTag();
-
+    public void updateRecyclerVSubCategory(byte index) {
         // Use condition to prevent spam
         if (mCurrentCategoryIndex != index) {
             mSubCategoryRVAdapter.notifyItemRangeRemoved(0, mSubCategoryModels.size());
