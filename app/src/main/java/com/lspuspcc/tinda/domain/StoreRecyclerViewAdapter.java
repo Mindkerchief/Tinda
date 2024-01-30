@@ -15,12 +15,14 @@ import com.lspuspcc.tinda.R;
 import java.util.ArrayList;
 
 public class StoreRecyclerViewAdapter extends RecyclerView.Adapter<StoreRecyclerViewAdapter.MyViewHolder> {
-    Context mContext;
-    ArrayList<StoreModel> mStoreModels;
+    private Context mContext;
+    private ArrayList<StoreModel> mStoreModels;
+    private int mStoreLayout;
 
-    public StoreRecyclerViewAdapter(Context context, ArrayList<StoreModel> storeModels) {
+    public StoreRecyclerViewAdapter(Context context, ArrayList<StoreModel> storeModels, int storeLayout) {
         this.mContext = context;
         this.mStoreModels = storeModels;
+        this.mStoreLayout = storeLayout;
     }
 
     @NonNull
@@ -28,7 +30,7 @@ public class StoreRecyclerViewAdapter extends RecyclerView.Adapter<StoreRecycler
     public StoreRecyclerViewAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         // Inflate the layout
         LayoutInflater inflater = LayoutInflater.from(mContext);
-        View view = inflater.inflate(R.layout.card_store_vertical, parent, false);
+        View view = inflater.inflate(mStoreLayout, parent, false);
         return new StoreRecyclerViewAdapter.MyViewHolder(view);
     }
 
@@ -62,6 +64,6 @@ public class StoreRecyclerViewAdapter extends RecyclerView.Adapter<StoreRecycler
     }
 
     public void updateRecyclerVStore(ArrayList<StoreModel> storeResults) {
-        this.mStoreModels =storeResults;
+        this.mStoreModels = storeResults;
     }
 }
