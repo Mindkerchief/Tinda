@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.lspuspcc.tinda.R;
 import com.lspuspcc.tinda.domain.SetupModel;
 import com.lspuspcc.tinda.ui.deal.DealActivity;
 import com.lspuspcc.tinda.ui.favorite.FavoriteActivity;
@@ -58,7 +59,8 @@ public class HomeFragment extends Fragment {
         recyclerVRecommendedProducts.setAdapter(productRVAdapter);
 
         RecyclerView recyclerVNearbyStore = mBinding.recyclerVNearbyStores;
-        StoreRecyclerViewAdapter storeRVAdapter = new StoreRecyclerViewAdapter(requireContext(), mStoreModels);
+        StoreRecyclerViewAdapter storeRVAdapter = new StoreRecyclerViewAdapter(requireContext(),
+                mStoreModels, R.layout.card_store_vertical);
         recyclerVNearbyStore.setLayoutManager(new LinearLayoutManager(requireContext(),
                 LinearLayoutManager.HORIZONTAL, false));
         recyclerVNearbyStore.setAdapter(storeRVAdapter);

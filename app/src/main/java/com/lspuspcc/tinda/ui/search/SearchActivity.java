@@ -79,7 +79,7 @@ public class SearchActivity extends AppCompatActivity {
 
         // Initialize Store Search Results Recycler View
         mStoreResults = mSetupModel.setupStoreModel();
-        mStoreRVAdapter = new StoreRecyclerViewAdapter(this, mStoreResults);
+        mStoreRVAdapter = new StoreRecyclerViewAdapter(this, mStoreResults, R.layout.card_store_vertical);
         recyclerVStoreResults.setLayoutManager(new LinearLayoutManager(this,
                 LinearLayoutManager.HORIZONTAL, false));
         recyclerVStoreResults.setAdapter(mStoreRVAdapter);
@@ -90,7 +90,7 @@ public class SearchActivity extends AppCompatActivity {
         recyclerVProductResults.setLayoutManager(new GridLayoutManager(this, 2));
         recyclerVProductResults.setAdapter(mProductRVAdapter);
 
-        // Handle Button Event
+        // Handle Views Event
         tabLSearchCategory.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
@@ -125,7 +125,7 @@ public class SearchActivity extends AppCompatActivity {
     }
 
     private void addCategoryTab(TabLayout tabLSearchCategory) {
-        String[] categoryNames = mSetupModel.getCategoryNames();
+        String[] categoryNames = mSetupModel.getProductCategory();
 
         for (int i = 0; i < 10; i++) {
             TabLayout.Tab newTab = tabLSearchCategory.newTab();
@@ -156,6 +156,7 @@ public class SearchActivity extends AppCompatActivity {
     }
 
     public void updateRecyclerVProductResults(View view) {
+        // Show Search Result Layout
         if (mConstraintLSearchResults.getVisibility() == View.GONE)
             mConstraintLSearchResults.setVisibility(View.VISIBLE);
 

@@ -63,13 +63,24 @@ public class SetupModel {
         return subCategoryModels;
     }
 
-    public String[] getCategoryNames() {
+    public String[] getProductCategory() {
         return new String[] {
                 "Electronics",  "Appliances",
                 "Beauty",       "Toys",
                 "Grocery",      "Furniture",
                 "Clothing",     "Footwear",
                 "Sports",       "Hardware"
+        };
+    }
+
+    public String[] getStoreCategory() {
+        // Stores can have multiple category
+        return new String[] {
+                "Office Supplies",  "Appliances",
+                "Beauty",                   "Entertainment",
+                "Grocery",                  "Furniture",
+                "Fashion",                 "Mixed",
+                "Food",                   "Hardware"
         };
     }
 }
