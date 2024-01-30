@@ -60,4 +60,8 @@ public class StoreRecyclerViewAdapter extends RecyclerView.Adapter<StoreRecycler
             textVStoreCategory = itemView.findViewById(R.id.textV_storeCategory);
         }
     }
+
+    public void updateRecyclerVStore(ArrayList<StoreModel> storeResults) {
+        this.mStoreModels =storeResults;
+    }
 }
