@@ -24,12 +24,11 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.navHostF_main);
         NavigationUI.setupWithNavController(mBinding.navVMain, navController);
 
-        // Prevents Night Mode
+        // Prevents Night Mode but can cause launching glitch
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
         /*TODO
         * Scrolling in Home using Store Recycler View does not detect by Collapsing Toolbar
-        * Use onViewCreated methods instead of onCreateView
         **/
     }
 }

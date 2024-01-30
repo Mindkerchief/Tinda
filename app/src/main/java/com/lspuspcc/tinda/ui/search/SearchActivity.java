@@ -31,7 +31,9 @@ public class SearchActivity extends AppCompatActivity {
     private ActivitySearchBinding mBinding;
     private ConstraintLayout mConstraintLCategory;
     private ConstraintLayout mConstraintLSearchResults;
+    private SearchView mSearchVSearchField;
     private SubCategoryRecyclerViewAdapter mSubCategoryRVAdapter;
+    private StoreRecyclerViewAdapter mStoreRVAdapter;
     private ProductRecyclerViewAdapter mProductRVAdapter;
     private ArrayList<SubCategoryModel> mSubCategoryModels;
     private ArrayList<ProductModel> mProductResults;
@@ -48,34 +50,21 @@ public class SearchActivity extends AppCompatActivity {
         // Initialize most of the Views
         mConstraintLSearchResults = mBinding.constraintLSearchResults;
         mConstraintLCategory = mBinding.constraintLSearchCategory;
+        mSearchVSearchField = mBinding.searchVSearchField;
         mSetupModel = new SetupModel();
 
-        SearchView searchVSearchField = mBinding.searchVSearchField;
         RecyclerView recyclerVStoreResults = mBinding.recyclerVStoreResults;
         RecyclerView recyclerVProductResults = mBinding.recyclerVProductResults;
         RecyclerView recyclerVSubCategory = mBinding.recyclerVSubCategory;
         TabLayout tabLSearchCategory = mBinding.tabLSearchCategory;
         Button btnSearchCategoryFilter = mBinding.btnSearchCategoryFilter;
 
-        String[] categoryNames = {
-                "Electronics",  "Appliances",
-                "Beauty",       "Toys",
-                "Grocery",      "Furniture",
-                "Clothing",     "Footwear",
-                "Sports",       "Hardware"
-        };
-
-        for (int i = 0; i < 10; i++) {
-            TabLayout.Tab newTab = tabLSearchCategory.newTab();
-            newTab.setIcon(R.drawable.ic_basket);
-            newTab.setText(categoryNames[i]);
-            newTab.setTag(i);
-            tabLSearchCategory.addTab(newTab);
-        }
+        // Initialize and add the temporary tabs in Category TabLayout
+        addCategoryTab(tabLSearchCategory);
 
         // Takes Home Fragment Search Bar Action using Extra
         if (getIntent().getBooleanExtra("isTyping", false))
-            searchVSearchField.setIconified(false);
+            mSearchVSearchField.setIconified(false);
         else
             btnSearchCategoryFilter.performClick();
 
@@ -90,10 +79,10 @@ public class SearchActivity extends AppCompatActivity {
 
         // Initialize Store Search Results Recycler View
         mStoreResults = mSetupModel.setupStoreModel();
-        StoreRecyclerViewAdapter storeRVAdapter = new StoreRecyclerViewAdapter(this, mStoreResults);
+        mStoreRVAdapter = new StoreRecyclerViewAdapter(this, mStoreResults);
         recyclerVStoreResults.setLayoutManager(new LinearLayoutManager(this,
                 LinearLayoutManager.HORIZONTAL, false));
-        recyclerVStoreResults.setAdapter(storeRVAdapter);
+        recyclerVStoreResults.setAdapter(mStoreRVAdapter);
 
         // Initialize Products Search Results Recycler View
         mProductResults = mSetupModel.setupProductModel();
@@ -118,11 +107,12 @@ public class SearchActivity extends AppCompatActivity {
 
             }
         });
-        searchVSearchField.setOnClickListener(v -> searchVSearchField.setIconified(false));
-        searchVSearchField.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+
+        mSearchVSearchField.setOnClickListener(v -> mSearchVSearchField.setIconified(false));
+        mSearchVSearchField.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                updateRecyclerVProductResults();
+                updateRecyclerVProductResults(mSearchVSearchField);
                 return false;
             }
 
@@ -132,6 +122,18 @@ public class SearchActivity extends AppCompatActivity {
                 return false;
             }
         });
+    }
+
+    private void addCategoryTab(TabLayout tabLSearchCategory) {
+        String[] categoryNames = mSetupModel.getCategoryNames();
+
+        for (int i = 0; i < 10; i++) {
+            TabLayout.Tab newTab = tabLSearchCategory.newTab();
+            newTab.setIcon(R.drawable.ic_basket);
+            newTab.setText(categoryNames[i]);
+            newTab.setTag(i);
+            tabLSearchCategory.addTab(newTab);
+        }
     }
 
     public void expandCollapseConstraintLCategory(View view) {
@@ -153,13 +155,27 @@ public class SearchActivity extends AppCompatActivity {
         }
     }
 
-    private void updateRecyclerVProductResults() {
+    public void updateRecyclerVProductResults(View view) {
         if (mConstraintLSearchResults.getVisibility() == View.GONE)
             mConstraintLSearchResults.setVisibility(View.VISIBLE);
 
-        TransitionManager.beginDelayedTransition(mConstraintLSearchResults, new AutoTransition());
+        // Close Category Filter after choosing sub category
+        if (mConstraintLCategory.getVisibility() == View.VISIBLE)
+            expandCollapseConstraintLCategory(view);
+
+        // Update Store Results
+        mStoreRVAdapter.notifyItemRangeRemoved(0, mStoreResults.size());
+        mStoreResults = mSetupModel.setupStoreModel();
+        mStoreRVAdapter.updateRecyclerVStore(mStoreResults);
+        mStoreRVAdapter.notifyItemRangeInserted(0, mStoreResults.size());
+
+        // Update Product Results
+        mProductRVAdapter.notifyItemRangeRemoved(0, mProductResults.size());
         mProductResults = mSetupModel.setupProductModel();
         mProductRVAdapter.updateRecyclerVProducts(mProductResults);
-        mProductRVAdapter.notifyDataSetChanged();
+        mProductRVAdapter.notifyItemRangeInserted(0, mProductResults.size());
+
+        TransitionManager.beginDelayedTransition(mConstraintLSearchResults, new AutoTransition());
+        getOnBackPressedDispatcher();
     }
 }

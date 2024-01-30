@@ -62,4 +62,14 @@ public class SetupModel {
 
         return subCategoryModels;
     }
+
+    public String[] getCategoryNames() {
+        return new String[] {
+                "Electronics",  "Appliances",
+                "Beauty",       "Toys",
+                "Grocery",      "Furniture",
+                "Clothing",     "Footwear",
+                "Sports",       "Hardware"
+        };
+    }
 }
