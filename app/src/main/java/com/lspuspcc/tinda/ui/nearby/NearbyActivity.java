@@ -18,6 +18,8 @@ import com.lspuspcc.tinda.databinding.ActivityNearbyBinding;
 import com.lspuspcc.tinda.domain.SetupModel;
 import com.lspuspcc.tinda.domain.StoreModel;
 import com.lspuspcc.tinda.domain.StoreRecyclerViewAdapter;
+import com.lspuspcc.tinda.domain.SubCategoryModel;
+import com.lspuspcc.tinda.domain.SubCategoryRecyclerViewAdapter;
 
 import java.util.ArrayList;
 
@@ -27,6 +29,7 @@ public class NearbyActivity extends AppCompatActivity {
     private ConstraintLayout mConstraintLSearchResults;
     private SearchView mSearchVSearchField;
     private StoreRecyclerViewAdapter mStoreRVAdapter;
+    private ArrayList<SubCategoryModel> mFeatureModel;
     private ArrayList<StoreModel> mStoreResults;
     private SetupModel mSetupModel;
 
@@ -46,18 +49,21 @@ public class NearbyActivity extends AppCompatActivity {
         TabLayout tabLSearchCategory = mBinding.tabLStoreCategory;
         Button btnSearchCategoryFilter = mBinding.btnSearchCategoryFilter;
 
-        // Initialize and add the temporary tabs in Category TabLayout
-        addCategoryTab(tabLSearchCategory);
-
-        // Enables layout transition
-        // mConstraintLCategory.getLayoutTransition().enableTransitionType(LayoutTransition.CHANGING);
-
         // Initialize Store Search Results Recycler View
-        mStoreResults = mSetupModel.setupStoreModel();
+        mStoreResults = mSetupModel.setupStoreModel(true);
         mStoreRVAdapter = new StoreRecyclerViewAdapter(this, mStoreResults, R.layout.card_store);
         recyclerVStoreResults.setLayoutManager(new LinearLayoutManager(this,
                 LinearLayoutManager.VERTICAL, false));
         recyclerVStoreResults.setAdapter(mStoreRVAdapter);
+
+        // Enables layout transition
+        // mConstraintLCategory.getLayoutTransition().enableTransitionType(LayoutTransition.CHANGING);
+
+        // Initialize and add the temporary tabs in Category TabLayout
+        addCategoryTab(tabLSearchCategory);
+
+        // Immediately display the Nearby Stores
+        updateRecyclerVProductResults(btnSearchCategoryFilter);
 
         // Handle Views Event
         tabLSearchCategory.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
@@ -123,7 +129,7 @@ public class NearbyActivity extends AppCompatActivity {
 
         // Update Store Results
         mStoreRVAdapter.notifyItemRangeRemoved(0, mStoreResults.size());
-        mStoreResults = mSetupModel.setupStoreModel();
+        mStoreResults = mSetupModel.setupStoreModel(true);
         mStoreRVAdapter.updateRecyclerVStore(mStoreResults);
         mStoreRVAdapter.notifyItemRangeInserted(0, mStoreResults.size());
 

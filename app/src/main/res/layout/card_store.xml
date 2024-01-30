@@ -8,15 +8,34 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="90dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
+        app:cardCornerRadius="@dimen/view_corner_radius"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/cardV_storeInfo">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerV_storeFeatures"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-8dp" />
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardV_storeInfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/view_margin_half"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="@dimen/view_margin_half"
         android:layout_marginEnd="@dimen/view_margin_half"
-        android:layout_marginBottom="4dp"
         android:clickable="true"
         android:focusable="true"
         android:foreground="?android:attr/selectableItemBackgroundBorderless"
         app:cardCornerRadius="@dimen/view_corner_radius"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -27,8 +46,8 @@
 
             <ImageView
                 android:id="@+id/imageV_storeImage"
-                android:layout_width="120dp"
-                android:layout_height="120dp"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 android:contentDescription="@string/label_product_name"
                 android:scaleType="centerCrop"
                 app:layout_constraintStart_toStartOf="parent"
@@ -57,9 +76,7 @@
                 android:id="@+id/textV_storeAddress"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
+                android:layout_margin="@dimen/view_margin_half"
                 android:ellipsize="end"
                 android:labelFor="@id/imageV_storeImage"
                 android:maxLines="1"
@@ -75,9 +92,7 @@
                 android:id="@+id/textV_storeCategory"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
+                android:layout_margin="@dimen/view_margin_half"
                 android:ellipsize="end"
                 android:labelFor="@id/imageV_storeImage"
                 android:maxLines="1"
