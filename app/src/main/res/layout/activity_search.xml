@@ -123,11 +123,6 @@
                 android:animateLayoutChanges="true"
                 android:visibility="gone">
 
-                <androidx.viewpager2.widget.ViewPager2
-                    android:id="@+id/viewP2_subCategory"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
-
                 <com.google.android.material.tabs.TabLayout
                     android:id="@+id/tabL_searchCategory"
                     android:layout_width="match_parent"
