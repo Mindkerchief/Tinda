@@ -28,10 +28,9 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class SearchActivity extends AppCompatActivity {
-    private ActivitySearchBinding mBinding;
+    private ActivitySearchBinding mSearchBinding;
     private ConstraintLayout mConstraintLCategory;
     private ConstraintLayout mConstraintLSearchResults;
-    private SearchView mSearchVSearchField;
     private SubCategoryRecyclerViewAdapter mSubCategoryRVAdapter;
     private StoreRecyclerViewAdapter mStoreRVAdapter;
     private ProductRecyclerViewAdapter mProductRVAdapter;
@@ -39,32 +38,31 @@ public class SearchActivity extends AppCompatActivity {
     private ArrayList<ProductModel> mProductResults;
     private ArrayList<StoreModel> mStoreResults;
     private SetupModel mSetupModel;
-    private byte mCurrentCategoryIndex;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mBinding = ActivitySearchBinding.inflate(getLayoutInflater());
-        setContentView(mBinding.getRoot());
+        mSearchBinding = ActivitySearchBinding.inflate(getLayoutInflater());
+        setContentView(mSearchBinding.getRoot());
 
         // Initialize most of the Views
-        mConstraintLSearchResults = mBinding.constraintLSearchResults;
-        mConstraintLCategory = mBinding.constraintLSearchCategory;
-        mSearchVSearchField = mBinding.searchVSearchField;
+        mConstraintLSearchResults = mSearchBinding.constraintLSearchResults;
+        mConstraintLCategory = mSearchBinding.constraintLSearchCategory;
         mSetupModel = new SetupModel();
 
-        RecyclerView recyclerVStoreResults = mBinding.recyclerVStoreResults;
-        RecyclerView recyclerVProductResults = mBinding.recyclerVProductResults;
-        RecyclerView recyclerVSubCategory = mBinding.recyclerVSubCategory;
-        TabLayout tabLSearchCategory = mBinding.tabLSearchCategory;
-        Button btnSearchCategoryFilter = mBinding.btnSearchCategoryFilter;
+        SearchView searchVSearchField = mSearchBinding.searchVSearchField;
+        RecyclerView recyclerVStoreResults = mSearchBinding.recyclerVStoreResults;
+        RecyclerView recyclerVProductResults = mSearchBinding.recyclerVProductResults;
+        RecyclerView recyclerVSubCategory = mSearchBinding.recyclerVSubCategory;
+        TabLayout tabLSearchCategory = mSearchBinding.tabLSearchCategory;
+        Button btnSearchCategoryFilter = mSearchBinding.btnSearchCategoryFilter;
 
         // Initialize and add the temporary tabs in Category TabLayout
         addCategoryTab(tabLSearchCategory);
 
         // Takes Home Fragment Search Bar Action using Extra
         if (getIntent().getBooleanExtra("isTyping", false))
-            mSearchVSearchField.setIconified(false);
+            searchVSearchField.setIconified(false);
         else
             btnSearchCategoryFilter.performClick();
 
@@ -108,11 +106,11 @@ public class SearchActivity extends AppCompatActivity {
             }
         });
 
-        mSearchVSearchField.setOnClickListener(v -> mSearchVSearchField.setIconified(false));
-        mSearchVSearchField.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+        searchVSearchField.setOnClickListener(v -> searchVSearchField.setIconified(false));
+        searchVSearchField.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                updateRecyclerVProductResults(mSearchVSearchField);
+                updateRecyclerVProductResults(searchVSearchField);
                 return false;
             }
 
@@ -122,6 +120,12 @@ public class SearchActivity extends AppCompatActivity {
                 return false;
             }
         });
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mSearchBinding = null;
     }
 
     private void addCategoryTab(TabLayout tabLSearchCategory) {
@@ -141,18 +145,13 @@ public class SearchActivity extends AppCompatActivity {
 
         TransitionManager.beginDelayedTransition(mConstraintLCategory, new AutoTransition());
         mConstraintLCategory.setVisibility(viewVisibility);
-        mCurrentCategoryIndex = 0;
     }
 
     public void updateRecyclerVSubCategory(byte index) {
-        // Use condition to prevent spam
-        if (mCurrentCategoryIndex != index) {
-            mSubCategoryRVAdapter.notifyItemRangeRemoved(0, mSubCategoryModels.size());
-            mSubCategoryModels = mSetupModel.setupSubCategoryModel(index);
-            mSubCategoryRVAdapter.updateCategoryModel(mSubCategoryModels);
-            mSubCategoryRVAdapter.notifyItemRangeInserted(0, mSubCategoryModels.size());
-            mCurrentCategoryIndex = index;
-        }
+        mSubCategoryRVAdapter.notifyItemRangeRemoved(0, mSubCategoryModels.size());
+        mSubCategoryModels = mSetupModel.setupSubCategoryModel(index);
+        mSubCategoryRVAdapter.updateCategoryModel(mSubCategoryModels);
+        mSubCategoryRVAdapter.notifyItemRangeInserted(0, mSubCategoryModels.size());
     }
 
     public void updateRecyclerVProductResults(View view) {
@@ -177,7 +176,7 @@ public class SearchActivity extends AppCompatActivity {
         mProductRVAdapter.notifyItemRangeInserted(0, mProductResults.size());
 
         TransitionManager.beginDelayedTransition(mConstraintLSearchResults, new AutoTransition());
-        mBinding.nestedSVSearchResults.scrollTo(0,0);
+        mSearchBinding.nestedSVSearchResults.scrollTo(0,0);
         getOnBackPressedDispatcher();
     }
 }

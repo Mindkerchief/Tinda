@@ -22,10 +22,8 @@ import com.lspuspcc.tinda.domain.StoreRecyclerViewAdapter;
 import java.util.ArrayList;
 
 public class NearbyActivity extends AppCompatActivity {
-    private ActivityNearbyBinding mBinding;
+    private ActivityNearbyBinding mNearbyBinding;
     private ConstraintLayout mConstraintLCategory;
-    private ConstraintLayout mConstraintLSearchResults;
-    private SearchView mSearchVSearchField;
     private StoreRecyclerViewAdapter mStoreRVAdapter;
     private ArrayList<StoreModel> mStoreResults;
     private SetupModel mSetupModel;
@@ -33,18 +31,17 @@ public class NearbyActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mBinding = ActivityNearbyBinding.inflate(getLayoutInflater());
-        setContentView(mBinding.getRoot());
+        mNearbyBinding = ActivityNearbyBinding.inflate(getLayoutInflater());
+        setContentView(mNearbyBinding.getRoot());
 
         // Initialize most of the Views
-        mConstraintLSearchResults = mBinding.constraintLSearchResults;
-        mConstraintLCategory = mBinding.constraintLStoreCategory;
-        mSearchVSearchField = mBinding.searchVSearchField;
+        mConstraintLCategory = mNearbyBinding.constraintLStoreCategory;
         mSetupModel = new SetupModel();
 
-        RecyclerView recyclerVStoreResults = mBinding.recyclerVStoreResults;
-        TabLayout tabLStoreCategory = mBinding.tabLStoreCategory;
-        Button btnSearchCategoryFilter = mBinding.btnSearchCategoryFilter;
+        SearchView searchVSearchField = mNearbyBinding.searchVSearchField;
+        RecyclerView recyclerVStoreResults = mNearbyBinding.recyclerVStoreResults;
+        TabLayout tabLStoreCategory = mNearbyBinding.tabLStoreCategory;
+        Button btnSearchCategoryFilter = mNearbyBinding.btnSearchCategoryFilter;
 
         // Initialize Store Search Results Recycler View
         mStoreResults = mSetupModel.setupStoreModel(true);
@@ -80,11 +77,11 @@ public class NearbyActivity extends AppCompatActivity {
             }
         });
 
-        mSearchVSearchField.setOnClickListener(v -> mSearchVSearchField.setIconified(false));
-        mSearchVSearchField.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+        searchVSearchField.setOnClickListener(v -> searchVSearchField.setIconified(false));
+        searchVSearchField.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                updateRecyclerVStoreResults(mSearchVSearchField);
+                updateRecyclerVStoreResults(searchVSearchField);
                 return false;
             }
 
@@ -94,6 +91,12 @@ public class NearbyActivity extends AppCompatActivity {
                 return false;
             }
         });
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mNearbyBinding = null;
     }
 
     private void addCategoryTab(TabLayout tabLSearchCategory) {
@@ -126,8 +129,8 @@ public class NearbyActivity extends AppCompatActivity {
         mStoreRVAdapter.updateRecyclerVStore(mStoreResults);
         mStoreRVAdapter.notifyItemRangeInserted(0, mStoreResults.size());
 
-        TransitionManager.beginDelayedTransition(mConstraintLSearchResults, new AutoTransition());
-        mBinding.nestedSVSearchResults.scrollTo(0,0);
+        TransitionManager.beginDelayedTransition(mNearbyBinding.constraintLSearchResults, new AutoTransition());
+        mNearbyBinding.nestedSVSearchResults.scrollTo(0,0);
         getOnBackPressedDispatcher();
     }
 }
