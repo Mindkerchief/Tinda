@@ -18,8 +18,6 @@ import com.lspuspcc.tinda.databinding.ActivityNearbyBinding;
 import com.lspuspcc.tinda.domain.SetupModel;
 import com.lspuspcc.tinda.domain.StoreModel;
 import com.lspuspcc.tinda.domain.StoreRecyclerViewAdapter;
-import com.lspuspcc.tinda.domain.SubCategoryModel;
-import com.lspuspcc.tinda.domain.SubCategoryRecyclerViewAdapter;
 
 import java.util.ArrayList;
 
@@ -29,7 +27,6 @@ public class NearbyActivity extends AppCompatActivity {
     private ConstraintLayout mConstraintLSearchResults;
     private SearchView mSearchVSearchField;
     private StoreRecyclerViewAdapter mStoreRVAdapter;
-    private ArrayList<SubCategoryModel> mFeatureModel;
     private ArrayList<StoreModel> mStoreResults;
     private SetupModel mSetupModel;
 
@@ -46,7 +43,7 @@ public class NearbyActivity extends AppCompatActivity {
         mSetupModel = new SetupModel();
 
         RecyclerView recyclerVStoreResults = mBinding.recyclerVStoreResults;
-        TabLayout tabLSearchCategory = mBinding.tabLStoreCategory;
+        TabLayout tabLStoreCategory = mBinding.tabLStoreCategory;
         Button btnSearchCategoryFilter = mBinding.btnSearchCategoryFilter;
 
         // Initialize Store Search Results Recycler View
@@ -60,16 +57,16 @@ public class NearbyActivity extends AppCompatActivity {
         // mConstraintLCategory.getLayoutTransition().enableTransitionType(LayoutTransition.CHANGING);
 
         // Initialize and add the temporary tabs in Category TabLayout
-        addCategoryTab(tabLSearchCategory);
+        addCategoryTab(tabLStoreCategory);
 
         // Immediately display the Nearby Stores
-        updateRecyclerVProductResults(btnSearchCategoryFilter);
+        updateRecyclerVStoreResults(btnSearchCategoryFilter);
 
         // Handle Views Event
-        tabLSearchCategory.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+        tabLStoreCategory.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                updateRecyclerVProductResults(btnSearchCategoryFilter);
+                updateRecyclerVStoreResults(btnSearchCategoryFilter);
             }
 
             @Override
@@ -87,7 +84,7 @@ public class NearbyActivity extends AppCompatActivity {
         mSearchVSearchField.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                updateRecyclerVProductResults(mSearchVSearchField);
+                updateRecyclerVStoreResults(mSearchVSearchField);
                 return false;
             }
 
@@ -118,12 +115,8 @@ public class NearbyActivity extends AppCompatActivity {
         mConstraintLCategory.setVisibility(viewVisibility);
     }
 
-    public void updateRecyclerVProductResults(View view) {
-        // Show Search Result Layout
-        if (mConstraintLSearchResults.getVisibility() == View.GONE)
-            mConstraintLSearchResults.setVisibility(View.VISIBLE);
-
-        // Close Category Filter after choosing sub category
+    public void updateRecyclerVStoreResults(View view) {
+        // Close Category Filter after choosing category
         if (mConstraintLCategory.getVisibility() == View.VISIBLE)
             expandCollapseConstraintLCategory(view);
 
@@ -134,6 +127,7 @@ public class NearbyActivity extends AppCompatActivity {
         mStoreRVAdapter.notifyItemRangeInserted(0, mStoreResults.size());
 
         TransitionManager.beginDelayedTransition(mConstraintLSearchResults, new AutoTransition());
+        mBinding.nestedSVSearchResults.scrollTo(0,0);
         getOnBackPressedDispatcher();
     }
 }

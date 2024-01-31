@@ -6,7 +6,8 @@
     android:layout_height="wrap_content"
     android:clickable="true"
     android:focusable="true"
-    android:foreground="?android:attr/selectableItemBackgroundBorderless">
+    android:foreground="?android:attr/selectableItemBackgroundBorderless"
+    android:onClick="updateRecyclerVProductResults">
 
     <ImageView
         android:id="@+id/imageV_categoryImage"
