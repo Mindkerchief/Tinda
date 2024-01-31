@@ -177,6 +177,7 @@ public class SearchActivity extends AppCompatActivity {
         mProductRVAdapter.notifyItemRangeInserted(0, mProductResults.size());
 
         TransitionManager.beginDelayedTransition(mConstraintLSearchResults, new AutoTransition());
+        mBinding.nestedSVSearchResults.scrollTo(0,0);
         getOnBackPressedDispatcher();
     }
 }
