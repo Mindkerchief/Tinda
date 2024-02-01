@@ -7,147 +7,96 @@
     android:background="@color/white"
     tools:context=".ui.search.SearchActivity">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedSV_searchResults"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp">
 
-        <androidx.core.widget.NestedScrollView
-            android:id="@+id/nestedSV_searchResults"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cardV_searchCategory">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/constraintL_searchResults"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:visibility="gone">
-
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/cardV_productResultsTitle"
-                    Of="@+id/recyclerV_storeResults"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/view_margin"
-                    android:layout_marginTop="@dimen/view_margin"
-                    app:cardBackgroundColor="@color/white"
-                    app:cardCornerRadius="@dimen/view_corner_radius"
-                    app:cardElevation="0dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/recyclerV_storeResults">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@color/teal"
-                        android:fontFamily="@font/inter_bold_family"
-                        android:paddingLeft="8dp"
-                        android:paddingTop="5dp"
-                        android:paddingRight="8dp"
-                        android:paddingBottom="10dp"
-                        android:text="@string/label_product_results"
-                        android:textColor="@color/white"
-                        android:textSize="18sp" />
-
-                </androidx.cardview.widget.CardView>
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recyclerV_productResults"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/view_margin_half"
-                    android:layout_marginTop="-8dp"
-                    android:layout_marginEnd="@dimen/view_margin_half"
-                    android:background="@color/white"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/cardV_productResultsTitle" />
-
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/cardV_storeResultsTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/view_margin"
-                    android:layout_marginTop="@dimen/view_margin_wider"
-                    app:cardBackgroundColor="@color/white"
-                    app:cardCornerRadius="@dimen/view_corner_radius"
-                    app:cardElevation="0dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@color/teal"
-                        android:fontFamily="@font/inter_bold_family"
-                        android:paddingLeft="8dp"
-                        android:paddingTop="5dp"
-                        android:paddingRight="8dp"
-                        android:paddingBottom="10dp"
-                        android:text="@string/label_store_results"
-                        android:textColor="@color/white"
-                        android:textSize="18sp" />
-
-                </androidx.cardview.widget.CardView>
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recyclerV_storeResults"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="-8dp"
-                    android:background="@color/white"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/cardV_storeResultsTitle" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.core.widget.NestedScrollView>
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cardV_searchCategory"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintL_searchResults"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/view_margin_wider"
-            android:layout_marginTop="58dp"
-            android:layout_marginEnd="@dimen/view_margin_wider"
-            app:cardCornerRadius="@dimen/view_corner_radius"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:layout_height="match_parent"
+            android:visibility="gone">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/constraintL_searchCategory"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:visibility="gone">
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardV_productResultsTitle"
+                Of="@+id/recyclerV_storeResults"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/view_margin"
+                android:layout_marginTop="@dimen/view_margin"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="@dimen/view_corner_radius"
+                app:cardElevation="0dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/recyclerV_storeResults">
 
-                <com.google.android.material.tabs.TabLayout
-                    android:id="@+id/tabL_searchCategory"
-                    android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:tabMode="scrollable"
-                    app:tabPaddingEnd="4dp"
-                    app:tabPaddingStart="4dp"
-                    app:tabPaddingTop="4dp"
-                    app:tabTextAppearance="@style/Theme.Tinda.TabLayout" />
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recyclerV_subCategory"
-                    android:layout_width="0dp"
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tabL_searchCategory" />
+                    android:background="@color/teal"
+                    android:fontFamily="@font/inter_bold_family"
+                    android:paddingLeft="8dp"
+                    android:paddingTop="5dp"
+                    android:paddingRight="8dp"
+                    android:paddingBottom="10dp"
+                    android:text="@string/label_product_results"
+                    android:textColor="@color/white"
+                    android:textSize="18sp" />
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.cardview.widget.CardView>
+            </androidx.cardview.widget.CardView>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerV_productResults"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/view_margin_half"
+                android:layout_marginTop="-8dp"
+                android:layout_marginEnd="@dimen/view_margin_half"
+                android:background="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cardV_productResultsTitle" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardV_storeResultsTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/view_margin"
+                android:layout_marginTop="@dimen/view_margin_wider"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="@dimen/view_corner_radius"
+                app:cardElevation="0dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/teal"
+                    android:fontFamily="@font/inter_bold_family"
+                    android:paddingLeft="8dp"
+                    android:paddingTop="5dp"
+                    android:paddingRight="8dp"
+                    android:paddingBottom="10dp"
+                    android:text="@string/label_store_results"
+                    android:textColor="@color/white"
+                    android:textSize="18sp" />
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerV_storeResults"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="-8dp"
+                android:background="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cardV_storeResultsTitle" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
 
     <include
         android:id="@+id/includeL_searchBar"
