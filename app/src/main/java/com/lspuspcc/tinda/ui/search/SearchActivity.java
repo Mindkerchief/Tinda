@@ -49,14 +49,14 @@ public class SearchActivity extends AppCompatActivity {
         // Initialize most of the Views
         mConstraintLSearchResults = mSearchBinding.constraintLSearchResults;
         mConstraintLCategory = mSearchBinding.constraintLSearchCategory;
-        mSearchVSearchField = mSearchBinding.searchVSearchField;
+        mSearchVSearchField = mSearchBinding.includeLSearchBar.searchVSearchField;
         mSetupModel = new SetupModel();
 
         RecyclerView recyclerVStoreResults = mSearchBinding.recyclerVStoreResults;
         RecyclerView recyclerVProductResults = mSearchBinding.recyclerVProductResults;
         RecyclerView recyclerVSubCategory = mSearchBinding.recyclerVSubCategory;
         TabLayout tabLSearchCategory = mSearchBinding.tabLSearchCategory;
-        Button btnSearchCategoryFilter = mSearchBinding.btnSearchCategoryFilter;
+        Button btnSearchCategoryFilter = mSearchBinding.includeLSearchBar.btnSearchCategoryFilter;
 
         // Initialize and add the temporary tabs in Category TabLayout
         addCategoryTab(tabLSearchCategory);
