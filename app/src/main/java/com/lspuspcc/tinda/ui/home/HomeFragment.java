@@ -54,11 +54,13 @@ public class HomeFragment extends Fragment {
         mIntentDeal = new Intent(getActivity(), DealActivity.class);
         mIntentMap = new Intent(getActivity(), MapsActivity.class);
         mIntentFavorite = new Intent(getActivity(), FavoriteActivity.class);
-        mSearchVSearchField = mHomeBinding.searchVHomeSearchField;
+        mSearchVSearchField = mHomeBinding.includeLSearchBar.searchVSearchField;
 
         RecyclerView recyclerVRecommendedProducts = mHomeBinding.recyclerVRecommendedProducts;
         RecyclerView recyclerVNearbyStore = mHomeBinding.recyclerVNearbyStores;
         SetupModel setupModel = new SetupModel();
+
+        mSearchVSearchField.setIconifiedByDefault(true);
 
         // Setup Home Stores and Products Recycler View
         mProductModels = setupModel.setupProductModel();
@@ -74,7 +76,7 @@ public class HomeFragment extends Fragment {
         recyclerVNearbyStore.setAdapter(storeRVAdapter);
 
         // Handle Search Bar & Buttons Event
-        mHomeBinding.btnSearchCategoryFilter.setOnClickListener(v -> homeSearchBarOnClick(false));
+        mHomeBinding.includeLSearchBar.btnSearchCategoryFilter.setOnClickListener(v -> homeSearchBarOnClick(false));
 
         mSearchVSearchField.setOnClickListener(v -> homeSearchBarOnClick(true));
         mSearchVSearchField.setOnSearchClickListener(v -> homeSearchBarOnClick(true));
