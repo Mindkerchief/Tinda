@@ -24,6 +24,7 @@ import java.util.ArrayList;
 public class NearbyActivity extends AppCompatActivity {
     private ActivityNearbyBinding mNearbyBinding;
     private ConstraintLayout mConstraintLCategory;
+    private SearchView mSearchVSearchField;
     private StoreRecyclerViewAdapter mStoreRVAdapter;
     private ArrayList<StoreModel> mStoreResults;
     private SetupModel mSetupModel;
@@ -36,9 +37,9 @@ public class NearbyActivity extends AppCompatActivity {
 
         // Initialize most of the Views
         mConstraintLCategory = mNearbyBinding.constraintLStoreCategory;
+        mSearchVSearchField = mNearbyBinding.searchVSearchField;
         mSetupModel = new SetupModel();
 
-        SearchView searchVSearchField = mNearbyBinding.searchVSearchField;
         RecyclerView recyclerVStoreResults = mNearbyBinding.recyclerVStoreResults;
         TabLayout tabLStoreCategory = mNearbyBinding.tabLStoreCategory;
         Button btnSearchCategoryFilter = mNearbyBinding.btnSearchCategoryFilter;
@@ -49,9 +50,6 @@ public class NearbyActivity extends AppCompatActivity {
         recyclerVStoreResults.setLayoutManager(new LinearLayoutManager(this,
                 LinearLayoutManager.VERTICAL, false));
         recyclerVStoreResults.setAdapter(mStoreRVAdapter);
-
-        // Enables layout transition
-        // mConstraintLCategory.getLayoutTransition().enableTransitionType(LayoutTransition.CHANGING);
 
         // Initialize and add the temporary tabs in Category TabLayout
         addCategoryTab(tabLStoreCategory);
@@ -77,16 +75,18 @@ public class NearbyActivity extends AppCompatActivity {
             }
         });
 
-        searchVSearchField.setOnClickListener(v -> searchVSearchField.setIconified(false));
-        searchVSearchField.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+        mSearchVSearchField.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                updateRecyclerVStoreResults(searchVSearchField);
+                updateRecyclerVStoreResults(mSearchVSearchField);
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
+                if (mConstraintLCategory.isShown())
+                    expandCollapseCategoryExplicitly(View.GONE);
+
                 // TODO: Give search suggestions
                 return false;
             }
@@ -111,17 +111,31 @@ public class NearbyActivity extends AppCompatActivity {
         }
     }
 
-    public void expandCollapseConstraintLCategory(View view) {
-        int viewVisibility = (mConstraintLCategory.getVisibility() == View.GONE)? View.VISIBLE : View.GONE;
+    public void searchFieldOnClick(View view) {
+        mSearchVSearchField.setIconified(false);
 
+        // Hide category when typing
+        if (mConstraintLCategory.isShown())
+            expandCollapseCategoryExplicitly(View.GONE);
+    }
+
+    public void expandCollapseCategoryImplicitly(View view) {
+        int viewVisibility = (mConstraintLCategory.isShown())? View.GONE : View.VISIBLE;
+        expandCollapseCategoryExplicitly(viewVisibility);
+
+        // Stop typing when category is expand
+        if (viewVisibility == View.VISIBLE)
+            mSearchVSearchField.clearFocus();
+    }
+
+    private void expandCollapseCategoryExplicitly(int viewVisibility) {
         TransitionManager.beginDelayedTransition(mConstraintLCategory, new AutoTransition());
         mConstraintLCategory.setVisibility(viewVisibility);
     }
 
     public void updateRecyclerVStoreResults(View view) {
-        // Close Category Filter after choosing category
-        if (mConstraintLCategory.getVisibility() == View.VISIBLE)
-            expandCollapseConstraintLCategory(view);
+        // Close Category Filter after choosing sub category
+        expandCollapseCategoryExplicitly(View.GONE);
 
         // Update Store Results
         mStoreRVAdapter.notifyItemRangeRemoved(0, mStoreResults.size());
@@ -129,8 +143,9 @@ public class NearbyActivity extends AppCompatActivity {
         mStoreRVAdapter.updateRecyclerVStore(mStoreResults);
         mStoreRVAdapter.notifyItemRangeInserted(0, mStoreResults.size());
 
+        // Scroll to the top and remove keyboard
         TransitionManager.beginDelayedTransition(mNearbyBinding.constraintLSearchResults, new AutoTransition());
         mNearbyBinding.nestedSVSearchResults.scrollTo(0,0);
-        getOnBackPressedDispatcher();
+        mSearchVSearchField.clearFocus();
     }
 }

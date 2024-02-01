@@ -31,6 +31,7 @@ public class SearchActivity extends AppCompatActivity {
     private ActivitySearchBinding mSearchBinding;
     private ConstraintLayout mConstraintLCategory;
     private ConstraintLayout mConstraintLSearchResults;
+    private SearchView mSearchVSearchField;
     private SubCategoryRecyclerViewAdapter mSubCategoryRVAdapter;
     private StoreRecyclerViewAdapter mStoreRVAdapter;
     private ProductRecyclerViewAdapter mProductRVAdapter;
@@ -48,9 +49,9 @@ public class SearchActivity extends AppCompatActivity {
         // Initialize most of the Views
         mConstraintLSearchResults = mSearchBinding.constraintLSearchResults;
         mConstraintLCategory = mSearchBinding.constraintLSearchCategory;
+        mSearchVSearchField = mSearchBinding.searchVSearchField;
         mSetupModel = new SetupModel();
 
-        SearchView searchVSearchField = mSearchBinding.searchVSearchField;
         RecyclerView recyclerVStoreResults = mSearchBinding.recyclerVStoreResults;
         RecyclerView recyclerVProductResults = mSearchBinding.recyclerVProductResults;
         RecyclerView recyclerVSubCategory = mSearchBinding.recyclerVSubCategory;
@@ -62,12 +63,9 @@ public class SearchActivity extends AppCompatActivity {
 
         // Takes Home Fragment Search Bar Action using Extra
         if (getIntent().getBooleanExtra("isTyping", false))
-            searchVSearchField.setIconified(false);
+            mSearchVSearchField.setIconified(false);
         else
             btnSearchCategoryFilter.performClick();
-
-        // Enables layout transition
-        // mConstraintLCategory.getLayoutTransition().enableTransitionType(LayoutTransition.CHANGING);
 
         // Initialize Search Bar Subcategory Recycler View
         mSubCategoryModels = mSetupModel.setupSubCategoryModel(0);
@@ -106,16 +104,19 @@ public class SearchActivity extends AppCompatActivity {
             }
         });
 
-        searchVSearchField.setOnClickListener(v -> searchVSearchField.setIconified(false));
-        searchVSearchField.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+        mSearchVSearchField.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                updateRecyclerVProductResults(searchVSearchField);
+                updateRecyclerVProductResults(mSearchVSearchField);
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
+                // Hide category when start typing
+                if (mConstraintLCategory.isShown())
+                    expandCollapseCategoryExplicitly(View.GONE);
+
                 // TODO: Give search suggestions
                 return false;
             }
@@ -140,14 +141,30 @@ public class SearchActivity extends AppCompatActivity {
         }
     }
 
-    public void expandCollapseConstraintLCategory(View view) {
-        int viewVisibility = (mConstraintLCategory.getVisibility() == View.GONE)? View.VISIBLE : View.GONE;
+    public void searchFieldOnClick(View view) {
+        mSearchVSearchField.setIconified(false);
 
+        // Hide category when typing
+        if (mConstraintLCategory.isShown())
+            expandCollapseCategoryExplicitly(View.GONE);
+    }
+
+    public void expandCollapseCategoryImplicitly(View view) {
+        int viewVisibility = (mConstraintLCategory.isShown())? View.GONE : View.VISIBLE;
+        expandCollapseCategoryExplicitly(viewVisibility);
+
+        // Stop typing when category is expand
+        if (viewVisibility == View.VISIBLE)
+            mSearchVSearchField.clearFocus();
+    }
+
+    private void expandCollapseCategoryExplicitly(int viewVisibility) {
         TransitionManager.beginDelayedTransition(mConstraintLCategory, new AutoTransition());
         mConstraintLCategory.setVisibility(viewVisibility);
     }
 
     public void updateRecyclerVSubCategory(byte index) {
+        // Index is store in Views Tag
         mSubCategoryRVAdapter.notifyItemRangeRemoved(0, mSubCategoryModels.size());
         mSubCategoryModels = mSetupModel.setupSubCategoryModel(index);
         mSubCategoryRVAdapter.updateCategoryModel(mSubCategoryModels);
@@ -156,12 +173,11 @@ public class SearchActivity extends AppCompatActivity {
 
     public void updateRecyclerVProductResults(View view) {
         // Show Search Result Layout
-        if (mConstraintLSearchResults.getVisibility() == View.GONE)
+        if (!mConstraintLSearchResults.isShown())
             mConstraintLSearchResults.setVisibility(View.VISIBLE);
 
         // Close Category Filter after choosing sub category
-        if (mConstraintLCategory.getVisibility() == View.VISIBLE)
-            expandCollapseConstraintLCategory(view);
+        expandCollapseCategoryExplicitly(View.GONE);
 
         // Update Store Results
         mStoreRVAdapter.notifyItemRangeRemoved(0, mStoreResults.size());
@@ -175,8 +191,9 @@ public class SearchActivity extends AppCompatActivity {
         mProductRVAdapter.updateRecyclerVProducts(mProductResults);
         mProductRVAdapter.notifyItemRangeInserted(0, mProductResults.size());
 
+        // Scroll to the top and remove keyboard
         TransitionManager.beginDelayedTransition(mConstraintLSearchResults, new AutoTransition());
         mSearchBinding.nestedSVSearchResults.scrollTo(0,0);
-        getOnBackPressedDispatcher();
+        mSearchVSearchField.clearFocus();
     }
 }
