@@ -48,14 +48,14 @@ public class SearchActivity extends AppCompatActivity {
 
         // Initialize most of the Views
         mConstraintLSearchResults = mSearchBinding.constraintLSearchResults;
-        mConstraintLCategory = mSearchBinding.constraintLSearchCategory;
+        mConstraintLCategory = mSearchBinding.includeLSearchBar.constraintLSearchCategory;
         mSearchVSearchField = mSearchBinding.includeLSearchBar.searchVSearchField;
         mSetupModel = new SetupModel();
 
         RecyclerView recyclerVStoreResults = mSearchBinding.recyclerVStoreResults;
         RecyclerView recyclerVProductResults = mSearchBinding.recyclerVProductResults;
-        RecyclerView recyclerVSubCategory = mSearchBinding.recyclerVSubCategory;
-        TabLayout tabLSearchCategory = mSearchBinding.tabLSearchCategory;
+        RecyclerView recyclerVSubCategory = mSearchBinding.includeLSearchBar.recyclerVSubCategory;
+        TabLayout tabLSearchCategory = mSearchBinding.includeLSearchBar.tabLSearchCategory;
         Button btnSearchCategoryFilter = mSearchBinding.includeLSearchBar.btnSearchCategoryFilter;
 
         // Initialize and add the temporary tabs in Category TabLayout
@@ -72,6 +72,7 @@ public class SearchActivity extends AppCompatActivity {
         mSubCategoryRVAdapter = new SubCategoryRecyclerViewAdapter(this, mSubCategoryModels);
         recyclerVSubCategory.setLayoutManager(new GridLayoutManager(this, 4));
         recyclerVSubCategory.setAdapter(mSubCategoryRVAdapter);
+        recyclerVSubCategory.setVisibility(View.VISIBLE);
 
         // Initialize Store Search Results Recycler View
         mStoreResults = mSetupModel.setupStoreModel(false);

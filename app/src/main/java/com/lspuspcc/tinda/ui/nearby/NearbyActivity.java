@@ -36,12 +36,12 @@ public class NearbyActivity extends AppCompatActivity {
         setContentView(mNearbyBinding.getRoot());
 
         // Initialize most of the Views
-        mConstraintLCategory = mNearbyBinding.constraintLStoreCategory;
+        mConstraintLCategory = mNearbyBinding.includeLSearchBar.constraintLSearchCategory;
         mSearchVSearchField = mNearbyBinding.includeLSearchBar.searchVSearchField;
         mSetupModel = new SetupModel();
 
         RecyclerView recyclerVStoreResults = mNearbyBinding.recyclerVStoreResults;
-        TabLayout tabLStoreCategory = mNearbyBinding.tabLStoreCategory;
+        TabLayout tabLStoreCategory = mNearbyBinding.includeLSearchBar.tabLSearchCategory;
         Button btnSearchCategoryFilter = mNearbyBinding.includeLSearchBar.btnSearchCategoryFilter;
 
         // Initialize Store Search Results Recycler View
