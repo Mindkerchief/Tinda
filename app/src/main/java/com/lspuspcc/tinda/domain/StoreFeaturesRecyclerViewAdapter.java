@@ -12,13 +12,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.lspuspcc.tinda.R;
 
-import java.util.ArrayList;
 import java.util.Locale;
 
 public class StoreFeaturesRecyclerViewAdapter extends RecyclerView.Adapter<StoreFeaturesRecyclerViewAdapter.MyViewHolder> {
-    private Context mContext;
-    private int[] mStoreFeatureImages;
-    private float[] mStoreFeaturePrices;
+    private final Context mContext;
+    private final int[] mStoreFeatureImages;
+    private final float[] mStoreFeaturePrices;
 
     public StoreFeaturesRecyclerViewAdapter(Context context, int[] storeFeatureImages, float[] storeFeaturePrices) {
         this.mContext = context;

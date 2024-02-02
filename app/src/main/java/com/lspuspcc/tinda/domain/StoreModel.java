@@ -1,10 +1,10 @@
 package com.lspuspcc.tinda.domain;
 
 public class StoreModel {
-    private int mStoreImage;
-    private String mStoreName;
-    private String mStoreAddress;
-    private String mStoreCategory;
+    private final int mStoreImage;
+    private final String mStoreName;
+    private final String mStoreAddress;
+    private final String mStoreCategory;
     private int[] mStoreFeatureImages;
     private float[] mStoreFeaturePrices;
 

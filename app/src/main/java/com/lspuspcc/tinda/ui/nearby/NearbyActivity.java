@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.transition.AutoTransition;
 import android.transition.TransitionManager;
 import android.view.View;
-import android.widget.Button;
 import android.widget.SearchView;
 
 import com.google.android.material.tabs.TabLayout;
@@ -18,10 +17,12 @@ import com.lspuspcc.tinda.databinding.ActivityNearbyBinding;
 import com.lspuspcc.tinda.domain.SetupModel;
 import com.lspuspcc.tinda.domain.StoreModel;
 import com.lspuspcc.tinda.domain.StoreRecyclerViewAdapter;
+import com.lspuspcc.tinda.ui.searchbar.SearchBarCallback;
+import com.lspuspcc.tinda.ui.searchbar.SearchBarViewModel;
 
 import java.util.ArrayList;
 
-public class NearbyActivity extends AppCompatActivity {
+public class NearbyActivity extends AppCompatActivity implements SearchBarCallback {
     private ActivityNearbyBinding mNearbyBinding;
     private ConstraintLayout mConstraintLCategory;
     private SearchView mSearchVSearchField;
@@ -41,8 +42,7 @@ public class NearbyActivity extends AppCompatActivity {
         mSetupModel = new SetupModel();
 
         RecyclerView recyclerVStoreResults = mNearbyBinding.recyclerVStoreResults;
-        TabLayout tabLStoreCategory = mNearbyBinding.includeLSearchBar.tabLSearchCategory;
-        Button btnSearchCategoryFilter = mNearbyBinding.includeLSearchBar.btnSearchCategoryFilter;
+        new SearchBarViewModel(this, mNearbyBinding.includeLSearchBar, "nearby");
 
         // Initialize Store Search Results Recycler View
         mStoreResults = mSetupModel.setupStoreModel(true);
@@ -50,47 +50,6 @@ public class NearbyActivity extends AppCompatActivity {
         recyclerVStoreResults.setLayoutManager(new LinearLayoutManager(this,
                 LinearLayoutManager.VERTICAL, false));
         recyclerVStoreResults.setAdapter(mStoreRVAdapter);
-
-        // Initialize and add the temporary tabs in Category TabLayout
-        addCategoryTab(tabLStoreCategory);
-
-        // Immediately display the Nearby Stores
-        updateRecyclerVStoreResults(btnSearchCategoryFilter);
-
-        // Handle Views Event
-        tabLStoreCategory.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                updateRecyclerVStoreResults(btnSearchCategoryFilter);
-            }
-
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-
-            }
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-
-            }
-        });
-
-        mSearchVSearchField.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                updateRecyclerVStoreResults(mSearchVSearchField);
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                if (mConstraintLCategory.isShown())
-                    expandCollapseCategoryExplicitly(View.GONE);
-
-                // TODO: Give search suggestions
-                return false;
-            }
-        });
     }
 
     @Override
@@ -133,7 +92,8 @@ public class NearbyActivity extends AppCompatActivity {
         mConstraintLCategory.setVisibility(viewVisibility);
     }
 
-    public void updateRecyclerVStoreResults(View view) {
+    @Override
+    public void updateResults() {
         // Close Category Filter after choosing sub category
         expandCollapseCategoryExplicitly(View.GONE);
 
