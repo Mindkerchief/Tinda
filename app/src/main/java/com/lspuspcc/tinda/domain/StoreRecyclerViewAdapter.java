@@ -16,9 +16,9 @@ import com.lspuspcc.tinda.R;
 import java.util.ArrayList;
 
 public class StoreRecyclerViewAdapter extends RecyclerView.Adapter<StoreRecyclerViewAdapter.MyViewHolder> {
-    private Context mContext;
+    private final Context mContext;
     private ArrayList<StoreModel> mStoreModels;
-    private int mStoreLayout;
+    private final int mStoreLayout;
 
     public StoreRecyclerViewAdapter(Context context, ArrayList<StoreModel> storeModels, int storeLayout) {
         this.mContext = context;

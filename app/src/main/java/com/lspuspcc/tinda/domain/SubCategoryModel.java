@@ -1,8 +1,8 @@
 package com.lspuspcc.tinda.domain;
 
 public class SubCategoryModel {
-    private int mSubCategoryImage;
-    private String mSubCategoryName;
+    private final int mSubCategoryImage;
+    private final String mSubCategoryName;
 
     public SubCategoryModel(int mSubCategoryImage, String mSubCategory) {
         this.mSubCategoryImage = mSubCategoryImage;

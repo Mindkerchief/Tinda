@@ -10,7 +10,6 @@ import android.widget.SearchView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -27,6 +26,7 @@ import com.lspuspcc.tinda.ui.search.SearchActivity;
 import com.lspuspcc.tinda.domain.StoreModel;
 import com.lspuspcc.tinda.domain.StoreRecyclerViewAdapter;
 import com.lspuspcc.tinda.databinding.FragmentHomeBinding;
+import com.lspuspcc.tinda.ui.searchbar.SearchBarViewModel;
 
 import java.util.ArrayList;
 
@@ -77,7 +77,6 @@ public class HomeFragment extends Fragment {
 
         // Handle Search Bar & Buttons Event
         mHomeBinding.includeLSearchBar.btnSearchCategoryFilter.setOnClickListener(v -> homeSearchBarOnClick(false));
-
         mSearchVSearchField.setOnClickListener(v -> homeSearchBarOnClick(true));
         mSearchVSearchField.setOnSearchClickListener(v -> homeSearchBarOnClick(true));
 
@@ -94,7 +93,7 @@ public class HomeFragment extends Fragment {
     }
 
     private void homeSearchBarOnClick(boolean showCategory) {
-        mIntentSearch.putExtra("isTyping", showCategory);
+        SearchBarViewModel.sShowCategory = showCategory;
         startActivity(mIntentSearch);
         mSearchVSearchField.setIconified(true);
     }

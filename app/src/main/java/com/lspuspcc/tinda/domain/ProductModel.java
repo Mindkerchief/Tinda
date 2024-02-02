@@ -1,10 +1,10 @@
 package com.lspuspcc.tinda.domain;
 
 public class ProductModel {
-    private int mProductImage;
-    private String mProductName;
-    private String mProductStore;
-    private String mProductPrice;
+    private final int mProductImage;
+    private final String mProductName;
+    private final String mProductStore;
+    private final String mProductPrice;
 
     public ProductModel(int productImage, String productName, String productStore, String productPrice) {
         this.mProductImage = productImage;

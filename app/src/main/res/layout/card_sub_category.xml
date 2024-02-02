@@ -7,7 +7,7 @@
     android:clickable="true"
     android:focusable="true"
     android:foreground="?android:attr/selectableItemBackgroundBorderless"
-    android:onClick="updateRecyclerVProductResults">
+    android:onClick="subCategoryOnClick">
 
     <ImageView
         android:id="@+id/imageV_categoryImage"
