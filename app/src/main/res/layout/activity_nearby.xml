@@ -60,7 +60,7 @@
 
     <include
         android:id="@+id/includeL_searchBar"
-        layout="@layout/card_search_bar"
+        layout="@layout/search_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
