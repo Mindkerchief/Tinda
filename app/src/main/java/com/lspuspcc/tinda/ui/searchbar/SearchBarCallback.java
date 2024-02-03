@@ -1,5 +1,5 @@
 package com.lspuspcc.tinda.ui.searchbar;
 
-public interface SearchBarCallback {
+interface SearchBarCallback {
     void updateResults();
 }

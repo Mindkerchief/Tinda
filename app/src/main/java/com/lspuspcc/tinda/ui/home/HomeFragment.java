@@ -10,32 +10,20 @@ import android.widget.SearchView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
-import com.lspuspcc.tinda.R;
-import com.lspuspcc.tinda.domain.SetupModel;
 import com.lspuspcc.tinda.ui.deal.DealActivity;
 import com.lspuspcc.tinda.ui.favorite.FavoriteActivity;
 import com.lspuspcc.tinda.ui.maps.MapsActivity;
 import com.lspuspcc.tinda.ui.nearby.NearbyActivity;
-import com.lspuspcc.tinda.domain.ProductModel;
-import com.lspuspcc.tinda.domain.ProductRecyclerViewAdapter;
 import com.lspuspcc.tinda.ui.search.SearchActivity;
-import com.lspuspcc.tinda.domain.StoreModel;
-import com.lspuspcc.tinda.domain.StoreRecyclerViewAdapter;
 import com.lspuspcc.tinda.databinding.FragmentHomeBinding;
 import com.lspuspcc.tinda.ui.searchbar.SearchBarViewModel;
-
-import java.util.ArrayList;
+import com.lspuspcc.tinda.ui.searchbar.SearchResultViewModel;
 
 public class HomeFragment extends Fragment {
     private FragmentHomeBinding mHomeBinding;
     private Intent mIntentSearch, mIntentNearby, mIntentDeal, mIntentMap, mIntentFavorite;
     private SearchView mSearchVSearchField;
-    private ArrayList<ProductModel> mProductModels;
-    private ArrayList<StoreModel> mStoreModels;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -56,24 +44,10 @@ public class HomeFragment extends Fragment {
         mIntentFavorite = new Intent(getActivity(), FavoriteActivity.class);
         mSearchVSearchField = mHomeBinding.includeLSearchBar.searchVSearchField;
 
-        RecyclerView recyclerVRecommendedProducts = mHomeBinding.recyclerVRecommendedProducts;
-        RecyclerView recyclerVNearbyStore = mHomeBinding.recyclerVNearbyStores;
-        SetupModel setupModel = new SetupModel();
-
         mSearchVSearchField.setIconifiedByDefault(true);
-
-        // Setup Home Stores and Products Recycler View
-        mProductModels = setupModel.setupProductModel();
-        ProductRecyclerViewAdapter productRVAdapter = new ProductRecyclerViewAdapter(requireContext(), mProductModels);
-        recyclerVRecommendedProducts.setLayoutManager(new GridLayoutManager(requireContext(), 2));
-        recyclerVRecommendedProducts.setAdapter(productRVAdapter);
-
-        mStoreModels = setupModel.setupStoreModel(false);
-        StoreRecyclerViewAdapter storeRVAdapter = new StoreRecyclerViewAdapter(requireContext(),
-                mStoreModels, R.layout.card_store_vertical);
-        recyclerVNearbyStore.setLayoutManager(new LinearLayoutManager(requireContext(),
-                LinearLayoutManager.HORIZONTAL, false));
-        recyclerVNearbyStore.setAdapter(storeRVAdapter);
+        SearchBarViewModel searchBarViewModel = new SearchBarViewModel();
+        new SearchResultViewModel(getContext(), searchBarViewModel, mHomeBinding.includeLSearchResult,
+                mHomeBinding.nestedSVRecommendations, "home");
 
         // Handle Search Bar & Buttons Event
         mHomeBinding.includeLSearchBar.btnSearchCategory.setOnClickListener(v -> homeSearchBarOnClick(false));
