@@ -16,8 +16,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintL_searchResults"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:visibility="gone">
+            android:layout_height="match_parent">
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardV_productResultsTitle"
@@ -100,7 +99,7 @@
 
     <include
         android:id="@+id/includeL_searchBar"
-        layout="@layout/card_search_bar"
+        layout="@layout/search_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 

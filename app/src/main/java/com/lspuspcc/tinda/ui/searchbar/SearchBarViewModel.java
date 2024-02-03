@@ -6,6 +6,7 @@ import android.transition.TransitionManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.SearchView;
+import android.widget.Toast;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -13,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.tabs.TabLayout;
 import com.lspuspcc.tinda.R;
-import com.lspuspcc.tinda.databinding.CardSearchBarBinding;
+import com.lspuspcc.tinda.databinding.SearchBarBinding;
 import com.lspuspcc.tinda.domain.SetupModel;
 import com.lspuspcc.tinda.domain.SubCategoryModel;
 import com.lspuspcc.tinda.domain.SubCategoryRecyclerViewAdapter;
@@ -25,34 +26,48 @@ public class SearchBarViewModel {
     private final ConstraintLayout mConstraintLCategory;
     private final SearchView mSearchVSearchField;
     private final SetupModel mSetupModel;
-    private final SubCategoryRecyclerViewAdapter mSubCategoryRVAdapter;
+    private SubCategoryRecyclerViewAdapter mSubCategoryRVAdapter;
     private ArrayList<SubCategoryModel> mSubCategoryModels;
     private final String mIncludedIn;
     public static Boolean sShowCategory;
 
-    public SearchBarViewModel(Context context, CardSearchBarBinding searchBar, String includedIn) {
+    public SearchBarViewModel(Context context, SearchBarBinding searchBarBinding, String includedIn) {
         SearchBarCallback searchBarCallback = (SearchBarCallback) context;
         this.mSetupModel = new SetupModel();
         this.mIncludedIn = includedIn;
 
-        mConstraintLCategory = searchBar.constraintLSearchCategory;
-        mSearchVSearchField = searchBar.searchVSearchField;
+        mConstraintLCategory = searchBarBinding.constraintLSearchCategory;
+        mSearchVSearchField = searchBarBinding.searchVSearchField;
 
-        RecyclerView recyclerVSubCategory = searchBar.recyclerVSubCategory;
-        TabLayout tabLSearchCategory = searchBar.tabLSearchCategory;
-        Button btnSearchCategoryFilter = searchBar.btnSearchCategoryFilter;
+        RecyclerView recyclerVSubCategory = searchBarBinding.recyclerVSubCategoryList;
+        TabLayout tabLSearchCategory = searchBarBinding.tabLSearchCategoryList;
+        Button btnSearchCategoryFilter = searchBarBinding.btnSearchCategory;
 
-        // Initialize and add the temporary tabs in Category TabLayout
-        addCategoryTab(tabLSearchCategory);
+        // Initialize and add the Tabs in Category TabLayout
+        addCategoryTab(tabLSearchCategory, context);
+
+        // Setup the appropriate Search Bar Hint
+        switch (mIncludedIn) {
+            case "search":
+                mSearchVSearchField.setQueryHint("Search local products");
+                break;
+            case "nearby":
+                mSearchVSearchField.setQueryHint("Search nearby stores");
+                break;
+            case "deal":
+                mSearchVSearchField.setQueryHint("Look for neighborhood deals");
+                break;
+        }
+
 
         // Initialize Search Bar Subcategory Recycler View
-        mSubCategoryModels = mSetupModel.setupSubCategoryModel(0);
-        mSubCategoryRVAdapter = new SubCategoryRecyclerViewAdapter(context, mSubCategoryModels);
-        recyclerVSubCategory.setLayoutManager(new GridLayoutManager(context, 4));
-        recyclerVSubCategory.setAdapter(mSubCategoryRVAdapter);
-
-        if (mIncludedIn.equals("search"))
+        if (mIncludedIn.equals("search")) {
+            mSubCategoryModels = mSetupModel.setupSubCategoryModel(0);
+            mSubCategoryRVAdapter = new SubCategoryRecyclerViewAdapter(context, mSubCategoryModels);
+            recyclerVSubCategory.setLayoutManager(new GridLayoutManager(context, 4));
+            recyclerVSubCategory.setAdapter(mSubCategoryRVAdapter);
             recyclerVSubCategory.setVisibility(View.VISIBLE);
+        }
 
         if (sShowCategory) {
             mSearchVSearchField.setIconified(false);
@@ -104,7 +119,7 @@ public class SearchBarViewModel {
         });
     }
 
-    private void addCategoryTab(TabLayout tabLSearchCategory) {
+    private void addCategoryTab(TabLayout tabLSearchCategory, Context context) {
         String[] categoryNames = new String[10];
 
         switch (mIncludedIn) {
@@ -114,15 +129,18 @@ public class SearchBarViewModel {
             case "nearby":
                 categoryNames = mSetupModel.getStoreCategory();
                 break;
+            default:
+                Toast.makeText(context, "Failed to load categories!", Toast.LENGTH_LONG).show();
         }
 
-        if (categoryNames != null)
+        if (categoryNames != null) {
             for (int i = 0; i < 10; i++) {
                 TabLayout.Tab newTab = tabLSearchCategory.newTab();
                 newTab.setIcon(R.drawable.ic_basket);
                 newTab.setText(categoryNames[i]);
                 newTab.setTag(i);
                 tabLSearchCategory.addTab(newTab);
+            }
         }
     }
 

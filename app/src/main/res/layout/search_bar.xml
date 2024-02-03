@@ -12,7 +12,7 @@
         android:layout_marginStart="@dimen/view_margin_wider"
         android:layout_marginTop="-8dp"
         android:layout_marginEnd="@dimen/view_margin_wider"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="@dimen/view_margin"
         app:cardCornerRadius="@dimen/view_corner_radius"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -26,7 +26,7 @@
             android:visibility="gone">
 
             <com.google.android.material.tabs.TabLayout
-                android:id="@+id/tabL_searchCategory"
+                android:id="@+id/tabL_searchCategoryList"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -39,14 +39,14 @@
                 app:tabTextAppearance="@style/Theme.Tinda.TabLayout" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerV_subCategory"
+                android:id="@+id/recyclerV_subCategoryList"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tabL_searchCategory" />
+                app:layout_constraintTop_toBottomOf="@+id/tabL_searchCategoryList" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
@@ -75,12 +75,12 @@
                 android:iconifiedByDefault="false"
                 android:queryHint="@string/label_search"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/btn_searchCategoryFilter"
+                app:layout_constraintEnd_toStartOf="@+id/btn_searchCategory"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <Button
-                android:id="@+id/btn_searchCategoryFilter"
+                android:id="@+id/btn_searchCategory"
                 android:layout_width="@dimen/search_filter_width"
                 android:layout_height="match_parent"
                 android:background="@color/transparent"

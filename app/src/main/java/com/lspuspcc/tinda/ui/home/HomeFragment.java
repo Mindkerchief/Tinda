@@ -76,7 +76,7 @@ public class HomeFragment extends Fragment {
         recyclerVNearbyStore.setAdapter(storeRVAdapter);
 
         // Handle Search Bar & Buttons Event
-        mHomeBinding.includeLSearchBar.btnSearchCategoryFilter.setOnClickListener(v -> homeSearchBarOnClick(false));
+        mHomeBinding.includeLSearchBar.btnSearchCategory.setOnClickListener(v -> homeSearchBarOnClick(false));
         mSearchVSearchField.setOnClickListener(v -> homeSearchBarOnClick(true));
         mSearchVSearchField.setOnSearchClickListener(v -> homeSearchBarOnClick(true));
 
