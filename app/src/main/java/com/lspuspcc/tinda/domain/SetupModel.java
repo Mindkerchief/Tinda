@@ -88,11 +88,22 @@ public class SetupModel {
     public String[] getStoreCategory() {
         // Stores can have multiple category
         return new String[] {
-                "Office Supplies",  "Appliances",
-                "Beauty",                   "Entertainment",
-                "Grocery",                  "Furniture",
-                "Fashion",                 "Mixed",
-                "Food",                   "Hardware"
+                "Office Supplies",      "Appliances",
+                "Beauty",               "Entertainment",
+                "Grocery",              "Furniture",
+                "Fashion",              "Mixed",
+                "Food",                 "Hardware"
+        };
+    }
+
+    public String[] getDealCategory() {
+        // Stores can have multiple category
+        return new String[] {
+                "Deal A",       "Deal B",
+                "Deal C",       "Deal D",
+                "Deal E",       "Deal F",
+                "Deal G",       "Deal H",
+                "Deal I",       "Deal J"
         };
     }
 }

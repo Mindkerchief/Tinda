@@ -64,7 +64,7 @@ public class SearchResultViewModel implements SearchBarCallback {
                 searchBarBinding.recyclerVProductResults.setVisibility(View.GONE);
                 break;
             case "deal":
-                searchBarBinding.textVStoreResultTitle.setText(R.string.label_store_results);
+                searchBarBinding.textVStoreResultTitle.setText(R.string.button_deal);
                 searchBarBinding.textVProductResultTitle.setText(R.string.label_product_results);
                 searchBarBinding.cardVProductResultTitle.setVisibility(View.GONE);
                 searchBarBinding.recyclerVProductResults.setVisibility(View.GONE);
@@ -81,7 +81,11 @@ public class SearchResultViewModel implements SearchBarCallback {
                     LinearLayoutManager.HORIZONTAL, false));
         }
         else if (mIncludedIn.equals("nearby") | mIncludedIn.equals("deal")) {
-            mStoreResults = mSetupModel.setupStoreModel(true);
+            if (mIncludedIn.equals("nearby"))
+                mStoreResults = mSetupModel.setupStoreModel(true);
+            else
+                mStoreResults = mSetupModel.setupStoreModel(true);
+
             mStoreRVAdapter = new StoreRecyclerViewAdapter(context, mStoreResults, R.layout.card_store);
             recyclerVStoreResults.setLayoutManager(new LinearLayoutManager(context,
                     LinearLayoutManager.VERTICAL, false));

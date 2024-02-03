@@ -21,8 +21,8 @@ public class SearchActivity extends AppCompatActivity {
 
         SearchBarViewModel searchBarViewModel = new SearchBarViewModel(this,
                 mSearchBinding.includeLSearchBar, "search");
-        mSearchResultViewModel = new SearchResultViewModel(this, searchBarViewModel, mSearchBinding.includeLSearchResult,
-                mSearchBinding.nestedSVSearchResults, "search");
+        mSearchResultViewModel = new SearchResultViewModel(this, searchBarViewModel,
+                mSearchBinding.includeLSearchResult, mSearchBinding.nestedSVSearchResults, "search");
     }
 
     @Override

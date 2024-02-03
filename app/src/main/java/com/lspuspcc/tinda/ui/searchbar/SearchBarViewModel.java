@@ -59,7 +59,7 @@ public class SearchBarViewModel {
                 mSearchVSearchField.setQueryHint("Search nearby stores");
                 break;
             case "deal":
-                mSearchVSearchField.setQueryHint("Look for neighborhood deals");
+                mSearchVSearchField.setQueryHint("Search easy deals");
                 break;
         }
 
@@ -108,6 +108,7 @@ public class SearchBarViewModel {
                         updateSubCategory(Byte.parseByte(Objects.requireNonNull(tab.getTag()).toString()));
                         break;
                     case "nearby":
+                    case "deal":
                         mSearchBarCallback.updateResults();
                         break;
                 }
@@ -134,6 +135,9 @@ public class SearchBarViewModel {
                 break;
             case "nearby":
                 categoryNames = mSetupModel.getStoreCategory();
+                break;
+            case "deal":
+                categoryNames = mSetupModel.getDealCategory();
                 break;
             default:
                 Toast.makeText(context, "Failed to load categories!", Toast.LENGTH_LONG).show();
