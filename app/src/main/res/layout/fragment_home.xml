@@ -7,6 +7,7 @@
     tools:context=".ui.home.HomeFragment">
 
     <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedSV_recommendations"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="-204dp"
@@ -16,81 +17,14 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/cardV_productListTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/view_margin"
-                android:layout_marginTop="@dimen/view_margin"
-                app:cardBackgroundColor="@color/white"
-                app:cardCornerRadius="@dimen/view_corner_radius"
-                app:cardElevation="0dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/recyclerV_nearbyStores">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@color/teal"
-                    android:fontFamily="@font/inter_bold_family"
-                    android:paddingLeft="8dp"
-                    android:paddingTop="5dp"
-                    android:paddingRight="8dp"
-                    android:paddingBottom="10dp"
-                    android:text="@string/label_available_products"
-                    android:textColor="@color/white"
-                    android:textSize="18sp" />
-            </androidx.cardview.widget.CardView>
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerV_recommendedProducts"
+            <include
+                android:id="@+id/includeL_searchResult"
+                layout="@layout/search_result"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="-8dp"
-                android:layout_marginEnd="8dp"
-                android:background="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cardV_productListTitle" />
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/cardV_nearbyStoreTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/view_margin"
-                android:layout_marginTop="@dimen/view_margin"
-                app:cardBackgroundColor="@color/white"
-                app:cardCornerRadius="@dimen/view_corner_radius"
-                app:cardElevation="0dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cardV_features">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@color/teal"
-                    android:fontFamily="@font/inter_bold_family"
-                    android:paddingLeft="8dp"
-                    android:paddingTop="5dp"
-                    android:paddingRight="8dp"
-                    android:paddingBottom="10dp"
-                    android:text="@string/label_nearby_store"
-                    android:textColor="@color/white"
-                    android:textSize="18sp" />
-
-            </androidx.cardview.widget.CardView>
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerV_nearbyStores"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="-8dp"
-                android:background="@color/white"
-                android:nestedScrollingEnabled="false"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cardV_nearbyStoreTitle" />
+                app:layout_constraintTop_toBottomOf="@+id/cardV_features" />
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardV_features"

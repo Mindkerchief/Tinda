@@ -12,50 +12,11 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="60dp">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraintL_searchResults"
+        <include
+            android:id="@+id/includeL_searchResult"
+            layout="@layout/search_result"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/cardV_storeResultsTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/view_margin"
-                android:layout_marginTop="@dimen/view_margin_wider"
-                app:cardBackgroundColor="@color/white"
-                app:cardCornerRadius="@dimen/view_corner_radius"
-                app:cardElevation="0dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@color/teal"
-                    android:fontFamily="@font/inter_bold_family"
-                    android:paddingLeft="8dp"
-                    android:paddingTop="5dp"
-                    android:paddingRight="8dp"
-                    android:paddingBottom="10dp"
-                    android:text="@string/label_nearby_store"
-                    android:textColor="@color/white"
-                    android:textSize="18sp" />
-
-            </androidx.cardview.widget.CardView>
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerV_storeResults"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="-8dp"
-                android:layout_marginEnd="8dp"
-                android:background="@color/white"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cardV_storeResultsTitle" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+            android:layout_height="wrap_content" />
     </androidx.core.widget.NestedScrollView>
 
     <include

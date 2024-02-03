@@ -23,16 +23,20 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class SearchBarViewModel {
-    private final ConstraintLayout mConstraintLCategory;
-    private final SearchView mSearchVSearchField;
-    private final SetupModel mSetupModel;
+    private SearchBarCallback mSearchBarCallback;
+    private ConstraintLayout mConstraintLCategory;
+    private SearchView mSearchVSearchField;
+    private SetupModel mSetupModel;
     private SubCategoryRecyclerViewAdapter mSubCategoryRVAdapter;
     private ArrayList<SubCategoryModel> mSubCategoryModels;
-    private final String mIncludedIn;
+    private String mIncludedIn;
     public static Boolean sShowCategory;
 
+    public SearchBarViewModel() {
+        // Empty constructor for displaying just the Search Bar
+    }
+
     public SearchBarViewModel(Context context, SearchBarBinding searchBarBinding, String includedIn) {
-        SearchBarCallback searchBarCallback = (SearchBarCallback) context;
         this.mSetupModel = new SetupModel();
         this.mIncludedIn = includedIn;
 
@@ -59,6 +63,7 @@ public class SearchBarViewModel {
                 break;
         }
 
+        btnSearchCategoryFilter.setOnClickListener(v -> searchCategoryOnClick());
 
         // Initialize Search Bar Subcategory Recycler View
         if (mIncludedIn.equals("search")) {
@@ -67,21 +72,20 @@ public class SearchBarViewModel {
             recyclerVSubCategory.setLayoutManager(new GridLayoutManager(context, 4));
             recyclerVSubCategory.setAdapter(mSubCategoryRVAdapter);
             recyclerVSubCategory.setVisibility(View.VISIBLE);
-        }
 
-        if (sShowCategory) {
-            mSearchVSearchField.setIconified(false);
-            sShowCategory = false;
+            if (sShowCategory) {
+                mSearchVSearchField.setIconified(false);
+                sShowCategory = false;
+            }
+            else btnSearchCategoryFilter.performClick();
         }
-        else btnSearchCategoryFilter.performClick();
 
         // Handle Views Event
-        btnSearchCategoryFilter.setOnClickListener(v -> searchCategoryOnClick());
         mSearchVSearchField.setOnClickListener(v -> searchFieldOnClick());
         mSearchVSearchField.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                searchBarCallback.updateResults();
+                mSearchBarCallback.updateResults();
                 return false;
             }
 
@@ -104,17 +108,19 @@ public class SearchBarViewModel {
                         updateSubCategory(Byte.parseByte(Objects.requireNonNull(tab.getTag()).toString()));
                         break;
                     case "nearby":
-                        searchBarCallback.updateResults();
+                        mSearchBarCallback.updateResults();
                         break;
                 }
             }
 
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
+
             }
 
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
+
             }
         });
     }
@@ -172,5 +178,13 @@ public class SearchBarViewModel {
         // Stop typing when category is expand
         if (viewVisibility == View.VISIBLE)
             mSearchVSearchField.clearFocus();
+    }
+
+    public SearchView getSearchVSearchField() {
+        return mSearchVSearchField;
+    }
+
+    public void setSearchBarCallback(SearchBarCallback searchBarCallback) {
+        this.mSearchBarCallback = searchBarCallback;
     }
 }
