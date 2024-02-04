@@ -6,36 +6,18 @@
     android:layout_height="wrap_content">
 
     <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/view_margin_wider"
-        android:layout_marginTop="90dp"
-        android:layout_marginEnd="@dimen/view_margin_wider"
-        android:layout_marginBottom="@dimen/view_margin_half"
-        app:cardCornerRadius="@dimen/view_corner_radius"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/cardV_storeInfo">
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerV_storeFeatures"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="-8dp" />
-    </androidx.cardview.widget.CardView>
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardV_storeInfo"
+        android:id="@+id/cardV_dealInfo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/view_margin"
         android:layout_marginTop="@dimen/view_margin_half"
         android:layout_marginEnd="@dimen/view_margin"
+        android:layout_marginBottom="@dimen/view_margin_half"
         android:clickable="true"
         android:focusable="true"
         android:foreground="?android:attr/selectableItemBackgroundBorderless"
         app:cardCornerRadius="@dimen/view_corner_radius"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -44,35 +26,47 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <Button
+                android:id="@+id/btn_dealMessage"
+                android:layout_width="40dp"
+                android:layout_height="45dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="2dp"
+                app:icon="@drawable/baseline_chat_24"
+                app:iconGravity="top"
+                app:iconSize="24dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
             <ImageView
-                android:id="@+id/imageV_storeImage"
+                android:id="@+id/imageV_dealImage"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:contentDescription="@string/label_product_name"
                 android:scaleType="centerCrop"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/sample_store_image" />
+                app:srcCompat="@drawable/sample_product_image" />
 
             <TextView
-                android:id="@+id/textV_storeName"
+                android:id="@+id/textV_dealProduct"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/view_margin_half"
                 android:layout_marginTop="4dp"
                 android:layout_marginEnd="@dimen/view_margin_half"
                 android:ellipsize="end"
-                android:labelFor="@id/imageV_storeImage"
+                android:labelFor="@id/imageV_dealImage"
                 android:maxLines="2"
-                android:text="@string/label_product_store"
+                android:text="@string/label_product_name"
                 android:textColor="@color/dark"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/imageV_storeImage"
+                app:layout_constraintStart_toEndOf="@+id/imageV_dealImage"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/textV_storeAddress"
+                android:id="@+id/textV_dealAddress"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/view_margin_half"
@@ -80,17 +74,17 @@
                 android:layout_marginTop="4dp"
                 android:layout_marginEnd="@dimen/view_margin_half"
                 android:ellipsize="end"
-                android:labelFor="@id/imageV_storeImage"
+                android:labelFor="@id/imageV_dealImage"
                 android:maxLines="1"
                 android:text="@string/label_store_address"
                 android:textColor="@color/dark"
                 android:textSize="12sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/imageV_storeImage"
-                app:layout_constraintTop_toBottomOf="@+id/textV_storeName" />
+                app:layout_constraintEnd_toStartOf="@+id/btn_dealMessage"
+                app:layout_constraintStart_toEndOf="@+id/imageV_dealImage"
+                app:layout_constraintTop_toBottomOf="@+id/textV_dealProduct" />
 
             <TextView
-                android:id="@+id/textV_storeCategory"
+                android:id="@+id/textV_dealPrice"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/view_margin_half"
@@ -99,16 +93,17 @@
                 android:layout_marginEnd="@dimen/view_margin_half"
                 android:layout_marginBottom="@dimen/view_margin_half"
                 android:ellipsize="end"
-                android:labelFor="@id/imageV_storeImage"
+                android:labelFor="@id/imageV_dealImage"
                 android:maxLines="1"
-                android:text="@string/label_store_category"
+                android:text="@string/label_product_price"
                 android:textColor="@color/teal"
                 android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/imageV_storeImage"
-                app:layout_constraintTop_toBottomOf="@+id/textV_storeAddress"
+                app:layout_constraintEnd_toStartOf="@+id/btn_dealMessage"
+                app:layout_constraintStart_toEndOf="@+id/imageV_dealImage"
+                app:layout_constraintTop_toBottomOf="@+id/textV_dealAddress"
                 app:layout_constraintVertical_bias="0.0" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

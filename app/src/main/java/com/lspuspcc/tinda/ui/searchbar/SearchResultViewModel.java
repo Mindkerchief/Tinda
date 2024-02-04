@@ -13,6 +13,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.lspuspcc.tinda.R;
 import com.lspuspcc.tinda.databinding.SearchResultBinding;
+import com.lspuspcc.tinda.domain.DealModel;
+import com.lspuspcc.tinda.domain.DealRecyclerViewAdapter;
 import com.lspuspcc.tinda.domain.ProductModel;
 import com.lspuspcc.tinda.domain.ProductRecyclerViewAdapter;
 import com.lspuspcc.tinda.domain.SetupModel;
@@ -28,8 +30,10 @@ public class SearchResultViewModel implements SearchBarCallback {
     private final SetupModel mSetupModel;
     private StoreRecyclerViewAdapter mStoreRVAdapter;
     private ProductRecyclerViewAdapter mProductRVAdapter;
+    private DealRecyclerViewAdapter mDealRVAdapter;
     private ArrayList<ProductModel> mProductResults;
     private ArrayList<StoreModel> mStoreResults;
+    private ArrayList<DealModel> mDealResults;
     private final String mIncludedIn;
 
     public SearchResultViewModel(Context context, SearchBarViewModel searchBarViewModel,
@@ -79,19 +83,23 @@ public class SearchResultViewModel implements SearchBarCallback {
             mStoreRVAdapter = new StoreRecyclerViewAdapter(context, mStoreResults, R.layout.card_store_vertical);
             recyclerVStoreResults.setLayoutManager(new LinearLayoutManager(context,
                     LinearLayoutManager.HORIZONTAL, false));
+            recyclerVStoreResults.setAdapter(mStoreRVAdapter);
         }
-        else if (mIncludedIn.equals("nearby") | mIncludedIn.equals("deal")) {
-            if (mIncludedIn.equals("nearby"))
-                mStoreResults = mSetupModel.setupStoreModel(true);
-            else
-                mStoreResults = mSetupModel.setupStoreModel(true);
-
+        else if (mIncludedIn.equals("nearby")) {
+            mStoreResults = mSetupModel.setupStoreModel(true);
             mStoreRVAdapter = new StoreRecyclerViewAdapter(context, mStoreResults, R.layout.card_store);
             recyclerVStoreResults.setLayoutManager(new LinearLayoutManager(context,
                     LinearLayoutManager.VERTICAL, false));
+            recyclerVStoreResults.setAdapter(mStoreRVAdapter);
         }
+        else if (mIncludedIn.equals("deal")) {
+            mDealResults = mSetupModel.setupDealModel();
 
-        recyclerVStoreResults.setAdapter(mStoreRVAdapter);
+            mDealRVAdapter = new DealRecyclerViewAdapter(context, mDealResults);
+            recyclerVStoreResults.setLayoutManager(new LinearLayoutManager(context,
+                    LinearLayoutManager.VERTICAL, false));
+            recyclerVStoreResults.setAdapter(mDealRVAdapter);
+        }
 
         // Initialize Products Search Results Recycler View
         if (isHomeOrSearch) {
@@ -115,12 +123,19 @@ public class SearchResultViewModel implements SearchBarCallback {
             mProductRVAdapter.updateRecyclerVProducts(mProductResults);
             mProductRVAdapter.notifyItemRangeInserted(0, mProductResults.size());
         }
-        else if (mIncludedIn.equals("nearby") | mIncludedIn.equals("deal")) {
+        else if (mIncludedIn.equals("nearby")) {
             // Update Store Results
             mStoreRVAdapter.notifyItemRangeRemoved(0, mStoreResults.size());
             mStoreResults = mSetupModel.setupStoreModel(true);
             mStoreRVAdapter.updateRecyclerVStore(mStoreResults);
             mStoreRVAdapter.notifyItemRangeInserted(0, mStoreResults.size());
+        }
+        else if (mIncludedIn.equals("deal")) {
+            // Update Deal Results
+            mDealRVAdapter.notifyItemRangeRemoved(0, mDealResults.size());
+            mDealResults = mSetupModel.setupDealModel();
+            mDealRVAdapter.updateDealModel(mDealResults);
+            mDealRVAdapter.notifyItemRangeInserted(0, mDealResults.size());
         }
 
         // Close Category Filter after choosing sub category
