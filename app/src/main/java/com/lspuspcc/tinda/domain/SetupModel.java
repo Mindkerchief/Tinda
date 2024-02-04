@@ -18,7 +18,6 @@ public class SetupModel {
         for (int i = 0; i < 10; i++) {
             productModels.add(new ProductModel(productImage, productName, productStore, productPrice));
         }
-
         return productModels;
     }
 
@@ -71,8 +70,21 @@ public class SetupModel {
         for (int i = 0; i < subCategory[subCategoryIndex].length; i++) {
             subCategoryModels.add(new SubCategoryModel(categoryImage, subCategory[subCategoryIndex][i]));
         }
-
         return subCategoryModels;
+    }
+
+    public ArrayList<DealModel> setupDealModel() {
+        ArrayList<DealModel> dealModels = new ArrayList<>();
+
+        int dealImage = R.drawable.sample_product_image;
+        String dealProduct = "KARSON Scientific Calculator Multiple Modes Intuitive Interface";
+        String dealAddress = "San Pablo";
+        float dealPrice = 169.00f;
+
+        for (int i = 0; i < 10; i++) {
+            dealModels.add(new DealModel(dealImage, dealProduct, dealAddress, dealPrice));
+        }
+        return dealModels;
     }
 
     public String[] getProductCategory() {
