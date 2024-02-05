@@ -27,4 +27,6 @@
     <string name="label_store_address">San Pablo</string>
     <string name="label_search_category">Electronics</string>
     <string name="label_product_count">1</string>
+    <string name="label_subtotal_amount">P0.00</string>
+    <string name="label_reserve_button">RESERVE(0)</string>
 </resources>

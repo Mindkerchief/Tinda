@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -13,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.tabs.TabLayout;
+import com.lspuspcc.tinda.R;
 import com.lspuspcc.tinda.databinding.FragmentBasketBinding;
 import com.lspuspcc.tinda.domain.BasketModel;
 import com.lspuspcc.tinda.domain.BasketRecyclerViewAdapter;
@@ -22,6 +25,8 @@ import java.util.ArrayList;
 
 public class BasketFragment extends Fragment implements BasketCallBack {
     private FragmentBasketBinding mBasketBinding;
+    private TextView mTextVSubTotalAmount;
+    private Button mBtnCheckOut;
     private SetupModel mSetupModel;
     private BasketRecyclerViewAdapter mBasketRVAdapter;
     private ArrayList<BasketModel> mBasketModels;
@@ -38,6 +43,8 @@ public class BasketFragment extends Fragment implements BasketCallBack {
         super.onViewCreated(view, savedInstanceState);
         TabLayout tabLayout = mBasketBinding.tabLBasketSection;
         RecyclerView recyclerVBasketItems = mBasketBinding.recyclerVBasketItems;
+        mTextVSubTotalAmount = mBasketBinding.textVSubTotalAmount;
+        mBtnCheckOut = mBasketBinding.btnCheckOut;
         mSetupModel = new SetupModel();
 
         mBasketModels = mSetupModel.setupBasketModel();
@@ -59,5 +66,32 @@ public class BasketFragment extends Fragment implements BasketCallBack {
         mBasketModels = mSetupModel.setupBasketModel();
         mBasketRVAdapter.updateBasketModel(mBasketModels);
         mBasketRVAdapter.notifyItemRangeInserted(0, mBasketModels.size());
+        // Spam Bug
+        mTextVSubTotalAmount.setText(R.string.label_subtotal_amount);
+        mBtnCheckOut.setText(R.string.label_reserve_button);
+    }
+
+    @Override
+    public void productSelected(float amountToAdd) {
+        String newSubTotalAmount = "P" + String.valueOf(Float.parseFloat(mTextVSubTotalAmount.getText()
+                .toString().substring(1)) + amountToAdd);
+        String btnCheckOutText = mBtnCheckOut.getText().toString();
+        String newCheckedCount = "RESERVE(" + String.valueOf(Integer.parseInt(btnCheckOutText.subSequence(8,
+                btnCheckOutText.length() - 1).toString()) + 1) + ")";
+
+        mBtnCheckOut.setText(newCheckedCount);
+        mTextVSubTotalAmount.setText(newSubTotalAmount);
+    }
+
+    @Override
+    public void productUnselected(float amountToSubtract) {
+        String newSubTotalAmount = "P" + String.valueOf(Float.parseFloat(mTextVSubTotalAmount.getText()
+                .toString().substring(1)) - amountToSubtract);
+        String btnCheckOutText = mBtnCheckOut.getText().toString();
+        String newCheckedCount = "RESERVE(" + String.valueOf(Integer.parseInt(btnCheckOutText.subSequence(8,
+                btnCheckOutText.length() - 1).toString()) - 1) + ")";
+
+        mBtnCheckOut.setText(newCheckedCount);
+        mTextVSubTotalAmount.setText(newSubTotalAmount);
     }
 }
