@@ -36,15 +36,14 @@ public class SearchResultViewModel implements SearchBarCallback {
     private ArrayList<DealModel> mDealResults;
     private final String mIncludedIn;
 
-    public SearchResultViewModel(Context context, SearchBarViewModel searchBarViewModel,
-                                 SearchResultBinding searchBarBinding, NestedScrollView nestedScrollView, String includedIn) {
+    public SearchResultViewModel(Context context, SearchBarViewModel searchBarViewModel, SearchResultBinding searchBarBinding,
+                                 NestedScrollView nestedScrollView, String includedIn) {
         this.mSearchBarViewModel = searchBarViewModel;
         this.mNestedScrollView = nestedScrollView;
         this.mSetupModel = new SetupModel();
         this.mIncludedIn = includedIn;
+
         mSearchBarViewModel.setSearchBarCallback(this);
-
-
         mConstraintLSearchResults = searchBarBinding.constraintLSearchResults;
 
         RecyclerView recyclerVStoreResults = searchBarBinding.recyclerVStoreResults;
@@ -94,7 +93,6 @@ public class SearchResultViewModel implements SearchBarCallback {
         }
         else if (mIncludedIn.equals("deal")) {
             mDealResults = mSetupModel.setupDealModel();
-
             mDealRVAdapter = new DealRecyclerViewAdapter(context, mDealResults);
             recyclerVStoreResults.setLayoutManager(new LinearLayoutManager(context,
                     LinearLayoutManager.VERTICAL, false));

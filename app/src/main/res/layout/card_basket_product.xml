@@ -27,83 +27,128 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/textV_dealPrice"
+                android:id="@+id/textV_basketProductPrice"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/view_margin_half"
                 android:layout_marginStart="@dimen/view_margin_half"
                 android:layout_marginTop="4dp"
-                android:layout_marginEnd="@dimen/view_margin_half"
                 android:layout_marginBottom="@dimen/view_margin_half"
                 android:ellipsize="end"
-                android:labelFor="@id/imageV_dealImage"
+                android:labelFor="@id/imageV_basketProductImage"
                 android:maxLines="1"
                 android:text="@string/label_product_price"
                 android:textColor="@color/teal"
                 android:textSize="12sp"
-                android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/btn_dealMessage"
-                app:layout_constraintStart_toEndOf="@+id/imageV_dealImage"
-                app:layout_constraintTop_toBottomOf="@+id/textV_dealAddress"
+                app:layout_constraintStart_toEndOf="@+id/imageV_basketProductImage"
+                app:layout_constraintTop_toBottomOf="@+id/textV_basketProductStore"
                 app:layout_constraintVertical_bias="0.0" />
 
             <TextView
-                android:id="@+id/textV_dealAddress"
+                android:id="@+id/textV_basketProductStore"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/view_margin_half"
                 android:layout_marginStart="@dimen/view_margin_half"
                 android:layout_marginTop="4dp"
-                android:layout_marginEnd="@dimen/view_margin_half"
                 android:ellipsize="end"
-                android:labelFor="@id/imageV_dealImage"
+                android:labelFor="@id/imageV_basketProductImage"
                 android:maxLines="1"
-                android:text="@string/label_store_address"
+                android:text="@string/label_store_name"
                 android:textColor="@color/dark"
                 android:textSize="12sp"
-                app:layout_constraintEnd_toStartOf="@+id/btn_dealMessage"
-                app:layout_constraintStart_toEndOf="@+id/imageV_dealImage"
-                app:layout_constraintTop_toBottomOf="@+id/textV_dealProduct" />
+                app:layout_constraintStart_toEndOf="@+id/imageV_basketProductImage"
+                app:layout_constraintTop_toBottomOf="@+id/textV_basketProductName" />
 
             <TextView
-                android:id="@+id/textV_dealProduct"
+                android:id="@+id/textV_basketProductName"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/view_margin_half"
                 android:layout_marginTop="4dp"
                 android:layout_marginEnd="@dimen/view_margin_half"
                 android:ellipsize="end"
-                android:labelFor="@id/imageV_dealImage"
+                android:labelFor="@id/imageV_basketProductImage"
                 android:maxLines="2"
                 android:text="@string/label_product_name"
                 android:textColor="@color/dark"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/imageV_dealImage"
+                app:layout_constraintStart_toEndOf="@+id/imageV_basketProductImage"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
-                android:id="@+id/imageV_dealImage"
+                android:id="@+id/imageV_basketProductImage"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:contentDescription="@string/label_product_name"
+                android:foreground="@color/image_overlay"
                 android:scaleType="centerCrop"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/sample_product_image" />
 
-            <Button
-                android:id="@+id/btn_dealMessage"
-                android:layout_width="40dp"
-                android:layout_height="45dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginBottom="2dp"
-                app:icon="@drawable/baseline_chat_24"
-                app:iconGravity="top"
-                app:iconSize="24dp"
+            <ImageButton
+                android:id="@+id/btn_subtractItem"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginBottom="8dp"
+                android:background="@color/grey"
+                android:backgroundTint="@color/light"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/textV_productCount"
+                app:srcCompat="@drawable/ic_remove"
+                app:tint="@color/dark" />
+
+            <TextView
+                android:id="@+id/textV_productCount"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginBottom="8dp"
+                android:gravity="center"
+                android:text="@string/label_product_count"
+                android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
+
+            <ImageButton
+                android:id="@+id/btn_addItem"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:background="@color/grey"
+                android:backgroundTint="@color/light"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/textV_productCount"
+                app:srcCompat="@drawable/ic_add"
+                app:tint="@color/dark" />
+
+            <ImageButton
+                android:id="@+id/btn_deleteOnBasket"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginBottom="8dp"
+                android:background="@color/transparent"
+                android:backgroundTint="@color/light"
+                android:scaleX="1.2"
+                android:scaleY="1.2"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:srcCompat="@drawable/ic_delete"
+                app:tint="@color/dark" />
+
+            <CheckBox
+                android:id="@+id/checkBox_productSelection"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:buttonTint="@color/dark"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
