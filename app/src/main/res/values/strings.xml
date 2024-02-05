@@ -17,6 +17,7 @@
     <string name="label_available_products">Available Products</string>
     <string name="label_store_results">Stores</string>
     <string name="label_product_results">Products</string>
+    <string name="label_store_name">Expression - San Pablo</string>
     <string name="label_under_development">Under Development</string>
 
     <string name="label_product_name">KARSON Scientific Calculator Multiple Modes Intuitive Interface</string>
@@ -25,4 +26,5 @@
     <string name="label_store_category">School/Office Supplies</string>
     <string name="label_store_address">San Pablo</string>
     <string name="label_search_category">Electronics</string>
+    <string name="label_product_count">1</string>
 </resources>

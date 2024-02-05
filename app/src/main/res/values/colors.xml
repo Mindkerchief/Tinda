@@ -2,10 +2,12 @@
 <resources>
     <color name="teal">#FF17B978</color>
     <color name="blue">#FF1565C0</color>
+    <color name="red">#FFC62828</color>
     <color name="dark">#FF323232</color>
     <color name="light">#FFEEEEEE</color>
     <color name="black">#FF000000</color>
     <color name="grey">#FF666666</color>
     <color name="white">#FFFFFFFF</color>
     <color name="transparent">#00000000</color>
+    <color name="image_overlay">#30FFFFFF</color>
 </resources>

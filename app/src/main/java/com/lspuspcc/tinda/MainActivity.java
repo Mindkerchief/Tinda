@@ -24,5 +24,6 @@ public class MainActivity extends AppCompatActivity {
 
         // Prevents Night Mode but can cause launching glitch
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+
     }
 }

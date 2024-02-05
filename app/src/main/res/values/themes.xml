@@ -16,8 +16,12 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
-    <style name="Theme.Tinda.TabLayout">
+    <style name="Theme.Tinda.TabLayoutCategory">
+        <item name="android:fontFamily">@font/inter_bold</item>
         <item name="android:textSize">10sp</item>
-        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="Theme.Tinda.TabLayoutCart">
+        <item name="android:fontFamily">@font/inter_bold</item>
+        <item name="android:textSize">14sp</item>
     </style>
 </resources>

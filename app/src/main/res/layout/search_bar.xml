@@ -36,7 +36,7 @@
                 app:tabPaddingEnd="4dp"
                 app:tabPaddingStart="4dp"
                 app:tabPaddingTop="4dp"
-                app:tabTextAppearance="@style/Theme.Tinda.TabLayout" />
+                app:tabTextAppearance="@style/Theme.Tinda.TabLayoutCategory" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerV_subCategoryList"

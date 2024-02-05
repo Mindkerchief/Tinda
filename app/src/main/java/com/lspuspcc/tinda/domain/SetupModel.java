@@ -87,6 +87,22 @@ public class SetupModel {
         return dealModels;
     }
 
+    public ArrayList<BasketModel> setupBasketModel() {
+        ArrayList<BasketModel> dealModels = new ArrayList<>();
+
+        boolean isProductSelected = false;
+        int productImage = R.drawable.sample_product_image;
+        String productName = "KARSON Scientific Calculator Multiple Modes Intuitive Interface";
+        String productStore = "San Pablo";
+        float productPrice = 169.00f;
+        short productCount = 1;
+
+        for (int i = 0; i < 10; i++) {
+            dealModels.add(new BasketModel(isProductSelected, productImage, productName, productStore, productPrice, productCount));
+        }
+        return dealModels;
+    }
+
     public String[] getProductCategory() {
         return new String[] {
                 "Electronics",  "Appliances",
