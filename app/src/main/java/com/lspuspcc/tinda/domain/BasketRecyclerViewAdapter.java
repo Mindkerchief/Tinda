@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -47,6 +48,13 @@ public class BasketRecyclerViewAdapter extends RecyclerView.Adapter<BasketRecycl
 
         String productPrice = "P" + String.format(Locale.ENGLISH, "%.2f", mBasketModels.get(position).getProductPrice());
         holder.textVProductPrice.setText(productPrice);
+
+        holder.checkBoxProductSelection.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (isChecked)
+                mBasketCallBack.productSelected(mBasketModels.get(position).getProductPrice());
+            else
+                mBasketCallBack.productUnselected(mBasketModels.get(position).getProductPrice());
+        });
 
         holder.btnDeleteOnBasket.setOnClickListener(v -> mBasketCallBack.deleteOnBasket());
     }
