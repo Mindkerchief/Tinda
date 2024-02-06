@@ -11,6 +11,8 @@
     <string name="button_deal">Deal</string>
     <string name="button_map">Map</string>
     <string name="button_favorite">Favorite</string>
+    <string name="button_store">Store</string>
+    <string name="button_history">History</string>
 
     <string name="label_search">Search local products</string>
     <string name="label_nearby_store">Local Store Near You</string>
@@ -18,6 +20,9 @@
     <string name="label_store_results">Stores</string>
     <string name="label_product_results">Products</string>
     <string name="label_store_name">Expression - San Pablo</string>
+    <string name="label_username">Jhondale Arandia</string>
+    <string name="label_account_type">Seller Account</string>
+    <string name="label_activity">Activity</string>
     <string name="label_under_development">Under Development</string>
 
     <string name="label_product_name">KARSON Scientific Calculator Multiple Modes Intuitive Interface</string>
