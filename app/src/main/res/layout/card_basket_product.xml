@@ -130,14 +130,12 @@
 
             <ImageButton
                 android:id="@+id/btn_deleteOnBasket"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginBottom="8dp"
                 android:background="@color/transparent"
                 android:backgroundTint="@color/light"
-                android:scaleX="1.2"
-                android:scaleY="1.2"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:srcCompat="@drawable/ic_delete"
