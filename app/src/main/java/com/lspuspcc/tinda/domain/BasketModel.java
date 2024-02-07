@@ -1,19 +1,22 @@
 package com.lspuspcc.tinda.domain;
 
 public class BasketModel {
-    private final boolean mIsProductSelected;
+    private boolean mIsProductSelected;
     private final int mProductImage;
     private final String mProductName;
     private final String mProductStore;
     private final float mProductPrice;
-    private final short mProductCount;
+    private double mProductTotalPrice;
+    private short mProductCount;
 
-    public BasketModel(boolean isProductSelected, int productImage, String productName, String productStore, float productPrice, short productCount) {
+    public BasketModel(boolean isProductSelected, int productImage, String productName, String productStore,
+                       float productPrice, short productCount) {
         this.mIsProductSelected = isProductSelected;
         this.mProductImage = productImage;
         this.mProductName = productName;
         this.mProductStore = productStore;
         this.mProductPrice = productPrice;
+        this.mProductTotalPrice = productPrice;
         this.mProductCount = productCount;
     }
 
@@ -37,7 +40,20 @@ public class BasketModel {
         return mProductPrice;
     }
 
+    public double getProductTotalPrice() {
+        return mProductTotalPrice;
+    }
+
     public short getProductCount() {
         return mProductCount;
+    }
+
+    public void setIsProductSelected(boolean isProductSelected) {
+        this.mIsProductSelected = isProductSelected;
+    }
+
+    public void setProductCount(short productCount) {
+        this.mProductTotalPrice = mProductPrice * productCount;
+        this.mProductCount = productCount;
     }
 }

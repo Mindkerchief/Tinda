@@ -22,7 +22,7 @@ import java.util.Locale;
 public class BasketRecyclerViewAdapter extends RecyclerView.Adapter<BasketRecyclerViewAdapter.MyViewModel> {
     private final Context mContext;
     private final BasketCallBack mBasketCallBack;
-    private ArrayList<BasketModel> mBasketModels;
+    private final ArrayList<BasketModel> mBasketModels;
 
     public BasketRecyclerViewAdapter(BasketFragment basketFragment, ArrayList<BasketModel> basketModels) {
         this.mContext = basketFragment.getContext();
@@ -45,17 +45,38 @@ public class BasketRecyclerViewAdapter extends RecyclerView.Adapter<BasketRecycl
         holder.textVProductStore.setText(mBasketModels.get(position).getProductStore());
         holder.checkBoxProductSelection.setChecked(mBasketModels.get(position).getIsProductSelected());
 
-        String productPrice = "P" + String.format(Locale.ENGLISH, "%.2f", mBasketModels.get(position).getProductPrice());
+        String productPrice = "₱" + String.format(Locale.ENGLISH, "%.2f", mBasketModels.get(position).getProductPrice());
         holder.textVProductPrice.setText(productPrice);
 
+        if (mBasketModels.get(position).getProductCount() < 2)
+            holder.btnSubtractItem.setActivated(false);
+        else if (mBasketModels.get(position).getProductCount() > 99)
+            holder.btnAddItem.setActivated(false);
+
+        // Handle views events
         holder.checkBoxProductSelection.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            if (isChecked)
-                mBasketCallBack.productSelected(mBasketModels.get(position).getProductPrice());
-            else
-                mBasketCallBack.productUnselected(mBasketModels.get(position).getProductPrice());
+            mBasketCallBack.setCountAndSubTotal(isChecked, mBasketModels.get(position).getProductTotalPrice(),
+                    mBasketModels.get(position).getProductCount());
+            mBasketModels.get(position).setIsProductSelected(isChecked);
         });
 
-        holder.btnDeleteOnBasket.setOnClickListener(v -> mBasketCallBack.deleteOnBasket());
+        holder.btnDeleteOnBasket.setOnClickListener(v -> {
+            // Trigger OnCheckedChange event to remove product count and subtotal
+            holder.checkBoxProductSelection.setChecked(false);
+            mBasketModels.remove(position);
+
+            notifyItemRemoved(position);
+            // TODO: For some reason, this produce an array out of bounds even though the index is correct
+            notifyItemRangeChanged(position, mBasketModels.size() - position);
+        });
+
+        holder.btnAddItem.setOnClickListener(v -> {
+            updateItemCount(holder.textVProductCount, holder.btnAddItem, holder.btnSubtractItem, position, true);
+        });
+
+        holder.btnSubtractItem.setOnClickListener(v -> {
+            updateItemCount(holder.textVProductCount, holder.btnAddItem, holder.btnSubtractItem, position, false);
+        });
     }
 
     @Override
@@ -80,32 +101,29 @@ public class BasketRecyclerViewAdapter extends RecyclerView.Adapter<BasketRecycl
             btnDeleteOnBasket =itemView.findViewById(R.id.btn_deleteOnBasket);
             btnAddItem = itemView.findViewById(R.id.btn_addItem);
             btnSubtractItem = itemView.findViewById(R.id.btn_subtractItem);
-
-            btnAddItem.setOnClickListener(v -> {
-                String newProductCount = String.valueOf(Integer.parseInt(textVProductCount.getText().toString()) + 1);
-
-                if (newProductCount.equals("100"))
-                    v.setClickable(false);
-                else if (newProductCount.equals("1"))
-                    btnSubtractItem.setClickable(true);
-
-                textVProductCount.setText(newProductCount);
-            });
-
-            btnSubtractItem.setOnClickListener(v -> {
-                String newProductCount = String.valueOf(Integer.parseInt(textVProductCount.getText().toString()) - 1);
-
-                if (newProductCount.equals("0"))
-                    v.setClickable(false);
-                else if (newProductCount.equals("99"))
-                    btnAddItem.setClickable(true);
-
-                textVProductCount.setText(newProductCount);
-            });
         }
     }
 
-    public void updateBasketModel(ArrayList<BasketModel> basketModels) {
-        this.mBasketModels = basketModels;
+    private void updateItemCount(TextView textVProductCount, ImageButton btnAddItem, ImageButton btnSubtractItem,
+                                 int position, boolean isAddItem) {
+        int itemToAdd = (isAddItem) ? 1 : -1;
+        float itemPrice = mBasketModels.get(position).getProductPrice() * itemToAdd;
+        String newProductCount = String.valueOf(Integer.parseInt(textVProductCount.getText().toString()) + itemToAdd);
+
+        // Limit the item count from 1 - 100
+        if (newProductCount.equals("1") | newProductCount.equals("0"))
+            btnSubtractItem.setClickable(false);
+        else if (newProductCount.equals("2"))
+            btnSubtractItem.setClickable(true);
+        else if (newProductCount.equals("99"))
+            btnAddItem.setClickable(true);
+        else if (newProductCount.equals("100"))
+            btnAddItem.setClickable(false);
+
+        mBasketModels.get(position).setProductCount(Short.parseShort(newProductCount));
+        textVProductCount.setText(newProductCount);
+
+        if (mBasketModels.get(position).getIsProductSelected())
+            mBasketCallBack.setCountAndSubTotal(true, itemPrice, (short) itemToAdd);
     }
 }
