@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -15,7 +14,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.tabs.TabLayout;
-import com.lspuspcc.tinda.R;
 import com.lspuspcc.tinda.databinding.FragmentBasketBinding;
 import com.lspuspcc.tinda.domain.BasketModel;
 import com.lspuspcc.tinda.domain.BasketRecyclerViewAdapter;
@@ -25,9 +23,7 @@ import java.util.ArrayList;
 
 public class BasketFragment extends Fragment implements BasketCallBack {
     private FragmentBasketBinding mBasketBinding;
-    private TextView mTextVSubTotalAmount;
-    private Button mBtnCheckOut;
-    private SetupModel mSetupModel;
+    private TextView mTextVItemCount, mTextVSubTotalAmount;
     private BasketRecyclerViewAdapter mBasketRVAdapter;
     private ArrayList<BasketModel> mBasketModels;
 
@@ -43,11 +39,11 @@ public class BasketFragment extends Fragment implements BasketCallBack {
         super.onViewCreated(view, savedInstanceState);
         TabLayout tabLayout = mBasketBinding.tabLBasketSection;
         RecyclerView recyclerVBasketItems = mBasketBinding.recyclerVBasketItems;
+        mTextVItemCount = mBasketBinding.textVItemCount;
         mTextVSubTotalAmount = mBasketBinding.textVSubTotalAmount;
-        mBtnCheckOut = mBasketBinding.btnCheckOut;
-        mSetupModel = new SetupModel();
+        SetupModel setupModel = new SetupModel();
 
-        mBasketModels = mSetupModel.setupBasketModel();
+        mBasketModels = setupModel.setupBasketModel();
         mBasketRVAdapter = new BasketRecyclerViewAdapter(this, mBasketModels);
         recyclerVBasketItems.setLayoutManager(new LinearLayoutManager(getContext(),
                 LinearLayoutManager.VERTICAL, false));
@@ -61,37 +57,17 @@ public class BasketFragment extends Fragment implements BasketCallBack {
     }
 
     @Override
-    public void deleteOnBasket() {
-        mBasketRVAdapter.notifyItemRangeRemoved(0, mBasketModels.size());
-        mBasketModels = mSetupModel.setupBasketModel();
-        mBasketRVAdapter.updateBasketModel(mBasketModels);
-        mBasketRVAdapter.notifyItemRangeInserted(0, mBasketModels.size());
-        // Spam Bug
-        mTextVSubTotalAmount.setText(R.string.label_subtotal_amount);
-        mBtnCheckOut.setText(R.string.label_reserve_button);
-    }
+    public void setCountAndSubTotal(boolean isChecked, double itemPrice, short itemCount) {
+        // Make price and count negative to subtract instead if item is unchecked
+        if (!isChecked) {
+            itemPrice *= -1;
+            itemCount *= -1;
+        }
 
-    @Override
-    public void productSelected(float amountToAdd) {
-        String newSubTotalAmount = "P" + String.valueOf(Float.parseFloat(mTextVSubTotalAmount.getText()
-                .toString().substring(1)) + amountToAdd);
-        String btnCheckOutText = mBtnCheckOut.getText().toString();
-        String newCheckedCount = "RESERVE(" + String.valueOf(Integer.parseInt(btnCheckOutText.subSequence(8,
-                btnCheckOutText.length() - 1).toString()) + 1) + ")";
-
-        mBtnCheckOut.setText(newCheckedCount);
-        mTextVSubTotalAmount.setText(newSubTotalAmount);
-    }
-
-    @Override
-    public void productUnselected(float amountToSubtract) {
-        String newSubTotalAmount = "P" + String.valueOf(Float.parseFloat(mTextVSubTotalAmount.getText()
-                .toString().substring(1)) - amountToSubtract);
-        String btnCheckOutText = mBtnCheckOut.getText().toString();
-        String newCheckedCount = "RESERVE(" + String.valueOf(Integer.parseInt(btnCheckOutText.subSequence(8,
-                btnCheckOutText.length() - 1).toString()) - 1) + ")";
-
-        mBtnCheckOut.setText(newCheckedCount);
+        // Set price and count new value
+        String newSubTotalAmount = "₱" + (Double.parseDouble(mTextVSubTotalAmount.getText()
+                .toString().substring(1)) + itemPrice);
+        mTextVItemCount.setText(String.valueOf(Integer.parseInt(mTextVItemCount.getText().toString()) + itemCount));
         mTextVSubTotalAmount.setText(newSubTotalAmount);
     }
 }

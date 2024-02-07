@@ -14,6 +14,14 @@
     <string name="button_store">Store</string>
     <string name="button_history">History</string>
 
+    <string name="tab_basket">BASKET</string>
+    <string name="tab_favorites">FAVORITES</string>
+
+    <string name="label_items">Item/s:</string>
+    <string name="label_item_count">0</string>
+    <string name="label_subtotal">Subtotal:</string>
+    <string name="label_subtotal_amount">₱0.00</string>
+
     <string name="label_search">Search local products</string>
     <string name="label_nearby_store">Local Store Near You</string>
     <string name="label_available_products">Available Products</string>
@@ -32,6 +40,5 @@
     <string name="label_store_address">San Pablo</string>
     <string name="label_search_category">Electronics</string>
     <string name="label_product_count">1</string>
-    <string name="label_subtotal_amount">P0.00</string>
-    <string name="label_reserve_button">RESERVE(0)</string>
+    <string name="label_reserve_button">RESERVE</string>
 </resources>

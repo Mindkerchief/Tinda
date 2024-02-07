@@ -9,5 +9,6 @@
     <color name="grey">#FF666666</color>
     <color name="white">#FFFFFFFF</color>
     <color name="transparent">#00000000</color>
-    <color name="image_overlay">#30FFFFFF</color>
+    <color name="semi_transparent_black">#30000000</color>
+    <color name="semi_transparent_white">#30FFFFFF</color>
 </resources>

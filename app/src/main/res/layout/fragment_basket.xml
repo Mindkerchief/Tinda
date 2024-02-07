@@ -20,12 +20,12 @@
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/title_basket" />
+            android:text="@string/tab_basket" />
 
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/button_favorite" />
+            android:text="@string/tab_favorites" />
 
     </com.google.android.material.tabs.TabLayout>
 
@@ -41,7 +41,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardCornerRadius="0dp"
-        app:cardElevation="4dp"
+        app:cardElevation="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
@@ -51,32 +51,51 @@
             android:layout_height="match_parent">
 
             <TextView
+                android:id="@+id/textV_itemCountLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="@string/label_items"
+                app:layout_constraintBottom_toTopOf="@+id/textV_subTotalLabel"
+                app:layout_constraintEnd_toEndOf="@+id/textV_subTotalLabel" />
+
+            <TextView
+                android:id="@+id/textV_itemCount"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_margin="@dimen/view_margin_half"
+                android:text="@string/label_item_count"
+                android:textColor="@color/teal"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/textV_subTotalLabel"
+                app:layout_constraintStart_toEndOf="@+id/textV_itemCountLabel" />
+
+            <TextView
                 android:id="@+id/textV_subTotalLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/view_margin"
-                android:layout_marginTop="@dimen/view_margin_half"
-                android:layout_marginBottom="@dimen/view_margin_half"
-                android:text="Subtotal:"
+                android:layout_marginStart="24dp"
+                android:layout_marginBottom="8dp"
+                android:text="@string/label_subtotal"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintStart_toStartOf="parent" />
 
             <TextView
                 android:id="@+id/textV_subTotalAmount"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="20dp"
                 android:layout_margin="@dimen/view_margin_half"
+                android:layout_marginBottom="8dp"
                 android:text="@string/label_subtotal_amount"
                 android:textColor="@color/teal"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/textV_subTotalLabel"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintStart_toEndOf="@+id/textV_subTotalLabel" />
 
             <Button
-                android:id="@+id/btn_checkOut"
+                android:id="@+id/btn_reserve"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/view_margin_half"

@@ -13,7 +13,7 @@ public class SetupModel {
         int productImage = R.drawable.sample_product_image;
         String productName = "KARSON Scientific Calculator Multiple Modes Intuitive Interface";
         String productStore = "Expressions - Ultimart San Pablo";
-        String productPrice = "P169.00";
+        String productPrice = "₱169.00";
 
         for (int i = 0; i < 10; i++) {
             productModels.add(new ProductModel(productImage, productName, productStore, productPrice));
@@ -93,11 +93,11 @@ public class SetupModel {
         boolean isProductSelected = false;
         int productImage = R.drawable.sample_product_image;
         String productName = "KARSON Scientific Calculator Multiple Modes Intuitive Interface";
-        String productStore = "San Pablo";
+        String productStore = "Expression - San Pablo";
         float productPrice = 169.00f;
         short productCount = 1;
 
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 5; i++) {
             dealModels.add(new BasketModel(isProductSelected, productImage, productName, productStore, productPrice, productCount));
         }
         return dealModels;

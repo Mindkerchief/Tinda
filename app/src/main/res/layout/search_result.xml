@@ -7,7 +7,6 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardV_productResultTitle"
-        Of="@+id/recyclerV_storeResults"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/view_margin"
@@ -41,7 +40,7 @@
         android:layout_marginStart="@dimen/view_margin_half"
         android:layout_marginTop="-8dp"
         android:layout_marginEnd="@dimen/view_margin_half"
-        android:background="@color/white"
+        android:background="@color/light"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardV_productResultTitle" />
@@ -79,7 +78,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="-8dp"
-        android:background="@color/white"
+        android:background="@color/light"
         android:nestedScrollingEnabled="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
