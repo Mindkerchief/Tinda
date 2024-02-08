@@ -45,7 +45,7 @@ public class StoreRecyclerViewAdapter extends RecyclerView.Adapter<StoreRecycler
 
         // Setup Store Features if exists
         if (mStoreLayout == R.layout.card_store) {
-            StoreFeaturesRecyclerViewAdapter storeFeaturesRVAdapter = new StoreFeaturesRecyclerViewAdapter(mContext,
+            StoreFeaturesRecyclerViewAdapter storeFeaturesRVAdapter = new StoreFeaturesRecyclerViewAdapter(
                     mStoreModels.get(position).getStoreFeatureImages(), mStoreModels.get(position).getStoreFeaturePrices());
             holder.recyclerVStoreFeatures.setLayoutManager(new LinearLayoutManager(mContext,
                     LinearLayoutManager.HORIZONTAL, false));

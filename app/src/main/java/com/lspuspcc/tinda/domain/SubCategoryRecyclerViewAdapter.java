@@ -1,6 +1,5 @@
 package com.lspuspcc.tinda.domain;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,11 +14,9 @@ import com.lspuspcc.tinda.R;
 import java.util.ArrayList;
 
 public class SubCategoryRecyclerViewAdapter extends RecyclerView.Adapter<SubCategoryRecyclerViewAdapter.MyViewHolder> {
-    Context mContext;
     ArrayList<SubCategoryModel> mSubCategoryModels;
 
-    public SubCategoryRecyclerViewAdapter(Context mContext, ArrayList<SubCategoryModel> subCategoryModels) {
-        this.mContext = mContext;
+    public SubCategoryRecyclerViewAdapter(ArrayList<SubCategoryModel> subCategoryModels) {
         this.mSubCategoryModels = subCategoryModels;
     }
 
@@ -27,7 +24,7 @@ public class SubCategoryRecyclerViewAdapter extends RecyclerView.Adapter<SubCate
     @Override
     public SubCategoryRecyclerViewAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         // Inflate the layout
-        LayoutInflater inflater = LayoutInflater.from(mContext);
+        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View view = inflater.inflate(R.layout.card_sub_category, parent, false);
         return new SubCategoryRecyclerViewAdapter.MyViewHolder(view);
     }

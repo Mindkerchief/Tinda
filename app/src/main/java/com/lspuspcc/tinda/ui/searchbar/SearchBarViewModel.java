@@ -36,7 +36,7 @@ public class SearchBarViewModel {
         // Empty constructor for displaying just the Search Bar
     }
 
-    public SearchBarViewModel(Context context, SearchBarBinding searchBarBinding, String includedIn) {
+    public SearchBarViewModel(SearchBarBinding searchBarBinding, String includedIn) {
         this.mSetupModel = new SetupModel();
         this.mIncludedIn = includedIn;
 
@@ -48,7 +48,7 @@ public class SearchBarViewModel {
         Button btnSearchCategoryFilter = searchBarBinding.btnSearchCategory;
 
         // Initialize and add the Tabs in Category TabLayout
-        addCategoryTab(tabLSearchCategory, context);
+        addCategoryTab(tabLSearchCategory);
 
         // Setup the appropriate Search Bar Hint
         switch (mIncludedIn) {
@@ -68,8 +68,8 @@ public class SearchBarViewModel {
         // Initialize Search Bar Subcategory Recycler View
         if (mIncludedIn.equals("search")) {
             mSubCategoryModels = mSetupModel.setupSubCategoryModel(0);
-            mSubCategoryRVAdapter = new SubCategoryRecyclerViewAdapter(context, mSubCategoryModels);
-            recyclerVSubCategory.setLayoutManager(new GridLayoutManager(context, 4));
+            mSubCategoryRVAdapter = new SubCategoryRecyclerViewAdapter(mSubCategoryModels);
+            recyclerVSubCategory.setLayoutManager(new GridLayoutManager(searchBarBinding.btnSearchCategory.getContext(), 4));
             recyclerVSubCategory.setAdapter(mSubCategoryRVAdapter);
             recyclerVSubCategory.setVisibility(View.VISIBLE);
 
@@ -126,7 +126,7 @@ public class SearchBarViewModel {
         });
     }
 
-    private void addCategoryTab(TabLayout tabLSearchCategory, Context context) {
+    private void addCategoryTab(TabLayout tabLSearchCategory) {
         String[] categoryNames = new String[10];
 
         switch (mIncludedIn) {
@@ -139,8 +139,6 @@ public class SearchBarViewModel {
             case "deal":
                 categoryNames = mSetupModel.getDealCategory();
                 break;
-            default:
-                Toast.makeText(context, "Failed to load categories!", Toast.LENGTH_LONG).show();
         }
 
         if (categoryNames != null) {

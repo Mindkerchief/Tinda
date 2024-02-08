@@ -1,6 +1,5 @@
 package com.lspuspcc.tinda.domain;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,11 +14,9 @@ import com.lspuspcc.tinda.R;
 import java.util.ArrayList;
 
 public class ProductRecyclerViewAdapter extends RecyclerView.Adapter<ProductRecyclerViewAdapter.MyViewHolder> {
-    Context mContext;
     ArrayList<ProductModel> mProductModels;
 
-    public ProductRecyclerViewAdapter(Context context, ArrayList<ProductModel> productModels) {
-        this.mContext = context;
+    public ProductRecyclerViewAdapter(ArrayList<ProductModel> productModels) {
         this.mProductModels = productModels;
     }
 
@@ -27,7 +24,7 @@ public class ProductRecyclerViewAdapter extends RecyclerView.Adapter<ProductRecy
     @Override
     public ProductRecyclerViewAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         // Inflate the layout
-        LayoutInflater inflater = LayoutInflater.from(mContext);
+        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View view = inflater.inflate(R.layout.card_product, parent, false);
         return new ProductRecyclerViewAdapter.MyViewHolder(view);
     }

@@ -1,6 +1,5 @@
 package com.lspuspcc.tinda.domain;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,12 +14,10 @@ import com.lspuspcc.tinda.R;
 import java.util.Locale;
 
 public class StoreFeaturesRecyclerViewAdapter extends RecyclerView.Adapter<StoreFeaturesRecyclerViewAdapter.MyViewHolder> {
-    private final Context mContext;
     private final int[] mStoreFeatureImages;
     private final float[] mStoreFeaturePrices;
 
-    public StoreFeaturesRecyclerViewAdapter(Context context, int[] storeFeatureImages, float[] storeFeaturePrices) {
-        this.mContext = context;
+    public StoreFeaturesRecyclerViewAdapter(int[] storeFeatureImages, float[] storeFeaturePrices) {
         this.mStoreFeatureImages = storeFeatureImages;
         this.mStoreFeaturePrices = storeFeaturePrices;
     }
@@ -28,7 +25,7 @@ public class StoreFeaturesRecyclerViewAdapter extends RecyclerView.Adapter<Store
     @NonNull
     @Override
     public StoreFeaturesRecyclerViewAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        LayoutInflater inflater = LayoutInflater.from(mContext);
+        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View view = inflater.inflate(R.layout.card_store_features_small, parent, false);
         return new StoreFeaturesRecyclerViewAdapter.MyViewHolder(view);
     }

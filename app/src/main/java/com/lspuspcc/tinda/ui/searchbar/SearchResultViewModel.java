@@ -93,7 +93,7 @@ public class SearchResultViewModel implements SearchBarCallback {
         }
         else if (mIncludedIn.equals("deal")) {
             mDealResults = mSetupModel.setupDealModel();
-            mDealRVAdapter = new DealRecyclerViewAdapter(context, mDealResults);
+            mDealRVAdapter = new DealRecyclerViewAdapter(mDealResults);
             recyclerVStoreResults.setLayoutManager(new LinearLayoutManager(context,
                     LinearLayoutManager.VERTICAL, false));
             recyclerVStoreResults.setAdapter(mDealRVAdapter);
@@ -102,7 +102,7 @@ public class SearchResultViewModel implements SearchBarCallback {
         // Initialize Products Search Results Recycler View
         if (isHomeOrSearch) {
             mProductResults = mSetupModel.setupProductModel();
-            mProductRVAdapter = new ProductRecyclerViewAdapter(context, mProductResults);
+            mProductRVAdapter = new ProductRecyclerViewAdapter(mProductResults);
             recyclerVProductResults.setLayoutManager(new GridLayoutManager(context, 2));
             recyclerVProductResults.setAdapter(mProductRVAdapter);
         }
