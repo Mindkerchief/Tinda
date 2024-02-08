@@ -17,8 +17,7 @@ public class NearbyActivity extends AppCompatActivity {
         mNearbyBinding = ActivityNearbyBinding.inflate(getLayoutInflater());
         setContentView(mNearbyBinding.getRoot());
 
-        SearchBarViewModel searchBarViewModel = new SearchBarViewModel(this,
-                mNearbyBinding.includeLSearchBar, "nearby");
+        SearchBarViewModel searchBarViewModel = new SearchBarViewModel(mNearbyBinding.includeLSearchBar, "nearby");
         new SearchResultViewModel(this, searchBarViewModel,
                 mNearbyBinding.includeLSearchResult, mNearbyBinding.nestedSVSearchResults, "nearby");
     }

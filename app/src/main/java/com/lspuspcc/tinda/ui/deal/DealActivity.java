@@ -17,8 +17,7 @@ public class DealActivity extends AppCompatActivity {
         mDealBinding = ActivityDealBinding.inflate(getLayoutInflater());
         setContentView(mDealBinding.getRoot());
 
-        SearchBarViewModel searchBarViewModel = new SearchBarViewModel(this,
-                mDealBinding.includeLSearchBar, "deal");
+        SearchBarViewModel searchBarViewModel = new SearchBarViewModel(mDealBinding.includeLSearchBar, "deal");
         new SearchResultViewModel(this, searchBarViewModel,
                 mDealBinding.includeLSearchResult, mDealBinding.nestedSVSearchResults, "deal");
     }

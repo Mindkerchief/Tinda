@@ -19,8 +19,7 @@ public class SearchActivity extends AppCompatActivity {
         mSearchBinding = ActivitySearchBinding.inflate(getLayoutInflater());
         setContentView(mSearchBinding.getRoot());
 
-        SearchBarViewModel searchBarViewModel = new SearchBarViewModel(this,
-                mSearchBinding.includeLSearchBar, "search");
+        SearchBarViewModel searchBarViewModel = new SearchBarViewModel(mSearchBinding.includeLSearchBar, "search");
         mSearchResultViewModel = new SearchResultViewModel(this, searchBarViewModel,
                 mSearchBinding.includeLSearchResult, mSearchBinding.nestedSVSearchResults, "search");
     }

@@ -1,6 +1,5 @@
 package com.lspuspcc.tinda.domain;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,12 +19,10 @@ import java.util.ArrayList;
 import java.util.Locale;
 
 public class BasketRecyclerViewAdapter extends RecyclerView.Adapter<BasketRecyclerViewAdapter.MyViewModel> {
-    private final Context mContext;
     private final BasketCallBack mBasketCallBack;
     private final ArrayList<BasketModel> mBasketModels;
 
     public BasketRecyclerViewAdapter(BasketFragment basketFragment, ArrayList<BasketModel> basketModels) {
-        this.mContext = basketFragment.getContext();
         this.mBasketCallBack = basketFragment;
         this.mBasketModels = basketModels;
     }
@@ -33,7 +30,7 @@ public class BasketRecyclerViewAdapter extends RecyclerView.Adapter<BasketRecycl
     @NonNull
     @Override
     public BasketRecyclerViewAdapter.MyViewModel onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        LayoutInflater layoutInflater = LayoutInflater.from(mContext);
+        LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         View view = layoutInflater.inflate(R.layout.card_basket_product, parent, false);
         return new MyViewModel(view);
     }

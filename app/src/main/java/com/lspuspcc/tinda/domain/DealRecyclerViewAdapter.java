@@ -17,18 +17,16 @@ import java.util.ArrayList;
 import java.util.Locale;
 
 public class DealRecyclerViewAdapter extends RecyclerView.Adapter<DealRecyclerViewAdapter.MyViewHolder> {
-    private final Context mContext;
     private ArrayList<DealModel> mDealModels;
 
-    public DealRecyclerViewAdapter(Context context, ArrayList<DealModel> dealModels) {
-        this.mContext = context;
+    public DealRecyclerViewAdapter(ArrayList<DealModel> dealModels) {
         this.mDealModels = dealModels;
     }
 
     @NonNull
     @Override
     public DealRecyclerViewAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        LayoutInflater layoutInflater = LayoutInflater.from(mContext);
+        LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         View view = layoutInflater.inflate(R.layout.card_deal, parent, false);
         return new DealRecyclerViewAdapter.MyViewHolder(view);
     }
