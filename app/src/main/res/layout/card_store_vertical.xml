@@ -7,7 +7,7 @@
     <data>
         <variable
             name="store"
-            type="com.lspuspcc.tinda.domain.StoreModel" />
+            type="com.lspuspcc.tinda.domain.StoreVerticalModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

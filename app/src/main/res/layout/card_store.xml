@@ -15,43 +15,228 @@
         android:layout_height="wrap_content">
 
         <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/view_margin_wider"
-            android:layout_marginTop="90dp"
-            android:layout_marginEnd="@dimen/view_margin_wider"
-            android:layout_marginBottom="@dimen/view_margin_half"
-            app:cardCornerRadius="@dimen/view_corner_radius"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/cardV_storeInfo">
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerV_storeFeatures"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="-8dp" />
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
             android:id="@+id/cardV_storeInfo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/view_margin"
             android:layout_marginTop="@dimen/view_margin_half"
             android:layout_marginEnd="@dimen/view_margin"
-            android:clickable="true"
-            android:focusable="true"
-            android:foreground="?android:attr/selectableItemBackgroundBorderless"
+            android:layout_marginBottom="8dp"
             app:cardCornerRadius="@dimen/view_corner_radius"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:paddingTop="100dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?android:attr/selectableItemBackgroundBorderless">
+
+                    <ImageView
+                        android:id="@+id/imageV_featureImage1"
+                        android:layout_width="0dp"
+                        android:layout_height="70dp"
+                        android:adjustViewBounds="true"
+                        android:scaleType="centerInside"
+                        app:imageResource="@{store.storeFeatureImage1}"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:src="@drawable/sample_product_image" />
+
+                    <TextView
+                        android:id="@+id/textV_featurePrice1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="4dp"
+                        android:ellipsize="end"
+                        android:maxLines="2"
+                        android:text="@{store.storeFeatureFormattedPrice1}"
+                        android:textColor="@color/teal"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/imageV_featureImage1"
+                        tools:text="@string/label_product_price" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?android:attr/selectableItemBackgroundBorderless">
+
+                    <ImageView
+                        android:id="@+id/imageV_featureImage2"
+                        android:layout_width="0dp"
+                        android:layout_height="70dp"
+                        android:adjustViewBounds="true"
+                        android:scaleType="centerInside"
+                        app:imageResource="@{store.storeFeatureImage2}"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:src="@drawable/sample_product_image" />
+
+                    <TextView
+                        android:id="@+id/textV_featurePrice2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="4dp"
+                        android:ellipsize="end"
+                        android:maxLines="2"
+                        android:text="@{store.storeFeatureFormattedPrice2}"
+                        android:textColor="@color/teal"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/imageV_featureImage2"
+                        tools:text="@string/label_product_price" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?android:attr/selectableItemBackgroundBorderless">
+
+                    <ImageView
+                        android:id="@+id/imageV_featureImage3"
+                        android:layout_width="0dp"
+                        android:layout_height="70dp"
+                        android:adjustViewBounds="true"
+                        android:scaleType="centerInside"
+                        app:imageResource="@{store.storeFeatureImage3}"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:src="@drawable/sample_product_image" />
+
+                    <TextView
+                        android:id="@+id/textV_featurePrice3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="4dp"
+                        android:ellipsize="end"
+                        android:maxLines="2"
+                        android:text="@{store.storeFeatureFormattedPrice3}"
+                        android:textColor="@color/teal"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/imageV_featureImage3"
+                        tools:text="@string/label_product_price" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?android:attr/selectableItemBackgroundBorderless">
+
+                    <ImageView
+                        android:id="@+id/imageV_featureImage4"
+                        android:layout_width="0dp"
+                        android:layout_height="70dp"
+                        android:adjustViewBounds="true"
+                        android:scaleType="centerInside"
+                        app:imageResource="@{store.storeFeatureImage4}"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:src="@drawable/sample_product_image" />
+
+                    <TextView
+                        android:id="@+id/textV_featurePrice4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="4dp"
+                        android:ellipsize="end"
+                        android:maxLines="2"
+                        android:text="@{store.storeFeatureFormattedPrice4}"
+                        android:textColor="@color/teal"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/imageV_featureImage4"
+                        tools:text="@string/label_product_price" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?android:attr/selectableItemBackgroundBorderless">
+
+                    <ImageView
+                        android:id="@+id/imageV_featureImage5"
+                        android:layout_width="0dp"
+                        android:layout_height="70dp"
+                        android:adjustViewBounds="true"
+                        android:scaleType="centerInside"
+                        app:imageResource="@{store.storeFeatureImage5}"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:src="@drawable/sample_product_image" />
+
+                    <TextView
+                        android:id="@+id/textV_featurePrice5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="4dp"
+                        android:ellipsize="end"
+                        android:maxLines="2"
+                        android:text="@{store.storeFeatureFormattedPrice5}"
+                        android:textColor="@color/teal"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/imageV_featureImage5"
+                        tools:text="@string/label_product_price" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </TableRow>
+
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:attr/selectableItemBackgroundBorderless">
 
                 <ImageView
                     android:id="@+id/imageV_storeImage"
@@ -59,9 +244,9 @@
                     android:layout_height="100dp"
                     android:contentDescription="@string/label_product_name"
                     android:scaleType="centerCrop"
+                    app:imageResource="@{store.storeImage}"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:imageResource="@{store.storeImage}"
                     tools:src="@drawable/sample_store_image" />
 
                 <TextView

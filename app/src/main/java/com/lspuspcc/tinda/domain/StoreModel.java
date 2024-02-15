@@ -1,55 +1,57 @@
 package com.lspuspcc.tinda.domain;
 
-public class StoreModel {
-    private final int mStoreImage;
-    private final String mStoreName;
-    private final String mStoreAddress;
-    private final String mStoreCategory;
-    private int[] mStoreFeatureImages;
-    private float[] mStoreFeaturePrices;
+import java.text.DecimalFormat;
 
-    public StoreModel(int storeImage, String storeName, String storeAddress, String storeCategory) {
-        this.mStoreImage = storeImage;
-        this.mStoreName = storeName;
-        this.mStoreAddress = storeAddress;
-        this.mStoreCategory = storeCategory;
-    }
+public class StoreModel extends StoreVerticalModel {
+    private final int[] mStoreFeatureImages;
+    private final float[] mStoreFeaturePrices;
+    private final DecimalFormat mPeroCurrencyFormat;
 
     public StoreModel(int storeImage, String storeName, String storeAddress, String storeCategory,
                       int[] storeFeatureImages, float[] storeFeaturePrices) {
-        this.mStoreImage = storeImage;
-        this.mStoreName = storeName;
-        this.mStoreAddress = storeAddress;
-        this.mStoreCategory = storeCategory;
+        super(storeImage, storeName, storeAddress, storeCategory);
         this.mStoreFeatureImages = storeFeatureImages;
         this.mStoreFeaturePrices = storeFeaturePrices;
+        this.mPeroCurrencyFormat = new DecimalFormat("₱###,###,###,##0.00");
     }
 
-    /**
-     * Temporary implementation of model for testing purposes
-     */
-
-    public int getStoreImage() {
-        return mStoreImage;
+    public int getStoreFeatureImage1() {
+        return mStoreFeatureImages[0];
     }
 
-    public String getStoreName() {
-        return mStoreName;
+    public String getStoreFeatureFormattedPrice1() {
+        return mPeroCurrencyFormat.format(mStoreFeaturePrices[0]);
     }
 
-    public String getStoreAddress() {
-        return mStoreAddress;
+    public int getStoreFeatureImage2() {
+        return mStoreFeatureImages[1];
     }
 
-    public String getStoreCategory() {
-        return mStoreCategory;
+    public String getStoreFeatureFormattedPrice2() {
+        return mPeroCurrencyFormat.format(mStoreFeaturePrices[1]);
     }
 
-    public int[] getStoreFeatureImages() {
-        return mStoreFeatureImages;
+    public int getStoreFeatureImage3() {
+        return mStoreFeatureImages[2];
     }
 
-    public float[] getStoreFeaturePrices() {
-        return mStoreFeaturePrices;
+    public String getStoreFeatureFormattedPrice3() {
+        return mPeroCurrencyFormat.format(mStoreFeaturePrices[2]);
+    }
+
+    public int getStoreFeatureImage4() {
+        return mStoreFeatureImages[3];
+    }
+
+    public String getStoreFeatureFormattedPrice4() {
+        return mPeroCurrencyFormat.format(mStoreFeaturePrices[3]);
+    }
+
+    public int getStoreFeatureImage5() {
+        return mStoreFeatureImages[4];
+    }
+
+    public String getStoreFeatureFormattedPrice5() {
+        return mPeroCurrencyFormat.format(mStoreFeaturePrices[4]);
     }
 }

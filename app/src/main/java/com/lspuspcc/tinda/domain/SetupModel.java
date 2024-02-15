@@ -1,7 +1,5 @@
 package com.lspuspcc.tinda.domain;
 
-import androidx.lifecycle.MutableLiveData;
-
 import com.lspuspcc.tinda.R;
 
 import java.util.ArrayList;
@@ -23,8 +21,7 @@ public class SetupModel {
         return productModels;
     }
 
-    public ArrayList<StoreModel> setupStoreModel(boolean isFeatureIncluded) {
-        // Temporary implementation for testing purposes
+    public ArrayList<StoreModel> setupStoreModel() {
         ArrayList<StoreModel> storeModels = new ArrayList<>();
 
         int storeImage = R.drawable.sample_store_image;
@@ -35,20 +32,31 @@ public class SetupModel {
         float[] storeFeaturePrices = new float[5];
 
         for (int i = 0; i < 10; i++) {
-            if (isFeatureIncluded) {
-                for (int j = 0; j < 5; j++) {
-                    storeFeatureImages[j] = R.drawable.sample_product_image;
-                    storeFeaturePrices[j] = 169.0f + j;
-                }
+            for (int j = 0; j < 5; j++) {
+                storeFeatureImages[j] = R.drawable.sample_product_image;
+                storeFeaturePrices[j] = 169.0f + j;
+            }
 
-                storeModels.add(new StoreModel(storeImage, storeName, storeAddress, storeCategory,
-                        storeFeatureImages, storeFeaturePrices));
-            }
-            else {
-                storeModels.add(new StoreModel(storeImage, storeName, storeAddress, storeCategory));
-            }
+            storeModels.add(new StoreModel(storeImage, storeName, storeAddress, storeCategory,
+                    storeFeatureImages, storeFeaturePrices));
         }
+
         return storeModels;
+    }
+
+    public ArrayList<StoreVerticalModel> setupStoreVerticalModel() {
+        ArrayList<StoreVerticalModel> storeVerticalModelsModels = new ArrayList<>();
+
+        int storeImage = R.drawable.sample_store_image;
+        String storeName = "Expressions - Ultimart San Pablo";
+        String storeAddress = "San Pablo";
+        String storeCategory = "School/Office Supplies";
+
+        for (int i = 0; i < 10; i++) {
+            storeVerticalModelsModels.add(new StoreVerticalModel(storeImage, storeName, storeAddress, storeCategory));
+        }
+
+        return storeVerticalModelsModels;
     }
 
     public ArrayList<SubCategoryModel> setupSubCategoryModel(int subCategoryIndex) {

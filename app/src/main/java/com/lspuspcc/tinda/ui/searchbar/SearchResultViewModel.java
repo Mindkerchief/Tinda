@@ -20,6 +20,8 @@ import com.lspuspcc.tinda.domain.ProductRecyclerViewAdapter;
 import com.lspuspcc.tinda.domain.SetupModel;
 import com.lspuspcc.tinda.domain.StoreModel;
 import com.lspuspcc.tinda.domain.StoreRecyclerViewAdapter;
+import com.lspuspcc.tinda.domain.StoreVerticalModel;
+import com.lspuspcc.tinda.domain.StoreVerticalRecyclerViewAdapter;
 
 import java.util.ArrayList;
 
@@ -28,10 +30,12 @@ public class SearchResultViewModel implements SearchBarCallback {
     private final ConstraintLayout mConstraintLSearchResults;
     private final NestedScrollView mNestedScrollView;
     private final SetupModel mSetupModel;
+    private StoreVerticalRecyclerViewAdapter mStoreVerticalRVAdapter;
     private StoreRecyclerViewAdapter mStoreRVAdapter;
     private ProductRecyclerViewAdapter mProductRVAdapter;
     private DealRecyclerViewAdapter mDealRVAdapter;
     private ArrayList<ProductModel> mProductResults;
+    private ArrayList<StoreVerticalModel> mStoreVerticalResults;
     private ArrayList<StoreModel> mStoreResults;
     private ArrayList<DealModel> mDealResults;
     private final String mIncludedIn;
@@ -78,15 +82,15 @@ public class SearchResultViewModel implements SearchBarCallback {
         boolean isHomeOrSearch = mIncludedIn.equals("home") | mIncludedIn.equals("search");
 
         if (isHomeOrSearch) {
-            mStoreResults = mSetupModel.setupStoreModel(false);
-            mStoreRVAdapter = new StoreRecyclerViewAdapter(context, mStoreResults, R.layout.card_store_vertical);
+            mStoreVerticalResults = mSetupModel.setupStoreVerticalModel();
+            mStoreVerticalRVAdapter = new StoreVerticalRecyclerViewAdapter(context, mStoreVerticalResults);
             recyclerVStoreResults.setLayoutManager(new LinearLayoutManager(context,
                     LinearLayoutManager.HORIZONTAL, false));
-            recyclerVStoreResults.setAdapter(mStoreRVAdapter);
+            recyclerVStoreResults.setAdapter(mStoreVerticalRVAdapter);
         }
         else if (mIncludedIn.equals("nearby")) {
-            mStoreResults = mSetupModel.setupStoreModel(true);
-            mStoreRVAdapter = new StoreRecyclerViewAdapter(context, mStoreResults, R.layout.card_store);
+            mStoreResults = mSetupModel.setupStoreModel();
+            mStoreRVAdapter = new StoreRecyclerViewAdapter(context, mStoreResults);
             recyclerVStoreResults.setLayoutManager(new LinearLayoutManager(context,
                     LinearLayoutManager.VERTICAL, false));
             recyclerVStoreResults.setAdapter(mStoreRVAdapter);
@@ -115,6 +119,12 @@ public class SearchResultViewModel implements SearchBarCallback {
             if (!mConstraintLSearchResults.isShown())
                 mConstraintLSearchResults.setVisibility(View.VISIBLE);
 
+            // Update Store Results
+            mStoreVerticalRVAdapter.notifyItemRangeRemoved(0, mStoreVerticalResults.size());
+            mStoreVerticalResults = mSetupModel.setupStoreVerticalModel();
+            mStoreVerticalRVAdapter.updateRecyclerVStore(mStoreVerticalResults);
+            mStoreVerticalRVAdapter.notifyItemRangeInserted(0, mStoreVerticalResults.size());
+
             // Update Product Results
             mProductRVAdapter.notifyItemRangeRemoved(0, mProductResults.size());
             mProductResults = mSetupModel.setupProductModel();
@@ -124,7 +134,7 @@ public class SearchResultViewModel implements SearchBarCallback {
         else if (mIncludedIn.equals("nearby")) {
             // Update Store Results
             mStoreRVAdapter.notifyItemRangeRemoved(0, mStoreResults.size());
-            mStoreResults = mSetupModel.setupStoreModel(true);
+            mStoreResults = mSetupModel.setupStoreModel();
             mStoreRVAdapter.updateRecyclerVStore(mStoreResults);
             mStoreRVAdapter.notifyItemRangeInserted(0, mStoreResults.size());
         }
