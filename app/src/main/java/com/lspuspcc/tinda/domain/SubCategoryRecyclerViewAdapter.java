@@ -1,19 +1,16 @@
 package com.lspuspcc.tinda.domain;
 
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.lspuspcc.tinda.R;
+import com.lspuspcc.tinda.databinding.CardSubCategoryBinding;
 
 import java.util.ArrayList;
 
-public class SubCategoryRecyclerViewAdapter extends RecyclerView.Adapter<SubCategoryRecyclerViewAdapter.MyViewHolder> {
+public class SubCategoryRecyclerViewAdapter extends RecyclerView.Adapter<SubCategoryRecyclerViewAdapter.SubCategoryViewHolder> {
     ArrayList<SubCategoryModel> mSubCategoryModels;
 
     public SubCategoryRecyclerViewAdapter(ArrayList<SubCategoryModel> subCategoryModels) {
@@ -22,18 +19,17 @@ public class SubCategoryRecyclerViewAdapter extends RecyclerView.Adapter<SubCate
 
     @NonNull
     @Override
-    public SubCategoryRecyclerViewAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        // Inflate the layout
-        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View view = inflater.inflate(R.layout.card_sub_category, parent, false);
-        return new SubCategoryRecyclerViewAdapter.MyViewHolder(view);
+    public SubCategoryViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
+        CardSubCategoryBinding cardSubCategoryBinding = CardSubCategoryBinding.inflate(layoutInflater, parent, false);
+        return new SubCategoryViewHolder(cardSubCategoryBinding);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull SubCategoryRecyclerViewAdapter.MyViewHolder holder, int position) {
-        // Assign values in the views
-        holder.imageVCategoryImage.setImageResource(mSubCategoryModels.get(position).getSubCategoryImage());
-        holder.textVCategoryName.setText(mSubCategoryModels.get(position).getSubCategoryName());
+    public void onBindViewHolder(@NonNull SubCategoryViewHolder holder, int position) {
+        SubCategoryModel subCategoryModel = mSubCategoryModels.get(position);
+        holder.cardSubCategoryBinding.setSubCategory(subCategoryModel);
+        holder.cardSubCategoryBinding.executePendingBindings();
     }
 
     @Override
@@ -41,20 +37,16 @@ public class SubCategoryRecyclerViewAdapter extends RecyclerView.Adapter<SubCate
         return mSubCategoryModels.size();
     }
 
-    public static class MyViewHolder extends RecyclerView.ViewHolder {
-        // Gets the views from recycler view rows
-        ImageView imageVCategoryImage;
-        TextView textVCategoryName;
-
-        public MyViewHolder(@NonNull View itemView) {
-            super(itemView);
-
-            imageVCategoryImage = itemView.findViewById(R.id.imageV_categoryImage);
-            textVCategoryName = itemView.findViewById(R.id.textV_categoryName);
-        }
-    }
-
     public void updateCategoryModel(ArrayList<SubCategoryModel> subCategoryModels) {
         this.mSubCategoryModels = subCategoryModels;
+    }
+
+    public static class SubCategoryViewHolder extends RecyclerView.ViewHolder {
+        private final CardSubCategoryBinding cardSubCategoryBinding;
+
+        public SubCategoryViewHolder(@NonNull CardSubCategoryBinding cardSubCategoryBinding) {
+            super(cardSubCategoryBinding.getRoot());
+            this.cardSubCategoryBinding = cardSubCategoryBinding;
+        }
     }
 }
