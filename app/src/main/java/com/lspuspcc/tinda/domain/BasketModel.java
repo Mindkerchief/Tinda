@@ -1,27 +1,36 @@
 package com.lspuspcc.tinda.domain;
 
+import androidx.lifecycle.MutableLiveData;
+
+import java.util.Locale;
+
 public class BasketModel {
     private boolean mIsProductSelected;
     private final int mProductImage;
     private final String mProductName;
     private final String mProductStore;
-    private final float mProductPrice;
+    private final Float mProductPrice;
+    private final MutableLiveData<Byte> mProductCount;
     private double mProductTotalPrice;
-    private short mProductCount;
 
-    public BasketModel(boolean isProductSelected, int productImage, String productName, String productStore,
-                       float productPrice, short productCount) {
+    public BasketModel(boolean isProductSelected, int productImage, String productName,
+                       String productStore, float productPrice, byte productCount) {
+        // TODO: Must be always updated from the database
         this.mIsProductSelected = isProductSelected;
         this.mProductImage = productImage;
         this.mProductName = productName;
         this.mProductStore = productStore;
         this.mProductPrice = productPrice;
-        this.mProductTotalPrice = productPrice;
-        this.mProductCount = productCount;
+        this.mProductCount = new MutableLiveData<>(productCount);
+        this.mProductTotalPrice = mProductPrice * productCount;
     }
 
     public boolean getIsProductSelected() {
         return mIsProductSelected;
+    }
+
+    public void setIsProductSelected(boolean isProductSelected) {
+        this.mIsProductSelected = isProductSelected;
     }
 
     public int getProductImage() {
@@ -40,20 +49,22 @@ public class BasketModel {
         return mProductPrice;
     }
 
+    public MutableLiveData<Byte> getProductCount() {
+        return mProductCount;
+    }
+
     public double getProductTotalPrice() {
         return mProductTotalPrice;
     }
 
-    public short getProductCount() {
-        return mProductCount;
+    public String getFormattedProductPrice() {
+        return String.format(Locale.ENGLISH, "₱%.2f", mProductPrice);
     }
 
-    public void setIsProductSelected(boolean isProductSelected) {
-        this.mIsProductSelected = isProductSelected;
-    }
+    public void updateCount(int countToToAdd) {
+        byte newProductCount = (byte) (mProductCount.getValue() + countToToAdd);
 
-    public void setProductCount(short productCount) {
-        this.mProductTotalPrice = mProductPrice * productCount;
-        this.mProductCount = productCount;
+        mProductCount.setValue(newProductCount);
+        mProductTotalPrice = mProductPrice * newProductCount;
     }
 }

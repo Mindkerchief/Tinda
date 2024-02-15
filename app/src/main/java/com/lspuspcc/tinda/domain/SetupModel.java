@@ -1,5 +1,7 @@
 package com.lspuspcc.tinda.domain;
 
+import androidx.lifecycle.MutableLiveData;
+
 import com.lspuspcc.tinda.R;
 
 import java.util.ArrayList;
@@ -36,7 +38,7 @@ public class SetupModel {
             if (isFeatureIncluded) {
                 for (int j = 0; j < 5; j++) {
                     storeFeatureImages[j] = R.drawable.sample_product_image;
-                    storeFeaturePrices[j] = 169.0f;
+                    storeFeaturePrices[j] = 169.0f + j;
                 }
 
                 storeModels.add(new StoreModel(storeImage, storeName, storeAddress, storeCategory,
@@ -82,6 +84,7 @@ public class SetupModel {
         float dealPrice = 169.00f;
 
         for (int i = 0; i < 10; i++) {
+            dealPrice += 10;
             dealModels.add(new DealModel(dealImage, dealProduct, dealAddress, dealPrice));
         }
         return dealModels;
@@ -94,11 +97,12 @@ public class SetupModel {
         int productImage = R.drawable.sample_product_image;
         String productName = "KARSON Scientific Calculator Multiple Modes Intuitive Interface";
         String productStore = "Expression - San Pablo";
-        float productPrice = 169.00f;
-        short productCount = 1;
+        float productPrice = 169.69f;
 
         for (int i = 0; i < 5; i++) {
-            dealModels.add(new BasketModel(isProductSelected, productImage, productName, productStore, productPrice, productCount));
+            productPrice += 10;
+            dealModels.add(new BasketModel(isProductSelected, productImage, productName, productStore,
+                    productPrice, (byte) (i + 1)));
         }
         return dealModels;
     }
