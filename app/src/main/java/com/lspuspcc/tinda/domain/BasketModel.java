@@ -3,6 +3,7 @@ package com.lspuspcc.tinda.domain;
 import androidx.lifecycle.MutableLiveData;
 
 import java.util.Locale;
+import java.util.Objects;
 
 public class BasketModel {
     private boolean mIsProductSelected;
@@ -62,9 +63,9 @@ public class BasketModel {
     }
 
     public void updateCount(int countToToAdd) {
-        byte newProductCount = (byte) (mProductCount.getValue() + countToToAdd);
+        byte newProductCount = (byte) (Objects.requireNonNull(mProductCount.getValue()) + countToToAdd);
 
-        mProductCount.setValue(newProductCount);
+        mProductCount.postValue(newProductCount);
         mProductTotalPrice = mProductPrice * newProductCount;
     }
 }
