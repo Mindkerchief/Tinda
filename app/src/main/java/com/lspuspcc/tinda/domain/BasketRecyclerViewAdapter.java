@@ -4,7 +4,6 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.ImageButton;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LifecycleOwner;
@@ -18,7 +17,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Objects;
 
-public class BasketRecyclerViewAdapter extends RecyclerView.Adapter<BasketRecyclerViewAdapter.BasketViewModel> {
+public class BasketRecyclerViewAdapter extends RecyclerView.Adapter<BasketRecyclerViewAdapter.BasketViewHolder> {
     private final LifecycleOwner mBasketLifecycle;
     private final ArrayList<BasketModel> mBasketModels;
     private final MutableLiveData<HashSet<BasketModel>> mSelectedItems;
@@ -34,14 +33,14 @@ public class BasketRecyclerViewAdapter extends RecyclerView.Adapter<BasketRecycl
 
     @NonNull
     @Override
-    public BasketViewModel onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public BasketViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         CardBasketItemBinding cardBasketProductBinding = CardBasketItemBinding.inflate(layoutInflater, parent, false);
-        return new BasketViewModel(cardBasketProductBinding);
+        return new BasketViewHolder(cardBasketProductBinding);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull BasketViewModel holder, int position) {
+    public void onBindViewHolder(@NonNull BasketViewHolder holder, int position) {
         BasketModel basketModel = mBasketModels.get(position);
         holder.mCardBasketProductBinding.setItem(basketModel);
         holder.mCardBasketProductBinding.executePendingBindings();
@@ -96,29 +95,23 @@ public class BasketRecyclerViewAdapter extends RecyclerView.Adapter<BasketRecycl
         return mBasketModels.size();
     }
 
-    public static class BasketViewModel extends RecyclerView.ViewHolder {
-        CardBasketItemBinding mCardBasketProductBinding;
-        CheckBox mCheckBoxProductSelection;
-        ImageButton mBtnDeleteOnBasket;
-        private final ImageButton mBtnAddItem;
-        private final ImageButton mBtnSubtractItem;
-        private final TextView mTextVProductCount;
+    public static class BasketViewHolder extends RecyclerView.ViewHolder {
+        private final CardBasketItemBinding mCardBasketProductBinding;
+        private final CheckBox mCheckBoxProductSelection;
+        private final ImageButton mBtnDeleteOnBasket;
 
-        public BasketViewModel(@NonNull CardBasketItemBinding cardBasketProductBinding) {
+        public BasketViewHolder(@NonNull CardBasketItemBinding cardBasketProductBinding) {
             super(cardBasketProductBinding.getRoot());
             mCardBasketProductBinding = cardBasketProductBinding;
             mCheckBoxProductSelection = cardBasketProductBinding.checkBoxProductSelection;
             mBtnDeleteOnBasket = cardBasketProductBinding.btnDeleteOnBasket;
-            mBtnAddItem = cardBasketProductBinding.btnAddItem;
-            mBtnSubtractItem = cardBasketProductBinding.btnSubtractItem;
-            mTextVProductCount = cardBasketProductBinding.textVProductCount;
         }
 
         public void updateProductCount(byte newProductCount) {
-            mTextVProductCount.setText(String.valueOf(newProductCount));
             // Limit product count to 1-99
-            mBtnAddItem.setEnabled(newProductCount < 99);
-            mBtnSubtractItem.setEnabled(newProductCount > 1);
+            mCardBasketProductBinding.textVProductCount.setText(String.valueOf(newProductCount));
+            mCardBasketProductBinding.btnAddItem.setEnabled(newProductCount < 99);
+            mCardBasketProductBinding.btnSubtractItem.setEnabled(newProductCount > 1);
         }
     }
 }
