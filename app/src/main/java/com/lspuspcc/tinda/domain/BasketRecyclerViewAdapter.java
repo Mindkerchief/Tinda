@@ -16,6 +16,7 @@ import com.lspuspcc.tinda.ui.basket.BasketFragment;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Objects;
 
 public class BasketRecyclerViewAdapter extends RecyclerView.Adapter<BasketRecyclerViewAdapter.BasketViewModel> {
     private final LifecycleOwner mBasketLifecycle;
@@ -49,7 +50,7 @@ public class BasketRecyclerViewAdapter extends RecyclerView.Adapter<BasketRecycl
         basketModel.getProductCount().observe(mBasketLifecycle, aByte -> {
             // Changes in productCount happens inside the model
             if (!mFirstLoad) {
-                holder.updateProductCount(basketModel.getProductCount().getValue());
+                holder.updateProductCount(Objects.requireNonNull(basketModel.getProductCount().getValue()));
 
                 if (basketModel.getIsProductSelected())
                     mSelectedItems.setValue(mSelectedItems.getValue());
@@ -58,7 +59,7 @@ public class BasketRecyclerViewAdapter extends RecyclerView.Adapter<BasketRecycl
 
         holder.mCheckBoxProductSelection.setOnCheckedChangeListener((buttonView, isChecked) -> {
             basketModel.setIsProductSelected(isChecked);
-            HashSet<BasketModel> newSelectedItems = mSelectedItems.getValue();
+            HashSet<BasketModel> newSelectedItems = Objects.requireNonNull(mSelectedItems.getValue());
             // Add or remove model
             if (isChecked)
                 newSelectedItems.add(basketModel);
@@ -80,7 +81,7 @@ public class BasketRecyclerViewAdapter extends RecyclerView.Adapter<BasketRecycl
 
         if (mFirstLoad) {
             if (basketModel.getIsProductSelected())
-                mSelectedItems.getValue().add(basketModel);
+                Objects.requireNonNull(mSelectedItems.getValue()).add(basketModel);
 
             // Update product count and total price if this is the last position
             if (position == mBasketModels.size() - 1) {

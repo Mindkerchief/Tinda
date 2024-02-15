@@ -20,15 +20,14 @@ import com.lspuspcc.tinda.domain.BasketModel;
 import com.lspuspcc.tinda.domain.BasketRecyclerViewAdapter;
 import com.lspuspcc.tinda.domain.SetupModel;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.Locale;
+import java.util.Objects;
 
 public class BasketFragment extends Fragment {
     private FragmentBasketBinding mBasketBinding;
     private TextView mTextVItemCount, mTextVSubTotalAmount;
-    private BasketRecyclerViewAdapter mBasketRVAdapter;
-    private ArrayList<BasketModel> mBasketModels;
     private MutableLiveData<HashSet<BasketModel>> mSelectedItems;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -45,15 +44,16 @@ public class BasketFragment extends Fragment {
         mTextVItemCount = mBasketBinding.textVItemCount;
         mTextVSubTotalAmount = mBasketBinding.textVSubTotalAmount;
 
-        mBasketModels = new SetupModel().setupBasketModel();
+        ArrayList<BasketModel> basketModels = new SetupModel().setupBasketModel();
         mSelectedItems = new MutableLiveData<>(new HashSet<>());
-        mBasketRVAdapter = new BasketRecyclerViewAdapter(this, mBasketModels, mSelectedItems);
+        BasketRecyclerViewAdapter basketRVAdapter = new BasketRecyclerViewAdapter(this,
+                basketModels, mSelectedItems);
         RecyclerView recyclerVBasketItems = mBasketBinding.recyclerVBasketItems;
         recyclerVBasketItems.setLayoutManager(new LinearLayoutManager(getContext(),
                 LinearLayoutManager.VERTICAL, false));
-        recyclerVBasketItems.setAdapter(mBasketRVAdapter);
+        recyclerVBasketItems.setAdapter(basketRVAdapter);
 
-        mSelectedItems.observe(getViewLifecycleOwner(), basketModels -> setCountAndSubTotal());
+        mSelectedItems.observe(getViewLifecycleOwner(), basketModel -> setCountAndSubTotal());
     }
 
     @Override
@@ -63,15 +63,16 @@ public class BasketFragment extends Fragment {
     }
 
     public void setCountAndSubTotal() {
+        // Recompute Subtotal and count every changes using observer
         double newSubTotalAmount = 0d;
         int newItemCount = 0;
 
-        for (BasketModel basketModel : mSelectedItems.getValue()) {
+        for (BasketModel basketModel : Objects.requireNonNull(mSelectedItems.getValue())) {
             newSubTotalAmount += basketModel.getProductTotalPrice();
-            newItemCount += basketModel.getProductCount().getValue();
+            newItemCount += Objects.requireNonNull(basketModel.getProductCount().getValue());
         }
 
-        String newSubTotal = String.format(Locale.ENGLISH, "₱%.2f", newSubTotalAmount);
+        String newSubTotal = new DecimalFormat("₱###,###,###,##0.00").format(newSubTotalAmount);
         mTextVItemCount.setText(String.valueOf(newItemCount));
         mTextVSubTotalAmount.setText(newSubTotal);
     }
