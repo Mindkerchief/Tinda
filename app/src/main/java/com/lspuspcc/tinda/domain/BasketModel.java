@@ -2,6 +2,7 @@ package com.lspuspcc.tinda.domain;
 
 import androidx.lifecycle.MutableLiveData;
 
+import java.text.DecimalFormat;
 import java.util.Locale;
 import java.util.Objects;
 
@@ -59,7 +60,7 @@ public class BasketModel {
     }
 
     public String getFormattedProductPrice() {
-        return String.format(Locale.ENGLISH, "₱%.2f", mProductPrice);
+        return new DecimalFormat("₱###,###,###,##0.00").format(mProductPrice);
     }
 
     public void updateCount(int countToToAdd) {
