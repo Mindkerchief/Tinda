@@ -9,6 +9,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -20,12 +21,15 @@ import com.lspuspcc.tinda.domain.BasketRecyclerViewAdapter;
 import com.lspuspcc.tinda.domain.SetupModel;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Locale;
 
-public class BasketFragment extends Fragment implements BasketCallBack {
+public class BasketFragment extends Fragment {
     private FragmentBasketBinding mBasketBinding;
     private TextView mTextVItemCount, mTextVSubTotalAmount;
     private BasketRecyclerViewAdapter mBasketRVAdapter;
     private ArrayList<BasketModel> mBasketModels;
+    private MutableLiveData<HashSet<BasketModel>> mSelectedItems;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -38,16 +42,18 @@ public class BasketFragment extends Fragment implements BasketCallBack {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         TabLayout tabLayout = mBasketBinding.tabLBasketSection;
-        RecyclerView recyclerVBasketItems = mBasketBinding.recyclerVBasketItems;
         mTextVItemCount = mBasketBinding.textVItemCount;
         mTextVSubTotalAmount = mBasketBinding.textVSubTotalAmount;
-        SetupModel setupModel = new SetupModel();
 
-        mBasketModels = setupModel.setupBasketModel();
-        mBasketRVAdapter = new BasketRecyclerViewAdapter(this, mBasketModels);
+        mBasketModels = new SetupModel().setupBasketModel();
+        mSelectedItems = new MutableLiveData<>(new HashSet<>());
+        mBasketRVAdapter = new BasketRecyclerViewAdapter(this, mBasketModels, mSelectedItems);
+        RecyclerView recyclerVBasketItems = mBasketBinding.recyclerVBasketItems;
         recyclerVBasketItems.setLayoutManager(new LinearLayoutManager(getContext(),
                 LinearLayoutManager.VERTICAL, false));
         recyclerVBasketItems.setAdapter(mBasketRVAdapter);
+
+        mSelectedItems.observe(getViewLifecycleOwner(), basketModels -> setCountAndSubTotal());
     }
 
     @Override
@@ -56,18 +62,17 @@ public class BasketFragment extends Fragment implements BasketCallBack {
         mBasketBinding = null;
     }
 
-    @Override
-    public void setCountAndSubTotal(boolean isChecked, double itemPrice, short itemCount) {
-        // Make price and count negative to subtract instead if item is unchecked
-        if (!isChecked) {
-            itemPrice *= -1;
-            itemCount *= -1;
+    public void setCountAndSubTotal() {
+        double newSubTotalAmount = 0d;
+        int newItemCount = 0;
+
+        for (BasketModel basketModel : mSelectedItems.getValue()) {
+            newSubTotalAmount += basketModel.getProductTotalPrice();
+            newItemCount += basketModel.getProductCount().getValue();
         }
 
-        // Set price and count new value
-        String newSubTotalAmount = "₱" + (Double.parseDouble(mTextVSubTotalAmount.getText()
-                .toString().substring(1)) + itemPrice);
-        mTextVItemCount.setText(String.valueOf(Integer.parseInt(mTextVItemCount.getText().toString()) + itemCount));
-        mTextVSubTotalAmount.setText(newSubTotalAmount);
+        String newSubTotal = String.format(Locale.ENGLISH, "₱%.2f", newSubTotalAmount);
+        mTextVItemCount.setText(String.valueOf(newItemCount));
+        mTextVSubTotalAmount.setText(newSubTotal);
     }
 }
