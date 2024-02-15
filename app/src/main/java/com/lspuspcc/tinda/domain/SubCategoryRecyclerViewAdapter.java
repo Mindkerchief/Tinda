@@ -28,8 +28,8 @@ public class SubCategoryRecyclerViewAdapter extends RecyclerView.Adapter<SubCate
     @Override
     public void onBindViewHolder(@NonNull SubCategoryViewHolder holder, int position) {
         SubCategoryModel subCategoryModel = mSubCategoryModels.get(position);
-        holder.cardSubCategoryBinding.setSubCategory(subCategoryModel);
-        holder.cardSubCategoryBinding.executePendingBindings();
+        holder.mCardSubCategoryBinding.setSubCategory(subCategoryModel);
+        holder.mCardSubCategoryBinding.executePendingBindings();
     }
 
     @Override
@@ -42,11 +42,11 @@ public class SubCategoryRecyclerViewAdapter extends RecyclerView.Adapter<SubCate
     }
 
     public static class SubCategoryViewHolder extends RecyclerView.ViewHolder {
-        private final CardSubCategoryBinding cardSubCategoryBinding;
+        private final CardSubCategoryBinding mCardSubCategoryBinding;
 
         public SubCategoryViewHolder(@NonNull CardSubCategoryBinding cardSubCategoryBinding) {
             super(cardSubCategoryBinding.getRoot());
-            this.cardSubCategoryBinding = cardSubCategoryBinding;
+            this.mCardSubCategoryBinding = cardSubCategoryBinding;
         }
     }
 }

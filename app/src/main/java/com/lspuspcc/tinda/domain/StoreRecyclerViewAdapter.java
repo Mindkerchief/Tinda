@@ -2,20 +2,19 @@ package com.lspuspcc.tinda.domain;
 
 import android.content.Context;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.lspuspcc.tinda.R;
+import com.lspuspcc.tinda.databinding.CardStoreBinding;
+import com.lspuspcc.tinda.databinding.CardStoreVerticalBinding;
 
 import java.util.ArrayList;
 
-public class StoreRecyclerViewAdapter extends RecyclerView.Adapter<StoreRecyclerViewAdapter.MyViewHolder> {
+public class StoreRecyclerViewAdapter extends RecyclerView.Adapter<StoreRecyclerViewAdapter.StoreViewHolder> {
     private final Context mContext;
     private ArrayList<StoreModel> mStoreModels;
     private final int mStoreLayout;
@@ -28,54 +27,62 @@ public class StoreRecyclerViewAdapter extends RecyclerView.Adapter<StoreRecycler
 
     @NonNull
     @Override
-    public StoreRecyclerViewAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        // Inflate the layout
-        LayoutInflater inflater = LayoutInflater.from(mContext);
-        View view = inflater.inflate(mStoreLayout, parent, false);
-        return new StoreRecyclerViewAdapter.MyViewHolder(view);
+    public StoreViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        LayoutInflater layoutInflater = LayoutInflater.from(mContext);
+
+        if (mStoreLayout == R.layout.card_store) {
+            CardStoreBinding cardStoreBinding = CardStoreBinding.inflate(layoutInflater, parent, false);
+            return new StoreViewHolder(cardStoreBinding);
+        }
+        else {
+            CardStoreVerticalBinding cardStoreVerticalBinding = CardStoreVerticalBinding.inflate(layoutInflater, parent, false);
+            return new StoreViewHolder(cardStoreVerticalBinding);
+        }
     }
 
     @Override
-    public void onBindViewHolder(@NonNull StoreRecyclerViewAdapter.MyViewHolder holder, int position) {
-        // Assign values in the views
-        holder.imageVStoreImage.setImageResource(mStoreModels.get(position).getStoreImage());
-        holder.textVStoreName.setText(mStoreModels.get(position).getStoreName());
-        holder.textVStoreAddress.setText(mStoreModels.get(position).getStoreAddress());
-        holder.textVStoreCategory.setText(mStoreModels.get(position).getStoreCategory());
+    public void onBindViewHolder(@NonNull StoreViewHolder holder, int position) {
+        StoreModel storeModel = mStoreModels.get(position);
 
-        // Setup Store Features if exists
         if (mStoreLayout == R.layout.card_store) {
+            holder.mCardStoreBinding.setStore(storeModel);
+            holder.mCardStoreBinding.executePendingBindings();
+
             StoreFeaturesRecyclerViewAdapter storeFeaturesRVAdapter = new StoreFeaturesRecyclerViewAdapter(
                     mStoreModels.get(position).getStoreFeatureImages(), mStoreModels.get(position).getStoreFeaturePrices());
-            holder.recyclerVStoreFeatures.setLayoutManager(new LinearLayoutManager(mContext,
+            holder.mRecyclerVStoreFeatures.setLayoutManager(new LinearLayoutManager(mContext,
                     LinearLayoutManager.HORIZONTAL, false));
-            holder.recyclerVStoreFeatures.setAdapter(storeFeaturesRVAdapter);
+            holder.mRecyclerVStoreFeatures.setAdapter(storeFeaturesRVAdapter);
+        }
+        else {
+            holder.mCardStoreVerticalBinding.setStore(storeModel);
+            holder.mCardStoreVerticalBinding.executePendingBindings();
         }
     }
 
     @Override
     public int getItemCount() {
-        // Counts the number of items to be displayed
         return mStoreModels.size();
-    }
-
-    public static class MyViewHolder extends RecyclerView.ViewHolder {
-        // Gets the views from recycler view rows
-        ImageView imageVStoreImage;
-        TextView textVStoreName, textVStoreAddress, textVStoreCategory;
-        RecyclerView recyclerVStoreFeatures;
-        public MyViewHolder(@NonNull View itemView) {
-            super(itemView);
-
-            imageVStoreImage = itemView.findViewById(R.id.imageV_storeImage);
-            textVStoreName = itemView.findViewById(R.id.textV_storeName);
-            textVStoreAddress = itemView.findViewById(R.id.textV_storeAddress);
-            textVStoreCategory = itemView.findViewById(R.id.textV_storeCategory);
-            recyclerVStoreFeatures = itemView.findViewById(R.id.recyclerV_storeFeatures);
-        }
     }
 
     public void updateRecyclerVStore(ArrayList<StoreModel> storeResults) {
         this.mStoreModels = storeResults;
+    }
+
+    public static class StoreViewHolder extends RecyclerView.ViewHolder {
+        private CardStoreBinding mCardStoreBinding;
+        private CardStoreVerticalBinding mCardStoreVerticalBinding;
+        private RecyclerView mRecyclerVStoreFeatures;
+
+        public StoreViewHolder(@NonNull CardStoreBinding cardStoreBinding) {
+            super(cardStoreBinding.getRoot());
+            this.mCardStoreBinding = cardStoreBinding;
+            this.mRecyclerVStoreFeatures = cardStoreBinding.recyclerVStoreFeatures;
+        }
+
+        public StoreViewHolder(@NonNull CardStoreVerticalBinding cardStoreVerticalBinding) {
+            super(cardStoreVerticalBinding.getRoot());
+            this.mCardStoreVerticalBinding = cardStoreVerticalBinding;
+        }
     }
 }
