@@ -40,5 +40,7 @@
     <string name="label_store_address">San Pablo</string>
     <string name="label_search_category">Electronics</string>
     <string name="label_product_count">1</string>
+    <string name="label_deal_title">KARSON Scientific Calculator</string>
+    <string name="label_deal_description">For Sale! Original item. Bought last january but not being used.</string>
     <string name="label_reserve_button">RESERVE</string>
 </resources>

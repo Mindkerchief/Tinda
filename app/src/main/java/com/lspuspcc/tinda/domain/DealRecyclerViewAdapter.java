@@ -1,10 +1,9 @@
 package com.lspuspcc.tinda.domain;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -35,7 +34,7 @@ public class DealRecyclerViewAdapter extends RecyclerView.Adapter<DealRecyclerVi
     public void onBindViewHolder(@NonNull DealRecyclerViewAdapter.MyViewHolder holder, int position) {
         holder.imageVDealImage.setImageResource(mDealModels.get(position).getDealImage());
         holder.textVDealProduct.setText(mDealModels.get(position).getDealProduct());
-        holder.textVDealAddress.setText(mDealModels.get(position).getDealAddress());
+        holder.textVDealAddress.setText(mDealModels.get(position).getDealDescription());
 
         String dealPrice = "P" + String.format(Locale.ENGLISH, "%.2f", mDealModels.get(position).getDealPrice());
         holder.textVDealPrice.setText(dealPrice);
@@ -53,14 +52,14 @@ public class DealRecyclerViewAdapter extends RecyclerView.Adapter<DealRecyclerVi
     public static class MyViewHolder extends RecyclerView.ViewHolder {
         ImageView imageVDealImage;
         TextView textVDealProduct, textVDealAddress, textVDealPrice;
-        Button btnDealMessage;
+        ImageButton btnDealMessage;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
 
             imageVDealImage = itemView.findViewById(R.id.imageV_dealImage);
             textVDealProduct = itemView.findViewById(R.id.textV_dealProduct);
-            textVDealAddress = itemView.findViewById(R.id.textV_dealAddress);
+            textVDealAddress = itemView.findViewById(R.id.textV_dealDescription);
             textVDealPrice = itemView.findViewById(R.id.textV_dealPrice);
             btnDealMessage = itemView.findViewById(R.id.btn_dealMessage);
         }

@@ -21,14 +21,12 @@ public class BasketRecyclerViewAdapter extends RecyclerView.Adapter<BasketRecycl
     private final LifecycleOwner mBasketLifecycle;
     private final ArrayList<BasketModel> mBasketModels;
     private final MutableLiveData<HashSet<BasketModel>> mSelectedItems;
-    private boolean mFirstLoad;
 
     public BasketRecyclerViewAdapter(BasketFragment basketFragment, ArrayList<BasketModel> basketModels,
                                      MutableLiveData<HashSet<BasketModel>> selectedItems) {
         this.mBasketLifecycle = basketFragment;
         this.mBasketModels = basketModels;
         this.mSelectedItems = selectedItems;
-        this.mFirstLoad = true;
     }
 
     @NonNull
@@ -42,18 +40,14 @@ public class BasketRecyclerViewAdapter extends RecyclerView.Adapter<BasketRecycl
     @Override
     public void onBindViewHolder(@NonNull BasketViewHolder holder, int position) {
         BasketModel basketModel = mBasketModels.get(position);
-        holder.mCardBasketProductBinding.setItem(basketModel);
-        holder.mCardBasketProductBinding.executePendingBindings();
 
         // Handle views events
         basketModel.getProductCount().observe(mBasketLifecycle, aByte -> {
             // Changes in productCount happens inside the model
-            if (!mFirstLoad) {
-                holder.updateProductCount(Objects.requireNonNull(basketModel.getProductCount().getValue()));
+            holder.updateProductCount(Objects.requireNonNull(basketModel.getProductCount().getValue()));
 
-                if (basketModel.getIsProductSelected())
-                    mSelectedItems.setValue(mSelectedItems.getValue());
-            }
+            if (basketModel.getIsProductSelected())
+                mSelectedItems.setValue(mSelectedItems.getValue());
         });
 
         holder.mCheckBoxProductSelection.setOnCheckedChangeListener((buttonView, isChecked) -> {
@@ -78,16 +72,9 @@ public class BasketRecyclerViewAdapter extends RecyclerView.Adapter<BasketRecycl
             notifyItemRangeChanged(position, mBasketModels.size() - position, 1);
         });
 
-        if (mFirstLoad) {
-            if (basketModel.getIsProductSelected())
-                Objects.requireNonNull(mSelectedItems.getValue()).add(basketModel);
-
-            // Update product count and total price if this is the last position
-            if (position == mBasketModels.size() - 1) {
-                mFirstLoad = false;
-                mSelectedItems.setValue(mSelectedItems.getValue());
-            }
-        }
+        // Let all event listener and observer to initialized before setting the model
+        holder.mCardBasketProductBinding.setItem(basketModel);
+        holder.mCardBasketProductBinding.executePendingBindings();
     }
 
     @Override

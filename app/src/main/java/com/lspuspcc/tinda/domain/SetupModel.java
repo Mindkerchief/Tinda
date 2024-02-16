@@ -87,27 +87,28 @@ public class SetupModel {
         ArrayList<DealModel> dealModels = new ArrayList<>();
 
         int dealImage = R.drawable.sample_product_image;
-        String dealProduct = "KARSON Scientific Calculator Multiple Modes Intuitive Interface";
-        String dealAddress = "San Pablo";
+        String dealProduct = "KARSON Scientific Calculator";
+        String dealDescription = "For Sale! Original item. Bought last january but not being used";
         float dealPrice = 169.00f;
 
         for (int i = 0; i < 10; i++) {
             dealPrice += 10;
-            dealModels.add(new DealModel(dealImage, dealProduct, dealAddress, dealPrice));
+            dealModels.add(new DealModel(dealImage, dealProduct, dealPrice, dealDescription));
         }
+
         return dealModels;
     }
 
     public ArrayList<BasketModel> setupBasketModel() {
         ArrayList<BasketModel> dealModels = new ArrayList<>();
 
-        boolean isProductSelected = false;
+        boolean isProductSelected = true;
         int productImage = R.drawable.sample_product_image;
         String productName = "KARSON Scientific Calculator Multiple Modes Intuitive Interface";
         String productStore = "Expression - San Pablo";
         float productPrice = 169.69f;
 
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 6; i++) {
             productPrice += 10;
             dealModels.add(new BasketModel(isProductSelected, productImage, productName, productStore,
                     productPrice, (byte) (i + 1)));

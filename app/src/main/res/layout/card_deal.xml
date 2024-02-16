@@ -26,15 +26,42 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <ImageButton
+                android:id="@+id/btn_dealMessage"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:background="@color/transparent"
+                android:clickable="true"
+                android:foreground="?android:attr/selectableItemBackgroundBorderless"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:srcCompat="@drawable/baseline_chat_24"
+                app:tint="@color/teal" />
+
+            <TextView
+                android:id="@+id/textV_dealDescription"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/view_margin_half"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"
+                android:ellipsize="end"
+                android:labelFor="@id/imageV_dealImage"
+                android:maxLines="2"
+                android:text="@string/label_deal_description"
+                android:textColor="@color/dark"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="@+id/imageV_dealImage"
+                app:layout_constraintEnd_toStartOf="@+id/btn_dealMessage"
+                app:layout_constraintStart_toEndOf="@+id/imageV_dealImage"
+                app:layout_constraintTop_toBottomOf="@+id/textV_dealPrice" />
+
             <TextView
                 android:id="@+id/textV_dealPrice"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/view_margin_half"
                 android:layout_marginStart="@dimen/view_margin_half"
                 android:layout_marginTop="4dp"
-                android:layout_marginEnd="@dimen/view_margin_half"
-                android:layout_marginBottom="@dimen/view_margin_half"
                 android:ellipsize="end"
                 android:labelFor="@id/imageV_dealImage"
                 android:maxLines="1"
@@ -42,27 +69,6 @@
                 android:textColor="@color/teal"
                 android:textSize="12sp"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/btn_dealMessage"
-                app:layout_constraintStart_toEndOf="@+id/imageV_dealImage"
-                app:layout_constraintTop_toBottomOf="@+id/textV_dealAddress"
-                app:layout_constraintVertical_bias="0.0" />
-
-            <TextView
-                android:id="@+id/textV_dealAddress"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/view_margin_half"
-                android:layout_marginStart="@dimen/view_margin_half"
-                android:layout_marginTop="4dp"
-                android:layout_marginEnd="@dimen/view_margin_half"
-                android:ellipsize="end"
-                android:labelFor="@id/imageV_dealImage"
-                android:maxLines="1"
-                android:text="@string/label_store_address"
-                android:textColor="@color/dark"
-                android:textSize="12sp"
-                app:layout_constraintEnd_toStartOf="@+id/btn_dealMessage"
                 app:layout_constraintStart_toEndOf="@+id/imageV_dealImage"
                 app:layout_constraintTop_toBottomOf="@+id/textV_dealProduct" />
 
@@ -76,7 +82,7 @@
                 android:ellipsize="end"
                 android:labelFor="@id/imageV_dealImage"
                 android:maxLines="2"
-                android:text="@string/label_product_name"
+                android:text="@string/label_deal_title"
                 android:textColor="@color/dark"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -92,18 +98,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/sample_product_image" />
-
-            <Button
-                android:id="@+id/btn_dealMessage"
-                android:layout_width="40dp"
-                android:layout_height="45dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginBottom="2dp"
-                app:icon="@drawable/baseline_chat_24"
-                app:iconGravity="top"
-                app:iconSize="24dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>

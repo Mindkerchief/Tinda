@@ -145,23 +145,29 @@
 
             <ImageButton
                 android:id="@+id/btn_deleteOnBasket"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginBottom="8dp"
                 android:background="@color/transparent"
                 android:backgroundTint="@color/light"
+                android:clickable="true"
+                android:foreground="?android:attr/selectableItemBackgroundBorderless"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:srcCompat="@drawable/ic_delete"
-                app:tint="@color/dark" />
+                app:tint="@color/red" />
 
             <CheckBox
                 android:id="@+id/checkBox_productSelection"
-                android:layout_width="45dp"
-                android:layout_height="45dp"
-                android:buttonTint="@color/dark"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:buttonTint="@color/teal"
                 android:checked="@{item.isProductSelected}"
+                android:clickable="true"
+                android:foreground="?android:attr/selectableItemBackgroundBorderless"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:useMaterialThemeColors="false" />
