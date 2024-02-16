@@ -1,10 +1,13 @@
 package com.lspuspcc.tinda.ui.searchbar;
 
+import android.content.res.ColorStateList;
 import android.transition.AutoTransition;
 import android.transition.TransitionManager;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.SearchView;
+import android.widget.TextView;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -67,7 +70,8 @@ public class SearchBarViewModel {
         if (mIncludedIn.equals("search")) {
             mSubCategoryModels = mSetupModel.setupSubCategoryModel(0);
             mSubCategoryRVAdapter = new SubCategoryRecyclerViewAdapter(mSubCategoryModels);
-            recyclerVSubCategory.setLayoutManager(new GridLayoutManager(searchBarBinding.btnSearchCategory.getContext(), 4));
+            recyclerVSubCategory.setLayoutManager(new GridLayoutManager(
+                    searchBarBinding.btnSearchCategory.getContext(), 4));
             recyclerVSubCategory.setAdapter(mSubCategoryRVAdapter);
             recyclerVSubCategory.setVisibility(View.VISIBLE);
 
@@ -101,6 +105,9 @@ public class SearchBarViewModel {
         tabLSearchCategory.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
+                changeTabColor(Objects.requireNonNull(tab.getCustomView()).findViewById(
+                        R.id.imageV_searchCategory), -15222408);
+
                 switch (mIncludedIn) {
                     case "search":
                         updateSubCategory(Byte.parseByte(Objects.requireNonNull(tab.getTag()).toString()));
@@ -114,13 +121,12 @@ public class SearchBarViewModel {
 
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
-
+                changeTabColor(Objects.requireNonNull(tab.getCustomView()).findViewById(
+                        R.id.imageV_searchCategory), -10066330);
             }
 
             @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-
-            }
+            public void onTabReselected(TabLayout.Tab tab) {}
         });
     }
 
@@ -139,15 +145,29 @@ public class SearchBarViewModel {
                 break;
         }
 
-        if (categoryNames != null) {
-            for (int i = 0; i < 10; i++) {
-                TabLayout.Tab newTab = tabLSearchCategory.newTab();
-                newTab.setIcon(R.drawable.ic_basket);
-                newTab.setText(categoryNames[i]);
-                newTab.setTag(i);
-                tabLSearchCategory.addTab(newTab);
+        for (int i = 0; i < categoryNames.length; i++) {
+            TabLayout.Tab newTab = tabLSearchCategory.newTab();
+            newTab.setCustomView(R.layout.search_custom_tab);
+            View customTab = newTab.getCustomView();
+
+            assert customTab != null;
+            customTab.findViewById(R.id.imageV_searchCategory).setBackgroundResource(R.drawable.ic_basket);
+            TextView textVSearchCategory = customTab.findViewById(R.id.textV_searchCategory);
+            textVSearchCategory.setText(categoryNames[i]);
+
+            // Highlight the first tab
+            if (i == 0) {
+                changeTabColor(Objects.requireNonNull(newTab.getCustomView()).findViewById(
+                        R.id.imageV_searchCategory), -15222408);
             }
+
+            newTab.setTag(i);
+            tabLSearchCategory.addTab(newTab);
         }
+    }
+
+    private void changeTabColor(ImageView tabIcon, int newColor) {
+        tabIcon.setBackgroundTintList(ColorStateList.valueOf(newColor));
     }
 
     private void updateSubCategory(byte index) {

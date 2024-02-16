@@ -19,7 +19,7 @@
         android:onClick="subCategoryOnClick">
 
         <ImageView
-            android:id="@+id/imageV_categoryImage"
+            android:id="@+id/imageV_subCategoryImage"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/view_margin_half"
@@ -32,7 +32,7 @@
             tools:srcCompat="@drawable/sample_product_image" />
 
         <TextView
-            android:id="@+id/textV_categoryName"
+            android:id="@+id/textV_subCategoryName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="4dp"
@@ -44,7 +44,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageV_categoryImage"
+            app:layout_constraintTop_toBottomOf="@+id/imageV_subCategoryImage"
             tools:text="@string/label_search_category" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
