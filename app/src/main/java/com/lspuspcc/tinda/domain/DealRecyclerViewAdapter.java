@@ -1,21 +1,17 @@
 package com.lspuspcc.tinda.domain;
 
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.lspuspcc.tinda.R;
+import com.lspuspcc.tinda.databinding.CardDealBinding;
 
 import java.util.ArrayList;
-import java.util.Locale;
 
-public class DealRecyclerViewAdapter extends RecyclerView.Adapter<DealRecyclerViewAdapter.MyViewHolder> {
+public class DealRecyclerViewAdapter extends RecyclerView.Adapter<DealRecyclerViewAdapter.DealViewHolder> {
     private ArrayList<DealModel> mDealModels;
 
     public DealRecyclerViewAdapter(ArrayList<DealModel> dealModels) {
@@ -24,24 +20,22 @@ public class DealRecyclerViewAdapter extends RecyclerView.Adapter<DealRecyclerVi
 
     @NonNull
     @Override
-    public DealRecyclerViewAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public DealViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        View view = layoutInflater.inflate(R.layout.card_deal, parent, false);
-        return new DealRecyclerViewAdapter.MyViewHolder(view);
+        CardDealBinding cardDealBinding = CardDealBinding.inflate(layoutInflater, parent, false);
+        return new DealViewHolder(cardDealBinding);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull DealRecyclerViewAdapter.MyViewHolder holder, int position) {
-        holder.imageVDealImage.setImageResource(mDealModels.get(position).getDealImage());
-        holder.textVDealProduct.setText(mDealModels.get(position).getDealProduct());
-        holder.textVDealAddress.setText(mDealModels.get(position).getDealDescription());
+    public void onBindViewHolder(@NonNull DealViewHolder holder, int position) {
+        DealModel dealModel = mDealModels.get(position);
 
-        String dealPrice = "P" + String.format(Locale.ENGLISH, "%.2f", mDealModels.get(position).getDealPrice());
-        holder.textVDealPrice.setText(dealPrice);
-
-        holder.btnDealMessage.setOnClickListener(v -> {
-            // TODO: Provide Message Functionality Here
+        holder.mBtnDealMessage.setOnClickListener(v -> {
+            // TODO: Provide Message Button Functionality
         });
+
+        holder.mCardDealBinding.setDeal(dealModel);
+        holder.mCardDealBinding.executePendingBindings();
     }
 
     @Override
@@ -49,23 +43,18 @@ public class DealRecyclerViewAdapter extends RecyclerView.Adapter<DealRecyclerVi
         return mDealModels.size();
     }
 
-    public static class MyViewHolder extends RecyclerView.ViewHolder {
-        ImageView imageVDealImage;
-        TextView textVDealProduct, textVDealAddress, textVDealPrice;
-        ImageButton btnDealMessage;
-
-        public MyViewHolder(@NonNull View itemView) {
-            super(itemView);
-
-            imageVDealImage = itemView.findViewById(R.id.imageV_dealImage);
-            textVDealProduct = itemView.findViewById(R.id.textV_dealProduct);
-            textVDealAddress = itemView.findViewById(R.id.textV_dealDescription);
-            textVDealPrice = itemView.findViewById(R.id.textV_dealPrice);
-            btnDealMessage = itemView.findViewById(R.id.btn_dealMessage);
-        }
-    }
-
     public void updateDealModel(ArrayList<DealModel> dealModels) {
         this.mDealModels = dealModels;
+    }
+
+    public static class DealViewHolder extends RecyclerView.ViewHolder {
+        private final CardDealBinding mCardDealBinding;
+        private final ImageButton mBtnDealMessage;
+
+        public DealViewHolder(@NonNull CardDealBinding cardDealBinding) {
+            super(cardDealBinding.getRoot());
+            this.mCardDealBinding = cardDealBinding;
+            this.mBtnDealMessage = cardDealBinding.btnDealMessage;
+        }
     }
 }

@@ -1,104 +1,117 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardV_dealInfo"
+    <data>
+        <variable
+            name="deal"
+            type="com.lspuspcc.tinda.domain.DealModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/view_margin"
-        android:layout_marginTop="@dimen/view_margin_half"
-        android:layout_marginEnd="@dimen/view_margin"
-        android:layout_marginBottom="@dimen/view_margin_half"
-        android:clickable="true"
-        android:focusable="true"
-        android:foreground="?android:attr/selectableItemBackgroundBorderless"
-        app:cardCornerRadius="@dimen/view_corner_radius"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="wrap_content">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardV_dealInfo"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/view_margin"
+            android:layout_marginTop="@dimen/view_margin_half"
+            android:layout_marginEnd="@dimen/view_margin"
+            android:layout_marginBottom="@dimen/view_margin_half"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?android:attr/selectableItemBackgroundBorderless"
+            app:cardCornerRadius="@dimen/view_corner_radius"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-            <ImageButton
-                android:id="@+id/btn_dealMessage"
-                android:layout_width="45dp"
-                android:layout_height="45dp"
-                android:background="@color/transparent"
-                android:clickable="true"
-                android:foreground="?android:attr/selectableItemBackgroundBorderless"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:srcCompat="@drawable/baseline_chat_24"
-                app:tint="@color/teal" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-            <TextView
-                android:id="@+id/textV_dealDescription"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/view_margin_half"
-                android:layout_marginTop="4dp"
-                android:layout_marginBottom="4dp"
-                android:ellipsize="end"
-                android:labelFor="@id/imageV_dealImage"
-                android:maxLines="2"
-                android:text="@string/label_deal_description"
-                android:textColor="@color/dark"
-                android:textSize="14sp"
-                app:layout_constraintBottom_toBottomOf="@+id/imageV_dealImage"
-                app:layout_constraintEnd_toStartOf="@+id/btn_dealMessage"
-                app:layout_constraintStart_toEndOf="@+id/imageV_dealImage"
-                app:layout_constraintTop_toBottomOf="@+id/textV_dealPrice" />
+                <ImageButton
+                    android:id="@+id/btn_dealMessage"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:background="@color/transparent"
+                    android:clickable="true"
+                    android:foreground="?android:attr/selectableItemBackgroundBorderless"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:srcCompat="@drawable/baseline_chat_24"
+                    app:tint="@color/teal"
+                    android:focusable="true" />
 
-            <TextView
-                android:id="@+id/textV_dealPrice"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/view_margin_half"
-                android:layout_marginTop="4dp"
-                android:ellipsize="end"
-                android:labelFor="@id/imageV_dealImage"
-                android:maxLines="1"
-                android:text="@string/label_product_price"
-                android:textColor="@color/teal"
-                android:textSize="12sp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toEndOf="@+id/imageV_dealImage"
-                app:layout_constraintTop_toBottomOf="@+id/textV_dealProduct" />
+                <TextView
+                    android:id="@+id/textV_dealDescription"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/view_margin_half"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="4dp"
+                    android:ellipsize="end"
+                    android:maxLines="2"
+                    android:text="@{deal.dealDescription}"
+                    android:textColor="@color/dark"
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/imageV_dealImage"
+                    app:layout_constraintEnd_toStartOf="@+id/btn_dealMessage"
+                    app:layout_constraintStart_toEndOf="@+id/imageV_dealImage"
+                    app:layout_constraintTop_toBottomOf="@+id/textV_dealPrice"
+                    tools:text="@string/label_deal_description" />
 
-            <TextView
-                android:id="@+id/textV_dealProduct"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/view_margin_half"
-                android:layout_marginTop="4dp"
-                android:layout_marginEnd="@dimen/view_margin_half"
-                android:ellipsize="end"
-                android:labelFor="@id/imageV_dealImage"
-                android:maxLines="2"
-                android:text="@string/label_deal_title"
-                android:textColor="@color/dark"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/imageV_dealImage"
-                app:layout_constraintTop_toTopOf="parent" />
+                <TextView
+                    android:id="@+id/textV_dealPrice"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/view_margin_half"
+                    android:layout_marginTop="4dp"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:text="@{deal.formattedDealPrice}"
+                    android:textColor="@color/teal"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toEndOf="@+id/imageV_dealImage"
+                    app:layout_constraintTop_toBottomOf="@+id/textV_dealProduct"
+                    tools:text="@string/label_product_price" />
 
-            <ImageView
-                android:id="@+id/imageV_dealImage"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:contentDescription="@string/label_product_name"
-                android:scaleType="centerCrop"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/sample_product_image" />
+                <TextView
+                    android:id="@+id/textV_dealProduct"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/view_margin_half"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginEnd="@dimen/view_margin_half"
+                    android:ellipsize="end"
+                    android:maxLines="2"
+                    android:text="@{deal.dealProduct}"
+                    android:textColor="@color/dark"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/imageV_dealImage"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="@string/label_deal_title" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.cardview.widget.CardView>
-</androidx.constraintlayout.widget.ConstraintLayout>
+                <ImageView
+                    android:id="@+id/imageV_dealImage"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:contentDescription="@string/label_product_name"
+                    android:scaleType="centerCrop"
+                    app:imageResource="@{deal.dealImage}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/sample_product_image"
+                    tools:src="@drawable/sample_store_image" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
