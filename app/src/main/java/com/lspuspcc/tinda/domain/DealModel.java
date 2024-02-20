@@ -1,5 +1,7 @@
 package com.lspuspcc.tinda.domain;
 
+import java.text.DecimalFormat;
+
 public class DealModel {
     private final int mDealImage;
     private final String mDealProduct;
@@ -27,5 +29,9 @@ public class DealModel {
 
     public float getDealPrice() {
         return mDealPrice;
+    }
+
+    public String getFormattedDealPrice() {
+        return new DecimalFormat("₱###,###,###,##0.00").format(mDealPrice);
     }
 }

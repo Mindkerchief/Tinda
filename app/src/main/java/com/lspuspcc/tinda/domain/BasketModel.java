@@ -3,7 +3,6 @@ package com.lspuspcc.tinda.domain;
 import androidx.lifecycle.MutableLiveData;
 
 import java.text.DecimalFormat;
-import java.util.Locale;
 import java.util.Objects;
 
 public class BasketModel {
