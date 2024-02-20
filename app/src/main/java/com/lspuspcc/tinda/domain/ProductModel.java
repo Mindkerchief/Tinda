@@ -1,35 +1,37 @@
 package com.lspuspcc.tinda.domain;
 
+import java.text.DecimalFormat;
+
 public class ProductModel {
     private final int mProductImage;
     private final String mProductName;
     private final String mProductStore;
-    private final String mProductPrice;
+    private final float mProductPrice;
 
-    public ProductModel(int productImage, String productName, String productStore, String productPrice) {
+    public ProductModel(int productImage, String productName, String productStore, float productPrice) {
         this.mProductImage = productImage;
         this.mProductName = productName;
         this.mProductStore = productStore;
         this.mProductPrice = productPrice;
     }
 
-    /**
-     * Temporary implementation of model for testing purposes
-    */
-
-    public int getmProductImage() {
+    public int getProductImage() {
         return mProductImage;
     }
 
-    public String getmProductName() {
+    public String getProductName() {
         return mProductName;
     }
 
-    public String getmProductStore() {
+    public String getProductStore() {
         return mProductStore;
     }
 
-    public String getmProductPrice() {
+    public float getProductPrice() {
         return mProductPrice;
+    }
+
+    public String getFormattedProductPrice() {
+        return new DecimalFormat("₱###,###,###,##0.00").format(mProductPrice);
     }
 }

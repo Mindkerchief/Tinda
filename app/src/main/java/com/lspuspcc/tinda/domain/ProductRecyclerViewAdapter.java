@@ -1,19 +1,16 @@
 package com.lspuspcc.tinda.domain;
 
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.lspuspcc.tinda.R;
+import com.lspuspcc.tinda.databinding.CardProductBinding;
 
 import java.util.ArrayList;
 
-public class ProductRecyclerViewAdapter extends RecyclerView.Adapter<ProductRecyclerViewAdapter.MyViewHolder> {
+public class ProductRecyclerViewAdapter extends RecyclerView.Adapter<ProductRecyclerViewAdapter.ProductViewHolder> {
     ArrayList<ProductModel> mProductModels;
 
     public ProductRecyclerViewAdapter(ArrayList<ProductModel> productModels) {
@@ -22,43 +19,33 @@ public class ProductRecyclerViewAdapter extends RecyclerView.Adapter<ProductRecy
 
     @NonNull
     @Override
-    public ProductRecyclerViewAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        // Inflate the layout
+    public ProductViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View view = inflater.inflate(R.layout.card_product, parent, false);
-        return new ProductRecyclerViewAdapter.MyViewHolder(view);
+        CardProductBinding cardProductBinding = CardProductBinding.inflate(inflater, parent, false);
+        return new ProductViewHolder(cardProductBinding);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ProductRecyclerViewAdapter.MyViewHolder holder, int position) {
-        // Assign values in the views
-        holder.imageVProductImage.setImageResource(mProductModels.get(position).getmProductImage());
-        holder.textVProductName.setText(mProductModels.get(position).getmProductName());
-        holder.textVProductStore.setText(mProductModels.get(position).getmProductStore());
-        holder.textVProductPrice.setText(mProductModels.get(position).getmProductPrice());
+    public void onBindViewHolder(@NonNull ProductViewHolder holder, int position) {
+        ProductModel productModel = mProductModels.get(position);
+        holder.mProductBinding.setProduct(productModel);
+        holder.mProductBinding.executePendingBindings();
     }
 
     @Override
     public int getItemCount() {
-        // Count the number of items to be displayed
         return mProductModels.size();
-    }
-
-    public static class MyViewHolder extends RecyclerView.ViewHolder {
-        // Gets the views from recycler view rows
-        ImageView imageVProductImage;
-        TextView textVProductName, textVProductStore, textVProductPrice;
-        public MyViewHolder(@NonNull View itemView) {
-            super(itemView);
-
-            imageVProductImage = itemView.findViewById(R.id.imageV_productImage);
-            textVProductName = itemView.findViewById(R.id.textV_productName);
-            textVProductStore = itemView.findViewById(R.id.textV_productStore);
-            textVProductPrice = itemView.findViewById(R.id.textV_productPrice);
-        }
     }
 
     public void updateRecyclerVProducts(ArrayList<ProductModel> productModels) {
         this.mProductModels = productModels;
+    }
+
+    public static class ProductViewHolder extends RecyclerView.ViewHolder {
+        private final CardProductBinding mProductBinding;
+        public ProductViewHolder(@NonNull CardProductBinding cardProductBinding) {
+            super(cardProductBinding.getRoot());
+            this.mProductBinding = cardProductBinding;
+        }
     }
 }

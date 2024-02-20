@@ -13,9 +13,10 @@ public class SetupModel {
         int productImage = R.drawable.sample_product_image;
         String productName = "KARSON Scientific Calculator Multiple Modes Intuitive Interface";
         String productStore = "Expressions - Ultimart San Pablo";
-        String productPrice = "₱169.00";
+        float productPrice = 169.0f;
 
         for (int i = 0; i < 10; i++) {
+            productPrice += 100;
             productModels.add(new ProductModel(productImage, productName, productStore, productPrice));
         }
         return productModels;
