@@ -41,12 +41,12 @@
                     android:layout_height="45dp"
                     android:background="@color/transparent"
                     android:clickable="true"
+                    android:focusable="true"
                     android:foreground="?android:attr/selectableItemBackgroundBorderless"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:srcCompat="@drawable/baseline_chat_24"
-                    app:tint="@color/teal"
-                    android:focusable="true" />
+                    app:tint="@color/teal" />
 
                 <TextView
                     android:id="@+id/textV_dealDescription"
