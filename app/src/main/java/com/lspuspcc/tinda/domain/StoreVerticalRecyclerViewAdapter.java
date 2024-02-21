@@ -12,36 +12,36 @@ import com.lspuspcc.tinda.databinding.CardStoreVerticalBinding;
 import java.util.ArrayList;
 
 public class StoreVerticalRecyclerViewAdapter extends RecyclerView.Adapter<StoreVerticalRecyclerViewAdapter.StoreVerticalViewHolder> {
-    private final Context mContext;
-    private ArrayList<StoreVerticalModel> mStoreModels;
+    private ArrayList<StoreVerticalModel> mStoreVerticalResults;
 
-    public StoreVerticalRecyclerViewAdapter(Context context, ArrayList<StoreVerticalModel> storeModels) {
-        this.mContext = context;
-        this.mStoreModels = storeModels;
+    public StoreVerticalRecyclerViewAdapter(ArrayList<StoreVerticalModel> storeModels) {
+        this.mStoreVerticalResults = storeModels;
     }
 
     @NonNull
     @Override
     public StoreVerticalViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        LayoutInflater layoutInflater = LayoutInflater.from(mContext);
+        LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         CardStoreVerticalBinding cardStoreVerticalBinding = CardStoreVerticalBinding.inflate(layoutInflater, parent, false);
         return new StoreVerticalViewHolder(cardStoreVerticalBinding);
     }
 
     @Override
     public void onBindViewHolder(@NonNull StoreVerticalViewHolder holder, int position) {
-        StoreVerticalModel storeVerticalModel = mStoreModels.get(position);
+        StoreVerticalModel storeVerticalModel = mStoreVerticalResults.get(position);
         holder.mCardStoreVerticalBinding.setStore(storeVerticalModel);
         holder.mCardStoreVerticalBinding.executePendingBindings();
     }
 
     @Override
     public int getItemCount() {
-        return mStoreModels.size();
+        return mStoreVerticalResults.size();
     }
 
-    public void updateRecyclerVStore(ArrayList<StoreVerticalModel> storeResults) {
-        this.mStoreModels = storeResults;
+    public void updateRecyclerVStore(ArrayList<StoreVerticalModel> storeVerticalResults) {
+        notifyItemRangeRemoved(0, mStoreVerticalResults.size());
+        this.mStoreVerticalResults = storeVerticalResults;
+        notifyItemRangeInserted(0, mStoreVerticalResults.size());
     }
 
     public static class StoreVerticalViewHolder extends RecyclerView.ViewHolder {

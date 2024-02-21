@@ -12,18 +12,16 @@ import com.lspuspcc.tinda.databinding.CardStoreBinding;
 import java.util.ArrayList;
 
 public class StoreRecyclerViewAdapter extends RecyclerView.Adapter<StoreRecyclerViewAdapter.StoreViewHolder> {
-    private final Context mContext;
     private ArrayList<StoreModel> mStoreModels;
 
-    public StoreRecyclerViewAdapter(Context context, ArrayList<StoreModel> storeModels) {
-        this.mContext = context;
+    public StoreRecyclerViewAdapter(ArrayList<StoreModel> storeModels) {
         this.mStoreModels = storeModels;
     }
 
     @NonNull
     @Override
     public StoreViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        LayoutInflater layoutInflater = LayoutInflater.from(mContext);
+        LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         CardStoreBinding cardStoreBinding = CardStoreBinding.inflate(layoutInflater, parent, false);
         return new StoreViewHolder(cardStoreBinding);
     }
@@ -41,7 +39,9 @@ public class StoreRecyclerViewAdapter extends RecyclerView.Adapter<StoreRecycler
     }
 
     public void updateRecyclerVStore(ArrayList<StoreModel> storeResults) {
+        notifyItemRangeRemoved(0, mStoreModels.size());
         this.mStoreModels = storeResults;
+        notifyItemRangeChanged(0, mStoreModels.size());
     }
 
     public static class StoreViewHolder extends RecyclerView.ViewHolder {

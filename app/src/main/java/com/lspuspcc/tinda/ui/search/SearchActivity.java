@@ -3,6 +3,7 @@ package com.lspuspcc.tinda.ui.search;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 
 import com.lspuspcc.tinda.databinding.ActivitySearchBinding;
@@ -19,9 +20,12 @@ public class SearchActivity extends AppCompatActivity {
         mSearchBinding = ActivitySearchBinding.inflate(getLayoutInflater());
         setContentView(mSearchBinding.getRoot());
 
-        SearchBarViewModel searchBarViewModel = new SearchBarViewModel(mSearchBinding.includeLSearchBar, "search");
-        mSearchResultViewModel = new SearchResultViewModel(this, searchBarViewModel,
-                mSearchBinding.includeLSearchResult, mSearchBinding.nestedSVSearchResults, "search");
+        Handler searchHandler = new Handler();
+        searchHandler.post(() -> {
+            SearchBarViewModel searchBarViewModel = new SearchBarViewModel(mSearchBinding.includeLSearchBar, "search");
+            mSearchResultViewModel = new SearchResultViewModel(this, searchBarViewModel,
+                    mSearchBinding.includeLSearchResult, mSearchBinding.nestedSVSearchResults, "search");
+        });
     }
 
     @Override

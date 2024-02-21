@@ -44,7 +44,9 @@ public class DealRecyclerViewAdapter extends RecyclerView.Adapter<DealRecyclerVi
     }
 
     public void updateDealModel(ArrayList<DealModel> dealModels) {
+        notifyItemRangeRemoved(0, mDealModels.size());
         this.mDealModels = dealModels;
+        notifyItemRangeChanged(0, mDealModels.size());
     }
 
     public static class DealViewHolder extends RecyclerView.ViewHolder {

@@ -1,6 +1,7 @@
 package com.lspuspcc.tinda.ui.searchbar;
 
 import android.content.Context;
+import android.os.Handler;
 import android.transition.AutoTransition;
 import android.transition.TransitionManager;
 import android.view.View;
@@ -28,6 +29,8 @@ import java.util.ArrayList;
 public class SearchResultViewModel implements SearchBarCallback {
     private final SearchBarViewModel mSearchBarViewModel;
     private final ConstraintLayout mConstraintLSearchResults;
+    private final Handler mStoreHandler;
+    private final Handler mProductHandler;
     private final NestedScrollView mNestedScrollView;
     private final SetupModel mSetupModel;
     private StoreVerticalRecyclerViewAdapter mStoreVerticalRVAdapter;
@@ -43,15 +46,18 @@ public class SearchResultViewModel implements SearchBarCallback {
     public SearchResultViewModel(Context context, SearchBarViewModel searchBarViewModel, SearchResultBinding searchBarBinding,
                                  NestedScrollView nestedScrollView, String includedIn) {
         this.mSearchBarViewModel = searchBarViewModel;
+        this.mStoreHandler = new Handler();
+        this.mProductHandler = new Handler();
         this.mNestedScrollView = nestedScrollView;
         this.mSetupModel = new SetupModel();
         this.mIncludedIn = includedIn;
 
-        mSearchBarViewModel.setSearchBarCallback(this);
-        mConstraintLSearchResults = searchBarBinding.constraintLSearchResults;
+        this.mSearchBarViewModel.setSearchBarCallback(this);
+        this.mConstraintLSearchResults = searchBarBinding.constraintLSearchResults;
 
-        RecyclerView recyclerVStoreResults = searchBarBinding.recyclerVStoreResults;
-        RecyclerView recyclerVProductResults = searchBarBinding.recyclerVProductResults;
+        SearchResultsRunnable searchResultsRunnable = new SearchResultsRunnable(context,
+                searchBarBinding.recyclerVStoreResults, searchBarBinding.recyclerVProductResults);
+        new Thread(searchResultsRunnable).start();
 
         // Assign appropriate result title
         switch (mIncludedIn) {
@@ -77,73 +83,41 @@ public class SearchResultViewModel implements SearchBarCallback {
                 searchBarBinding.recyclerVProductResults.setVisibility(View.GONE);
                 break;
         }
-
-        // Initialize Store Search Results Recycler View
-        boolean isHomeOrSearch = mIncludedIn.equals("home") | mIncludedIn.equals("search");
-
-        if (isHomeOrSearch) {
-            mStoreVerticalResults = mSetupModel.setupStoreVerticalModel();
-            mStoreVerticalRVAdapter = new StoreVerticalRecyclerViewAdapter(context, mStoreVerticalResults);
-            recyclerVStoreResults.setLayoutManager(new LinearLayoutManager(context,
-                    LinearLayoutManager.HORIZONTAL, false));
-            recyclerVStoreResults.setAdapter(mStoreVerticalRVAdapter);
-        }
-        else if (mIncludedIn.equals("nearby")) {
-            mStoreResults = mSetupModel.setupStoreModel();
-            mStoreRVAdapter = new StoreRecyclerViewAdapter(context, mStoreResults);
-            recyclerVStoreResults.setLayoutManager(new LinearLayoutManager(context,
-                    LinearLayoutManager.VERTICAL, false));
-            recyclerVStoreResults.setAdapter(mStoreRVAdapter);
-        }
-        else if (mIncludedIn.equals("deal")) {
-            mDealResults = mSetupModel.setupDealModel();
-            mDealRVAdapter = new DealRecyclerViewAdapter(mDealResults);
-            recyclerVStoreResults.setLayoutManager(new LinearLayoutManager(context,
-                    LinearLayoutManager.VERTICAL, false));
-            recyclerVStoreResults.setAdapter(mDealRVAdapter);
-        }
-
-        // Initialize Products Search Results Recycler View
-        if (isHomeOrSearch) {
-            mProductResults = mSetupModel.setupProductModel();
-            mProductRVAdapter = new ProductRecyclerViewAdapter(mProductResults);
-            recyclerVProductResults.setLayoutManager(new GridLayoutManager(context, 2));
-            recyclerVProductResults.setAdapter(mProductRVAdapter);
-        }
     }
 
     @Override
     public void updateResults() {
+
         if (mIncludedIn.equals("home") | mIncludedIn.equals("search")) {
             // Show Search Result Layout
             if (!mConstraintLSearchResults.isShown())
                 mConstraintLSearchResults.setVisibility(View.VISIBLE);
 
-            // Update Store Results
-            mStoreVerticalRVAdapter.notifyItemRangeRemoved(0, mStoreVerticalResults.size());
-            mStoreVerticalResults = mSetupModel.setupStoreVerticalModel();
-            mStoreVerticalRVAdapter.updateRecyclerVStore(mStoreVerticalResults);
-            mStoreVerticalRVAdapter.notifyItemRangeInserted(0, mStoreVerticalResults.size());
+            mStoreHandler.post(() -> {
+                // Update Store Results
+                mStoreVerticalResults = mSetupModel.setupStoreVerticalModel();
+                mStoreVerticalRVAdapter.updateRecyclerVStore(mStoreVerticalResults);
+            });
 
-            // Update Product Results
-            mProductRVAdapter.notifyItemRangeRemoved(0, mProductResults.size());
-            mProductResults = mSetupModel.setupProductModel();
-            mProductRVAdapter.updateRecyclerVProducts(mProductResults);
-            mProductRVAdapter.notifyItemRangeInserted(0, mProductResults.size());
+            mProductHandler.post(() -> {
+                // Update Product Results
+                mProductResults = mSetupModel.setupProductModel();
+                mProductRVAdapter.updateRecyclerVProducts(mProductResults);
+            });
         }
         else if (mIncludedIn.equals("nearby")) {
-            // Update Store Results
-            mStoreRVAdapter.notifyItemRangeRemoved(0, mStoreResults.size());
-            mStoreResults = mSetupModel.setupStoreModel();
-            mStoreRVAdapter.updateRecyclerVStore(mStoreResults);
-            mStoreRVAdapter.notifyItemRangeInserted(0, mStoreResults.size());
+            mStoreHandler.post(() -> {
+                // Update Store Results
+                mStoreResults = mSetupModel.setupStoreModel();
+                mStoreRVAdapter.updateRecyclerVStore(mStoreResults);
+            });
         }
         else if (mIncludedIn.equals("deal")) {
-            // Update Deal Results
-            mDealRVAdapter.notifyItemRangeRemoved(0, mDealResults.size());
-            mDealResults = mSetupModel.setupDealModel();
-            mDealRVAdapter.updateDealModel(mDealResults);
-            mDealRVAdapter.notifyItemRangeInserted(0, mDealResults.size());
+            mStoreHandler.post(() -> {
+                // Update Deal Results
+                mDealResults = mSetupModel.setupDealModel();
+                mDealRVAdapter.updateDealModel(mDealResults);
+            });
         }
 
         // Close Category Filter after choosing sub category
@@ -153,5 +127,70 @@ public class SearchResultViewModel implements SearchBarCallback {
         TransitionManager.beginDelayedTransition(mConstraintLSearchResults, new AutoTransition());
         mNestedScrollView.scrollTo(0,0);
         mSearchBarViewModel.getSearchVSearchField().clearFocus();
+    }
+
+    class SearchResultsRunnable implements Runnable {
+        private final Context mContext;
+        private final RecyclerView mRecyclerVStoreResults;
+        private final RecyclerView mRecyclerVProductResults;
+
+        public SearchResultsRunnable(Context context, RecyclerView recyclerVStoreResults, RecyclerView recyclerVProductResults) {
+            this.mContext = context;
+            this.mRecyclerVStoreResults = recyclerVStoreResults;
+            this.mRecyclerVProductResults = recyclerVProductResults;
+        }
+
+        @Override
+        public void run() {
+            // Initialize Store Search Results Recycler View
+            boolean isHomeOrSearch = mIncludedIn.equals("home") | mIncludedIn.equals("search");
+
+            if (isHomeOrSearch) {
+                mStoreHandler.post(() -> {
+                    mStoreVerticalResults = mSetupModel.setupStoreVerticalModel();
+                    mStoreVerticalRVAdapter = new StoreVerticalRecyclerViewAdapter(mStoreVerticalResults);
+                    mRecyclerVStoreResults.setLayoutManager(new LinearLayoutManager(mContext,
+                            LinearLayoutManager.HORIZONTAL, false));
+                    mRecyclerVStoreResults.setAdapter(mStoreVerticalRVAdapter);
+                });
+            }
+            else if (mIncludedIn.equals("nearby")) {
+                mStoreHandler.post(() -> {
+                    mStoreResults = mSetupModel.setupStoreModel();
+                    mStoreRVAdapter = new StoreRecyclerViewAdapter(mStoreResults);
+                    mRecyclerVStoreResults.setLayoutManager(new LinearLayoutManager(mContext,
+                            LinearLayoutManager.VERTICAL, false));
+                    mRecyclerVStoreResults.setAdapter(mStoreRVAdapter);
+                });
+            }
+            else if (mIncludedIn.equals("deal")) {
+                mStoreHandler.post(() -> {
+                    mDealResults = mSetupModel.setupDealModel();
+                    mDealRVAdapter = new DealRecyclerViewAdapter(mDealResults);
+                    mRecyclerVStoreResults.setLayoutManager(new LinearLayoutManager(mContext,
+                            LinearLayoutManager.VERTICAL, false));
+                    mRecyclerVStoreResults.setAdapter(mDealRVAdapter);
+                });
+            }
+
+            // Initialize Products Search Results Recycler View
+            if (isHomeOrSearch) {
+                mProductHandler.post(() -> {
+                    mProductRVAdapter = new ProductRecyclerViewAdapter(new ArrayList<>());
+                    mRecyclerVProductResults.setLayoutManager(new GridLayoutManager(mContext, 2));
+                    mRecyclerVProductResults.setAdapter(mProductRVAdapter);
+                    mProductResults = mSetupModel.setupProductModel();
+
+                    for (int i = 0; i < mProductResults.size(); i++) {
+                        int finalI = i;
+                        mRecyclerVProductResults.post(() -> {
+                            ProductModel productModel = mProductResults.get(finalI);
+                            mProductRVAdapter.mProductModels.add(productModel);
+                            mProductRVAdapter.notifyItemInserted(finalI);
+                        });
+                    }
+                });
+            }
+        }
     }
 }
