@@ -1,7 +1,6 @@
 package com.lspuspcc.tinda.ui.searchbar;
 
 import android.content.res.ColorStateList;
-import android.os.Handler;
 import android.transition.AutoTransition;
 import android.transition.TransitionManager;
 import android.view.View;
@@ -28,7 +27,6 @@ public class SearchBarViewModel {
     private SearchBarCallback mSearchBarCallback;
     private ConstraintLayout mConstraintLCategory;
     private SearchView mSearchVSearchField;
-    private Handler mSearchBarHandler;
     private SetupModel mSetupModel;
     private SubCategoryRecyclerViewAdapter mSubCategoryRVAdapter;
     private ArrayList<SubCategoryModel> mSubCategoryModels;
@@ -40,7 +38,6 @@ public class SearchBarViewModel {
     }
 
     public SearchBarViewModel(SearchBarBinding searchBarBinding, String includedIn) {
-        this.mSearchBarHandler = new Handler();
         this.mSetupModel = new SetupModel();
         this.mIncludedIn = includedIn;
         this.mConstraintLCategory = searchBarBinding.constraintLSearchCategory;

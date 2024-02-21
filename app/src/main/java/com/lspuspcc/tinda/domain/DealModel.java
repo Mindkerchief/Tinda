@@ -1,5 +1,11 @@
 package com.lspuspcc.tinda.domain;
 
+import android.widget.ImageView;
+
+import androidx.databinding.BindingAdapter;
+
+import com.bumptech.glide.Glide;
+
 import java.text.DecimalFormat;
 
 public class DealModel {
@@ -33,5 +39,10 @@ public class DealModel {
 
     public String getFormattedDealPrice() {
         return new DecimalFormat("₱###,###,###,##0.00").format(mDealPrice);
+    }
+
+    @BindingAdapter("android:loadDealImage")
+    public static void loadImage(ImageView imageVDealImage, int dealImage) {
+        Glide.with(imageVDealImage).load(dealImage).into(imageVDealImage);
     }
 }

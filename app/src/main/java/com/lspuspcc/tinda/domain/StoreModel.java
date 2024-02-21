@@ -1,5 +1,11 @@
 package com.lspuspcc.tinda.domain;
 
+import android.widget.ImageView;
+
+import androidx.databinding.BindingAdapter;
+
+import com.bumptech.glide.Glide;
+
 import java.text.DecimalFormat;
 
 public class StoreModel extends StoreVerticalModel {
@@ -53,5 +59,10 @@ public class StoreModel extends StoreVerticalModel {
 
     public String getStoreFeatureFormattedPrice5() {
         return mPeroCurrencyFormat.format(mStoreFeaturePrices[4]);
+    }
+
+    @BindingAdapter("android:loadStoreImage")
+    public static void loadImage(ImageView imageVStoreImage, int storeImage) {
+        Glide.with(imageVStoreImage).load(storeImage).into(imageVStoreImage);
     }
 }

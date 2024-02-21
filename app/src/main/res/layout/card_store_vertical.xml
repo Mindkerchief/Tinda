@@ -39,11 +39,11 @@
                     android:layout_width="0dp"
                     android:layout_height="120dp"
                     android:contentDescription="@string/label_product_name"
-                    android:scaleType="centerCrop"
+                    android:scaleType="fitXY"
+                    android:loadStoreVerticalImage="@{store.storeImage}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:imageResource="@{store.storeImage}"
                     tools:src="@drawable/sample_store_image" />
 
                 <TextView

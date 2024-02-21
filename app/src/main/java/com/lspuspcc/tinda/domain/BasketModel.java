@@ -1,6 +1,11 @@
 package com.lspuspcc.tinda.domain;
 
+import android.widget.ImageView;
+
+import androidx.databinding.BindingAdapter;
 import androidx.lifecycle.MutableLiveData;
+
+import com.bumptech.glide.Glide;
 
 import java.text.DecimalFormat;
 import java.util.Objects;
@@ -67,5 +72,10 @@ public class BasketModel {
 
         mProductCount.postValue(newProductCount);
         mProductTotalPrice = mProductPrice * newProductCount;
+    }
+
+    @BindingAdapter("android:loadBasketImage")
+    public static void loadImage(ImageView imageVProductImage, int productImage) {
+        Glide.with(imageVProductImage).load(productImage).into(imageVProductImage);
     }
 }
