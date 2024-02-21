@@ -24,11 +24,11 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/view_margin_half"
             android:adjustViewBounds="true"
-            android:scaleType="centerCrop"
+            android:scaleType="fitXY"
+            android:loadSubCategoryImage="@{subCategory.subCategoryImage}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:imageResource="@{subCategory.subCategoryImage}"
             tools:srcCompat="@drawable/sample_product_image" />
 
         <TextView

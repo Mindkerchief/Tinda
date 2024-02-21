@@ -1,5 +1,11 @@
 package com.lspuspcc.tinda.domain;
 
+import android.widget.ImageView;
+
+import androidx.databinding.BindingAdapter;
+
+import com.bumptech.glide.Glide;
+
 public class StoreVerticalModel {
     private final int mStoreImage;
     private final String mStoreName;
@@ -27,5 +33,10 @@ public class StoreVerticalModel {
 
     public String getStoreCategory() {
         return mStoreCategory;
+    }
+
+    @BindingAdapter("android:loadStoreVerticalImage")
+    public static void loadImage(ImageView imageVStoreVerticalImage, int storeVerticalImage) {
+        Glide.with(imageVStoreVerticalImage).load(storeVerticalImage).into(imageVStoreVerticalImage);
     }
 }

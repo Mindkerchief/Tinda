@@ -94,10 +94,10 @@
                 android:layout_height="100dp"
                 android:contentDescription="@string/label_product_name"
                 android:foreground="@color/semi_transparent_white"
-                android:scaleType="centerCrop"
+                android:scaleType="fitXY"
+                android:loadBasketImage="@{item.productImage}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:imageResource="@{item.productImage}"
                 tools:srcCompat="@drawable/sample_product_image" />
 
             <ImageButton
