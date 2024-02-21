@@ -38,7 +38,9 @@ public class SubCategoryRecyclerViewAdapter extends RecyclerView.Adapter<SubCate
     }
 
     public void updateCategoryModel(ArrayList<SubCategoryModel> subCategoryModels) {
+        notifyItemRangeRemoved(0, mSubCategoryModels.size());
         this.mSubCategoryModels = subCategoryModels;
+        notifyItemRangeInserted(0, mSubCategoryModels.size());
     }
 
     public static class SubCategoryViewHolder extends RecyclerView.ViewHolder {
