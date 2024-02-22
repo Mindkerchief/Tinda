@@ -33,6 +33,7 @@
         android:id="@+id/recyclerV_basketItems"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layoutAnimation="@anim/recycler_view_item"
         android:paddingBottom="115dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
