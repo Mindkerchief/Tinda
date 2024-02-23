@@ -12,11 +12,7 @@ import com.lspuspcc.tinda.databinding.CardDealBinding;
 import java.util.ArrayList;
 
 public class DealRecyclerViewAdapter extends RecyclerView.Adapter<DealRecyclerViewAdapter.DealViewHolder> {
-    private ArrayList<DealModel> mDealModels;
-
-    public DealRecyclerViewAdapter(ArrayList<DealModel> dealModels) {
-        this.mDealModels = dealModels;
-    }
+    private ArrayList<DealModel> mDealModels = new ArrayList<>();
 
     @NonNull
     @Override

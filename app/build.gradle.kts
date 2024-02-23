@@ -24,6 +24,8 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            matchingFallbacks += listOf()
+            signingConfig = signingConfigs.getByName("debug")
         }
     }
     compileOptions {

@@ -11,11 +11,7 @@ import com.lspuspcc.tinda.databinding.CardSubCategoryBinding;
 import java.util.ArrayList;
 
 public class SubCategoryRecyclerViewAdapter extends RecyclerView.Adapter<SubCategoryRecyclerViewAdapter.SubCategoryViewHolder> {
-    ArrayList<SubCategoryModel> mSubCategoryModels;
-
-    public SubCategoryRecyclerViewAdapter(ArrayList<SubCategoryModel> subCategoryModels) {
-        this.mSubCategoryModels = subCategoryModels;
-    }
+    ArrayList<SubCategoryModel> mSubCategoryModels = new ArrayList<>();
 
     @NonNull
     @Override
@@ -37,7 +33,7 @@ public class SubCategoryRecyclerViewAdapter extends RecyclerView.Adapter<SubCate
         return mSubCategoryModels.size();
     }
 
-    public void updateCategoryModel(ArrayList<SubCategoryModel> subCategoryModels) {
+    public void updateSubCategoryModel(ArrayList<SubCategoryModel> subCategoryModels) {
         notifyItemRangeRemoved(0, mSubCategoryModels.size());
         this.mSubCategoryModels = subCategoryModels;
         notifyItemRangeInserted(0, mSubCategoryModels.size());

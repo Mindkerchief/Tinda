@@ -12,11 +12,7 @@ import com.lspuspcc.tinda.databinding.CardStoreVerticalBinding;
 import java.util.ArrayList;
 
 public class StoreVerticalRecyclerViewAdapter extends RecyclerView.Adapter<StoreVerticalRecyclerViewAdapter.StoreVerticalViewHolder> {
-    private ArrayList<StoreVerticalModel> mStoreVerticalResults;
-
-    public StoreVerticalRecyclerViewAdapter(ArrayList<StoreVerticalModel> storeModels) {
-        this.mStoreVerticalResults = storeModels;
-    }
+    private ArrayList<StoreVerticalModel> mStoreVerticalResults = new ArrayList<>();
 
     @NonNull
     @Override
