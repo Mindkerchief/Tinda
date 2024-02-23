@@ -16,14 +16,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        // Prevents Night Mode but can cause launching glitch
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+
         ActivityMainBinding mMainBinding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(mMainBinding.getRoot());
 
         NavController navController = Navigation.findNavController(this, R.id.navHostF_main);
         NavigationUI.setupWithNavController(mMainBinding.navVMain, navController);
-
-        // Prevents Night Mode but can cause launching glitch
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-
     }
 }

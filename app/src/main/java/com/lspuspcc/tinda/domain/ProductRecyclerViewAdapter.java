@@ -11,11 +11,7 @@ import com.lspuspcc.tinda.databinding.CardProductBinding;
 import java.util.ArrayList;
 
 public class ProductRecyclerViewAdapter extends RecyclerView.Adapter<ProductRecyclerViewAdapter.ProductViewHolder> {
-    public ArrayList<ProductModel> mProductModels;
-
-    public ProductRecyclerViewAdapter(ArrayList<ProductModel> productModels) {
-        this.mProductModels = productModels;
-    }
+    private ArrayList<ProductModel> mProductModels = new ArrayList<>();
 
     @NonNull
     @Override
@@ -41,7 +37,6 @@ public class ProductRecyclerViewAdapter extends RecyclerView.Adapter<ProductRecy
         notifyItemRangeRemoved(0, mProductModels.size());
         this.mProductModels = productModels;
         notifyItemRangeInserted(0, mProductModels.size());
-
     }
 
     public static class ProductViewHolder extends RecyclerView.ViewHolder {

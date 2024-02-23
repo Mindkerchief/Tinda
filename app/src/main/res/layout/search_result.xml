@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/constraintL_searchResults"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -41,10 +42,12 @@
         android:layout_marginTop="-8dp"
         android:layout_marginEnd="@dimen/view_margin_half"
         android:background="@color/light"
-        android:layoutAnimation="@anim/recycler_view_item"
+        android:drawingCacheQuality="low"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardV_productResultTitle" />
+        app:layout_constraintTop_toBottomOf="@+id/cardV_productResultTitle"
+        app:spanCount="2" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardV_storeResultTitle"
@@ -80,8 +83,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="-8dp"
         android:background="@color/light"
-        android:layoutAnimation="@anim/recycler_view_item"
         android:nestedScrollingEnabled="false"
+        android:orientation="vertical"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardV_storeResultTitle" />

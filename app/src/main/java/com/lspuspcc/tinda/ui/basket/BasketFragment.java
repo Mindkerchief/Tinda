@@ -49,8 +49,6 @@ public class BasketFragment extends Fragment {
         BasketRecyclerViewAdapter basketRVAdapter = new BasketRecyclerViewAdapter(this,
                 basketModels, mSelectedItems);
         RecyclerView recyclerVBasketItems = mBasketBinding.recyclerVBasketItems;
-        recyclerVBasketItems.setLayoutManager(new LinearLayoutManager(getContext(),
-                LinearLayoutManager.VERTICAL, false));
         recyclerVBasketItems.setAdapter(basketRVAdapter);
 
         mSelectedItems.observe(getViewLifecycleOwner(), basketModel -> setCountAndSubTotal());
