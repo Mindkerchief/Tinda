@@ -18,8 +18,6 @@ import com.lspuspcc.tinda.domain.SetupModel;
 import com.lspuspcc.tinda.domain.StoreRecyclerViewAdapter;
 import com.lspuspcc.tinda.domain.StoreVerticalRecyclerViewAdapter;
 
-import java.util.ArrayList;
-
 public class SearchResultViewModel implements SearchBarCallback {
     private final SearchBarViewModel mSearchBarViewModel;
     private final ConstraintLayout mConstraintLSearchResults;
@@ -97,7 +95,7 @@ public class SearchResultViewModel implements SearchBarCallback {
     }
 
     @Override
-    public void updateResults() {
+    public void updateResults(CharSequence searchQuery) {
         if (mIncludedIn.equals("home") | mIncludedIn.equals("search")) {
             // Show Search Result Layout
             if (!mConstraintLSearchResults.isShown())
@@ -119,5 +117,6 @@ public class SearchResultViewModel implements SearchBarCallback {
         TransitionManager.beginDelayedTransition(mConstraintLSearchResults, new AutoTransition());
         mNestedScrollView.scrollTo(0,0);
         mSearchBarViewModel.getSearchVSearchField().clearFocus();
+        mSearchBarViewModel.getSearchVSearchField().setQuery(searchQuery, false);
     }
 }
