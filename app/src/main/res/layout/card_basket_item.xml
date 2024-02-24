@@ -90,12 +90,12 @@
 
             <ImageView
                 android:id="@+id/imageV_basketProductImage"
-                android:layout_width="100dp"
+                android:layout_width="0dp"
                 android:layout_height="100dp"
                 android:contentDescription="@string/label_product_name"
                 android:foreground="@color/semi_transparent_white"
-                android:scaleType="fitXY"
                 android:loadBasketImage="@{item.productImage}"
+                app:layout_constraintDimensionRatio="1:1"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:srcCompat="@drawable/sample_product_image" />

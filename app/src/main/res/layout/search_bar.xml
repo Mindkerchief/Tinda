@@ -10,6 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/view_margin"
+        android:animateLayoutChanges="true"
         app:cardCornerRadius="@dimen/view_corner_radius"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -42,7 +43,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tabL_searchCategoryList"
-                app:spanCount="4" />
+                app:spanCount="5" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

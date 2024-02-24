@@ -101,11 +101,11 @@
 
                 <ImageView
                     android:id="@+id/imageV_dealImage"
-                    android:layout_width="100dp"
+                    android:layout_width="0dp"
                     android:layout_height="100dp"
                     android:contentDescription="@string/label_product_name"
-                    android:scaleType="fitXY"
                     android:loadDealImage="@{deal.dealImage}"
+                    app:layout_constraintDimensionRatio="1:1"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:srcCompat="@drawable/sample_product_image"

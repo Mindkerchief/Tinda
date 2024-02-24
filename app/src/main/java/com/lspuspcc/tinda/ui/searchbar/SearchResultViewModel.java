@@ -1,8 +1,6 @@
 package com.lspuspcc.tinda.ui.searchbar;
 
 import android.content.Context;
-import android.transition.AutoTransition;
-import android.transition.TransitionManager;
 import android.view.View;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -51,19 +49,17 @@ public class SearchResultViewModel implements SearchBarCallback {
             case "search":
                 searchBarBinding.textVStoreResultTitle.setText(R.string.label_store_results);
                 searchBarBinding.textVProductResultTitle.setText(R.string.label_product_results);
-                searchBarBinding.constraintLSearchResults.setVisibility(View.GONE);
+                mConstraintLSearchResults.setVisibility(View.GONE);
                 break;
             case "nearby":
                 searchBarBinding.textVStoreResultTitle.setText(R.string.label_nearby_store);
                 searchBarBinding.textVProductResultTitle.setText(R.string.label_available_products);
-                searchBarBinding.cardVProductResultTitle.setVisibility(View.GONE);
-                searchBarBinding.recyclerVProductResults.setVisibility(View.GONE);
+                searchBarBinding.groupProductResults.setVisibility(View.GONE);
                 break;
             case "deal":
                 searchBarBinding.textVStoreResultTitle.setText(R.string.button_deal);
                 searchBarBinding.textVProductResultTitle.setText(R.string.label_product_results);
-                searchBarBinding.cardVProductResultTitle.setVisibility(View.GONE);
-                searchBarBinding.recyclerVProductResults.setVisibility(View.GONE);
+                searchBarBinding.groupProductResults.setVisibility(View.GONE);
                 break;
         }
 
@@ -77,6 +73,7 @@ public class SearchResultViewModel implements SearchBarCallback {
             mProductRVAdapter = new ProductRecyclerViewAdapter();
             recyclerVProductResults.setAdapter(mProductRVAdapter);
 
+            // Immediately display results in home
             if (mIncludedIn.equals("home")) {
                 mStoreVerticalRVAdapter.updateRecyclerVStore(mSetupModel.setupStoreVerticalModel());
                 mProductRVAdapter.updateRecyclerVProducts(mSetupModel.setupProductModel());
@@ -114,7 +111,6 @@ public class SearchResultViewModel implements SearchBarCallback {
         mSearchBarViewModel.showHideCategoryExplicitly(View.GONE);
 
         // Scroll to the top and remove keyboard
-        TransitionManager.beginDelayedTransition(mConstraintLSearchResults, new AutoTransition());
         mNestedScrollView.scrollTo(0,0);
         mSearchBarViewModel.getSearchVSearchField().clearFocus();
         mSearchBarViewModel.getSearchVSearchField().setQuery(searchQuery, false);

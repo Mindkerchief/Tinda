@@ -89,4 +89,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardV_storeResultTitle" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/group_storeResults"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="cardV_storeResultTitle, recyclerV_storeResults" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/group_productResults"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="cardV_productResultTitle, recyclerV_productResults" />
 </androidx.constraintlayout.widget.ConstraintLayout>

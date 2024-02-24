@@ -1,8 +1,6 @@
 package com.lspuspcc.tinda.ui.searchbar;
 
 import android.content.res.ColorStateList;
-import android.transition.AutoTransition;
-import android.transition.TransitionManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -51,7 +49,6 @@ public class SearchBarViewModel {
 
         // Initialize Search Bar Subcategory Recycler View
         if (mIncludedIn.equals("search")) {
-
             if (sShowCategory) {
                 mSearchVSearchField.setIconified(false);
                 sShowCategory = false;
@@ -188,7 +185,6 @@ public class SearchBarViewModel {
     }
 
     public void showHideCategoryExplicitly(int viewVisibility) {
-        TransitionManager.beginDelayedTransition(mConstraintLCategory, new AutoTransition());
         mConstraintLCategory.setVisibility(viewVisibility);
     }
 
