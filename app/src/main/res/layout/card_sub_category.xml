@@ -16,7 +16,8 @@
         android:clickable="true"
         android:focusable="true"
         android:foreground="?android:attr/selectableItemBackgroundBorderless"
-        android:onClick="subCategoryOnClick">
+        android:onClick="subCategoryOnClick"
+        android:tag="@{subCategory.subCategoryName}">
 
         <ImageView
             android:id="@+id/imageV_subCategoryImage"
@@ -24,8 +25,8 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/view_margin_half"
             android:adjustViewBounds="true"
-            android:scaleType="fitXY"
             android:loadSubCategoryImage="@{subCategory.subCategoryImage}"
+            android:scaleType="fitXY"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"

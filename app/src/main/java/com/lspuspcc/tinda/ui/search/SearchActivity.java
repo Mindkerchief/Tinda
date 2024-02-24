@@ -3,7 +3,6 @@ package com.lspuspcc.tinda.ui.search;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.View;
 
 import com.lspuspcc.tinda.databinding.ActivitySearchBinding;
@@ -11,31 +10,26 @@ import com.lspuspcc.tinda.ui.searchbar.SearchBarViewModel;
 import com.lspuspcc.tinda.ui.searchbar.SearchResultViewModel;
 
 public class SearchActivity extends AppCompatActivity {
-    private ActivitySearchBinding mSearchBinding;
     private SearchResultViewModel mSearchResultViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mSearchBinding = ActivitySearchBinding.inflate(getLayoutInflater());
-        setContentView(mSearchBinding.getRoot());
+        ActivitySearchBinding searchBinding = ActivitySearchBinding.inflate(getLayoutInflater());
+        setContentView(searchBinding.getRoot());
 
-        Handler searchHandler = new Handler();
-        searchHandler.post(() -> {
-            SearchBarViewModel searchBarViewModel = new SearchBarViewModel(mSearchBinding.includeLSearchBar, "search");
-            mSearchResultViewModel = new SearchResultViewModel(this, searchBarViewModel,
-                    mSearchBinding.includeLSearchResult, mSearchBinding.nestedSVSearchResults, "search");
-        });
+        SearchBarViewModel searchBarViewModel = new SearchBarViewModel(searchBinding.includeLSearchBar, "search");
+        mSearchResultViewModel = new SearchResultViewModel(this, searchBarViewModel,
+                searchBinding.includeLSearchResult, searchBinding.nestedSVSearchResults, "search");
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
         mSearchResultViewModel = null;
-        mSearchBinding = null;
     }
 
     public void subCategoryOnClick(View view) {
-        mSearchResultViewModel.updateResults();
+        mSearchResultViewModel.updateResults(view.getTag().toString());
     }
 }

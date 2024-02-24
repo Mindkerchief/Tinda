@@ -18,7 +18,6 @@ import com.lspuspcc.tinda.databinding.SearchBarBinding;
 import com.lspuspcc.tinda.domain.SetupModel;
 import com.lspuspcc.tinda.domain.SubCategoryRecyclerViewAdapter;
 
-import java.util.ArrayList;
 import java.util.Objects;
 
 public class SearchBarViewModel {
@@ -44,19 +43,25 @@ public class SearchBarViewModel {
         RecyclerView recyclerVSubCategory = searchBarBinding.recyclerVSubCategoryList;
         Button btnSearchCategoryFilter = searchBarBinding.btnSearchCategory;
 
+        // Initialize and add the Tabs in Category TabLayout
+        setupSearchBarHint();
+        addCategoryTab(tabLSearchCategory);
+
         btnSearchCategoryFilter.setOnClickListener(v -> searchCategoryOnClick());
 
         // Initialize Search Bar Subcategory Recycler View
         if (mIncludedIn.equals("search")) {
-            mSubCategoryRVAdapter = new SubCategoryRecyclerViewAdapter();
-            recyclerVSubCategory.setAdapter(mSubCategoryRVAdapter);
-            recyclerVSubCategory.setVisibility(View.VISIBLE);
 
             if (sShowCategory) {
                 mSearchVSearchField.setIconified(false);
                 sShowCategory = false;
             }
             else btnSearchCategoryFilter.performClick();
+
+            mSubCategoryRVAdapter = new SubCategoryRecyclerViewAdapter();
+            recyclerVSubCategory.setAdapter(mSubCategoryRVAdapter);
+            recyclerVSubCategory.setVisibility(View.VISIBLE);
+            mSubCategoryRVAdapter.updateSubCategoryModel(mSetupModel.setupSubCategoryModel(0));
         }
 
         // Handle Views Event
@@ -64,7 +69,7 @@ public class SearchBarViewModel {
         mSearchVSearchField.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                mSearchBarCallback.updateResults();
+                mSearchBarCallback.updateResults(query);
                 return false;
             }
 
@@ -93,7 +98,8 @@ public class SearchBarViewModel {
                         break;
                     case "nearby":
                     case "deal":
-                        mSearchBarCallback.updateResults();
+                        TextView textVSearchCategory = tab.getCustomView().findViewById(R.id.textV_searchCategory);
+                        mSearchBarCallback.updateResults(textVSearchCategory.getText());
                         break;
                 }
             }
@@ -107,11 +113,6 @@ public class SearchBarViewModel {
             @Override
             public void onTabReselected(TabLayout.Tab tab) {}
         });
-
-        // Initialize and add the Tabs in Category TabLayout
-        setupSearchBarHint();
-        addCategoryTab(tabLSearchCategory);
-        Objects.requireNonNull(tabLSearchCategory.getTabAt(0)).select();
     }
 
     private void setupSearchBarHint() {
@@ -154,6 +155,11 @@ public class SearchBarViewModel {
             customTab.findViewById(R.id.imageV_searchCategory).setBackgroundResource(R.drawable.ic_basket);
             TextView textVSearchCategory = customTab.findViewById(R.id.textV_searchCategory);
             textVSearchCategory.setText(categoryNames[i]);
+
+            if (i == 0) {
+                changeTabColor(Objects.requireNonNull(newTab.getCustomView()).findViewById(
+                        R.id.imageV_searchCategory), -15222408);
+            }
 
             newTab.setTag(i);
             tabLSearchCategory.addTab(newTab);
