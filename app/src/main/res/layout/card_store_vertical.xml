@@ -37,10 +37,10 @@
                 <ImageView
                     android:id="@+id/imageV_storeImage"
                     android:layout_width="0dp"
-                    android:layout_height="120dp"
+                    android:layout_height="0dp"
                     android:contentDescription="@string/label_product_name"
-                    android:scaleType="fitXY"
                     android:loadStoreVerticalImage="@{store.storeImage}"
+                    app:layout_constraintDimensionRatio="1:1"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
