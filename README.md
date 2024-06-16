@@ -1,7 +1,25 @@
-# Tinda
+# ![tinda-logo](https://github.com/Mindkerchief/Tinda/assets/130748576/ddc0b66d-b5b2-49dd-b8b0-50cb54552e38) Tinda
+An Android applicaion that can provide existing local shops around your area. It's like online shopping but instead, you browse directly from your local shops. You cannot order product here but you can reserve product and bought it directly from the store. The app will provide all kinds of information like price, promos, business time and navigation and make the process more convinient.
 
-Online shopping has become a second nature in today's fast-paced world, offering convenience and a wide range of products. While online shopping offers numerous advantages and opportunities, it's also important to recognize its effects on local businesses. As a local store owner, building an online shopping store for thier physical store can be challenging because of the existing competition and chosing the perfect platform.
+## Table of Contents
+- [Installation](#installation)
+- [Features](#features)
+- [License](#license)
+- [Acknowledgments](#acknowledgments)
 
-Enter our innovative mobile application!. Local store owners can now list all the items in thier inventory to be available for online users to browse then buy it directly to thier store. Users can then browse the nearby store page in-app listing all the items they sell as well as promos at the moment. Users can also search for specific item to look for the nearest store and more.
+## Installation
+### Steps
+1. Download the latest release
+2. Install the apk file
+3. Open the app and grant necessary permissions
 
-The purpose of this mobile app is to provide a fair competition for local stores owner while making it convenient for local customer to look for an item they want to buy.
+## Features
+Screenshot Here
+- **Feature Name** - Feature Description.
+
+## License
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Acknowledgments
+- **[Android Studio](https://developer.android.com/studio)**: The official IDE for Android development by Google.
+- **[Google Maps](https://developers.google.com/maps)**: A web mapping platform and consumer application by Google.
