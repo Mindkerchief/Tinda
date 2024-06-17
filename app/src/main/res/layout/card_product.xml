@@ -7,7 +7,7 @@
     <data>
         <variable
             name="product"
-            type="com.lspuspcc.tinda.domain.ProductModel" />
+            type="com.mindkerchief.tinda.domain.ProductModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

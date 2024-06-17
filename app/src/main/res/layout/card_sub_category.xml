@@ -7,7 +7,7 @@
     <data>
         <variable
             name="subCategory"
-            type="com.lspuspcc.tinda.domain.SubCategoryModel" />
+            type="com.mindkerchief.tinda.domain.SubCategoryModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
