@@ -7,7 +7,7 @@
     <data>
         <variable
             name="store"
-            type="com.lspuspcc.tinda.domain.StoreModel" />
+            type="com.mindkerchief.tinda.domain.StoreModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

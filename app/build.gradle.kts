@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "com.lspuspcc.tinda"
+    namespace = "com.mindkerchief.tinda"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.lspuspcc.tinda"
+        applicationId = "com.mindkerchief.tinda"
         minSdk = 23
         targetSdk = 34
         versionCode = 1

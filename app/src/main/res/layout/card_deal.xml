@@ -7,7 +7,7 @@
     <data>
         <variable
             name="deal"
-            type="com.lspuspcc.tinda.domain.DealModel" />
+            type="com.mindkerchief.tinda.domain.DealModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
