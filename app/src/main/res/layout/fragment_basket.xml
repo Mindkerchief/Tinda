@@ -8,7 +8,7 @@
     tools:context=".ui.basket.BasketFragment">
 
     <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tabL_basketSection"
+        android:id="@+id/tabL_basketSections"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -20,24 +20,24 @@
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/tab_basket" />
+            android:text="@string/tab_basket"
+            android:visibility="gone" />
 
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/tab_favorites" />
+            android:text="@string/tab_favorites"
+            android:visibility="gone" />
 
     </com.google.android.material.tabs.TabLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerV_basketItems"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:paddingBottom="115dp"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/viewPager_basketSections"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tabL_basketSection" />
+        app:layout_constraintTop_toBottomOf="@+id/tabL_basketSections" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"

@@ -1,19 +1,30 @@
 package com.lspuspcc.tinda.ui.basket;
 
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.lspuspcc.tinda.domain.BasketModel;
+
+import java.util.HashSet;
+
 public class BasketViewModel extends ViewModel {
 
-    private final MutableLiveData<String> mText;
+    private BasketSectionAdapter mBasketSectionAdapter;
+    private MutableLiveData<HashSet<BasketModel>> mSelectedItems;
 
     public BasketViewModel() {
-        mText = new MutableLiveData<>();
-        mText.setValue("This is basket fragment");
+        mSelectedItems = new MutableLiveData<>(new HashSet<>());
     }
 
-    public LiveData<String> getText() {
-        return mText;
+    public BasketSectionAdapter getBasketSectionAdapter() {
+        return mBasketSectionAdapter;
+    }
+
+    public MutableLiveData<HashSet<BasketModel>> getSelectedItems() {
+        return mSelectedItems;
+    }
+
+    public void setBasketSectionAdapter(BasketSectionAdapter basketSectionAdapter) {
+        this.mBasketSectionAdapter = basketSectionAdapter;
     }
 }

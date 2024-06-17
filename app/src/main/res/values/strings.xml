@@ -43,4 +43,6 @@
     <string name="label_deal_title">KARSON Scientific Calculator</string>
     <string name="label_deal_description">For Sale! Original item. Bought last january but not being used.</string>
     <string name="label_reserve_button">RESERVE</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
