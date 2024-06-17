@@ -11,7 +11,6 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.lspuspcc.tinda.databinding.CardBasketItemBinding;
-import com.lspuspcc.tinda.ui.basket.BasketFragment;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -22,10 +21,11 @@ public class BasketRecyclerViewAdapter extends RecyclerView.Adapter<BasketRecycl
     private final ArrayList<BasketModel> mBasketModels;
     private final MutableLiveData<HashSet<BasketModel>> mSelectedItems;
 
-    public BasketRecyclerViewAdapter(BasketFragment basketFragment, ArrayList<BasketModel> basketModels,
+    public BasketRecyclerViewAdapter(LifecycleOwner basketItemsLifecycle, ArrayList<BasketModel> basketModels,
                                      MutableLiveData<HashSet<BasketModel>> selectedItems) {
-        this.mBasketLifecycle = basketFragment;
+        this.mBasketLifecycle = basketItemsLifecycle;
         this.mBasketModels = basketModels;
+        // 5
         this.mSelectedItems = selectedItems;
     }
 
