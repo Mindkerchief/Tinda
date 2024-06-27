@@ -21,7 +21,7 @@ An Android application that provides existing local shops nearby. Browse directl
 - **Search Bar** - Search for specific products, stores and filter results by categories.
 - **Search Result** - List the search results.
 
-### Additionl Features
+### Additional Features
 ![nearby section][nearby-section] &nbsp;
 ![deal section][deal-section]
 - **Favorite** - Mark the products to keep track of or plan to buy again.
