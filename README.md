@@ -1,5 +1,5 @@
 # ![tinda thumbnail][tinda-thumbnail] Tinda ![tinda badge][tinda-badge]
-An Android application that provides existing local shops nearby. Browse directly from your local shop's products and promos. Products can only be reserved and bought directly from the store. The app will provide all the necessary information like price, promos, business time and navigation to make the process more convenient.
+An Android application that provides existing local shops nearby. Browse directly from their local shop's products and promos. Products can only be reserved and bought directly from the store. The app will provide all the necessary information like price, promos, business time and navigation to make the process more convenient.
 
 ## Table of Contents
 - [Features](#features)
