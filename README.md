@@ -32,8 +32,8 @@ An Android application that provides existing local shops nearby. Browse directl
 - **Account Setting** - Provides more control over the app and account.
 
 ## Installation
-1. Download the [latest version][release-page] of Tinda.
-2. Install `Tinda-0.1.0-Alpha.apk`.
+1. Download the latest version of [Tinda][release-page].
+2. Install [Tinda-0.1.0-Alpha.apk][latest-release].
 
 ## License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
@@ -56,6 +56,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 [deal-section]: https://github.com/Mindkerchief/Tinda/assets/130748576/7c2a8683-60d3-4d5c-ac8e-94cbdb103524
 
 [release-page]: https://github.com/Mindkerchief/Tinda/releases
+[latest-release]: https://github.com/Mindkerchief/Tinda/releases/download/v0.1.0-Alpha/Tinda-0.1.0-Alpha.apk
 [readme-mkc-standard]: https://github.com/Mindkerchief/README-MKC-Standard
 [android-studio]: https://developer.android.com/studio
 [google-maps]: https://developers.google.com/maps
