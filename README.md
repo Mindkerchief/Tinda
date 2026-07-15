@@ -32,20 +32,19 @@ An Android application that provides existing local shops nearby. Browse directl
 - **Account Setting** - Provides more control over the app and account.
 
 ## Installation
-1. Download the latest version of [Tinda][release-page].
-2. Install [Tinda-0.1.0-Alpha.apk][latest-release].
+1. Download and install the latest version of [Tinda][release-page].
 
 ## License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## Acknowledgments
-- **[Android Studio][android-studio]**: For development environment.
+- **[Android Studio][android-studio]**: For IDE.
 - **[Google Maps][google-maps]**: For map provider.
 - **[Glide][glide]**: For image loading and caching library.
 
 <!-- Reference -->
 [tinda-thumbnail]: https://github.com/Mindkerchief/Tinda/assets/130748576/ddc0b66d-b5b2-49dd-b8b0-50cb54552e38
-[tinda-badge]: https://img.shields.io/badge/Android-Local_Shopping-17B978
+[tinda-badge]: https://img.shields.io/badge/Android-Online_Shopping-17B978
 
 [home-tab]: https://github.com/Mindkerchief/Tinda/assets/130748576/8bd781a3-3a9c-43c1-8844-8b608ff0fa5d
 [basket-tab]: https://github.com/Mindkerchief/Tinda/assets/130748576/de6f8dda-cfcb-4e9e-a690-e2aa83a4445d
@@ -56,7 +55,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 [deal-section]: https://github.com/Mindkerchief/Tinda/assets/130748576/7c2a8683-60d3-4d5c-ac8e-94cbdb103524
 
 [release-page]: https://github.com/Mindkerchief/Tinda/releases
-[latest-release]: https://github.com/Mindkerchief/Tinda/releases/download/v0.1.0-Alpha/Tinda-0.1.0-Alpha.apk
 [readme-mkc-standard]: https://github.com/Mindkerchief/README-MKC-Standard
 [android-studio]: https://developer.android.com/studio
 [google-maps]: https://developers.google.com/maps
